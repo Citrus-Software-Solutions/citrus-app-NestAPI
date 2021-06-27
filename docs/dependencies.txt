@@ -1,0 +1,13 @@
+Dependecias de desarrollo
+
+npm i -D dotenv @types/dotenv
+
+---Creo la variable de entorno y con eso puedo configurar mi entorno de 
+desarrollo. En ambiente de producción lo inyectamos nosotros.
+
+
+Dependecias de bases de datos
+
+npm i @nestjs/typeorm typeorm pg
+
+
