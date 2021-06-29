@@ -1,4 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
+import { Name } from 'src/shared/domain/name.model';
 import { EmployerStatus } from '../domain/employer-status.model';
 import { Employer } from '../domain/employer.model';
 import { IEmployersService } from './employers.service.interface';
@@ -7,7 +8,7 @@ export class EmployersService implements IEmployersService {
   private employers: Employer[] = [];
 
   createEmployer(companyName: string, status: EmployerStatus) {
-    const newEmployer = new Employer(companyName, status);
+    const newEmployer = new Employer(Name.create(companyName), status);
     this.employers.push(newEmployer);
   }
   getEmployers(): Employer[] {
