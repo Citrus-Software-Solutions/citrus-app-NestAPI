@@ -11,15 +11,15 @@ export class EmployersService implements IEmployersService {
     this.employers.push(newEmployer);
   }
   getEmployers(): Employer[] {
-    return [...this.employers];
+    return this.employers;
   }
   getSingleEmployer(companyName: string) {
     const employer = this.findEmployer(companyName)[0];
-    return { ...employer };
+    return employer;
   }
   updateEmployer(oldName: string, companyName: string, status: EmployerStatus) {
     const [employer, index] = this.findEmployer(oldName);
-    const updatedEmployer = { ...employer };
+    const updatedEmployer = employer;
     if (oldName) {
       updatedEmployer.companyName = companyName;
     }
