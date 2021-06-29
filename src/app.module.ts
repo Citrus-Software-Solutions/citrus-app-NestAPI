@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 import { Configuration } from './config/config.enum';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
-import { JobOffersModule } from './job-offers/job-offers.module';
+import { EmployersModule } from './employers/employers.module';
+// import { JobOffersModule } from './job-offers/job-offers.module';
 // import { DatabaseModule } from './database/database.module';
 
 @Module({
   // imports: [DatabaseModule],
-  imports: [ConfigModule, JobOffersModule],
+  // imports: [ConfigModule, JobOffersModule, EmployersModule],
+  imports: [ConfigModule, EmployersModule],
   controllers: [],
   providers: [],
 })
