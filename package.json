@@ -32,6 +32,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
+    "shallow-equal-object": "^1.1.1",
     "ts-mapper": "^1.2.4",
     "typeorm": "^0.2.34"
   },

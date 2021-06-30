@@ -6,7 +6,8 @@ import { JobOffersController } from './infrastructure/job-offers.controller';
 import { JobOffersRepository } from './infrastructure/job-offers.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([JobOffersRepository]), SharedModule],
+  // imports: [TypeOrmModule.forFeature([JobOffersRepository]), SharedModule],
+  imports: [TypeOrmModule.forFeature([JobOffersRepository])],
   providers: [GetAllJobOffers],
   controllers: [JobOffersController],
 })
