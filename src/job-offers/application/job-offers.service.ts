@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JobOffer } from '../domain/job-offer.model';
 import { JobOffersRepository } from '../infrastructure/job-offers.repository';
-import { JobOffersInteractor } from './job-offert.interactor';
+import { JobOffersInteractor } from './job-offers.interactor';
 
 @Injectable()
 export class GetAllJobOffers implements JobOffersInteractor {
