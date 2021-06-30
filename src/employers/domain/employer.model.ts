@@ -1,8 +1,12 @@
-import { Name } from 'src/shared/domain/name.model';
+import { JobOffer } from '../../job-offers/domain/job-offer.model';
+import { Name } from '../../shared/domain/name.model';
 import { EmployerStatus } from './employer-status.model';
 
 export class Employer {
-  constructor(private _companyName: Name, private _status: EmployerStatus) {}
+  private _companyName: Name;
+  private _status: EmployerStatus;
+  public _jobOffers: JobOffer[];
+
   public get companyName(): string {
     return this._companyName.value;
   }
