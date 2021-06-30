@@ -1,5 +1,5 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { JobOffersInteractor } from '../application/job-offert.interactor';
+import { JobOffersInteractor } from '../application/job-offers.interactor';
 import { JobOffer } from '../domain/job-offer.model';
 
 @Controller('jobOffers')
