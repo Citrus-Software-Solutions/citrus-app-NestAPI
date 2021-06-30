@@ -3,11 +3,10 @@ import { Configuration } from './config/config.enum';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { JobOffersModule } from './job-offers/job-offers.module';
-// import { DatabaseModule } from './database/database.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  // imports: [DatabaseModule],
-  imports: [ConfigModule, JobOffersModule],
+  imports: [DatabaseModule, ConfigModule, JobOffersModule],
   controllers: [],
   providers: [],
 })
