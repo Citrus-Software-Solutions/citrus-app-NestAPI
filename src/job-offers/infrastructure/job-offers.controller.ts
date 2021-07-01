@@ -1,4 +1,12 @@
-import { Controller, Get, Inject, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { JobOffersInteractor } from '../application/job-offers.interactor';
 import { JobOffer } from '../domain/job-offer.model';
 
@@ -8,6 +16,14 @@ export class JobOffersController {
     @Inject('JobOfferService')
     private readonly _jobOfferInteractor: JobOffersInteractor,
   ) {}
+
+  @Post('createOffer/:employerId')
+  createRole(
+    @Body() offer: Partial<JobOffer>,
+    @Param('employerId', ParseIntPipe) employerId: number,
+  ): Promise<JobOffer> {
+    return this._jobOfferInteractor.createOffer(offer, employerId);
+  }
 
   @Get('all')
   getAllJobOffers(): Promise<JobOffer[]> {
