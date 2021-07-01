@@ -2,9 +2,22 @@
 // import { Name } from 'src/shared/domain/name.model';
 // import { EmployerStatus } from '../domain/employer-status.model';
 // import { Employer } from '../domain/employer.model';
-// import { IEmployersService } from './employers.service.interface';
 
-// export class EmployersService implements IEmployersService { }
+import { Injectable } from '@nestjs/common';
+import { classToClass } from 'class-transformer';
+import { Employer } from '../domain/employer.model';
+import { EmployerEntity } from '../entities/employers.entity';
+import { EmployersRepository } from '../infrastructure/employers.repository';
+import { IEmployersService } from './employers.service.interface';
+@Injectable()
+export class EmployersService implements IEmployersService {
+  constructor(private readonly _employerRepository: EmployersRepository) {}
+
+  async getEmployers(): Promise<EmployerEntity[]> {
+    const employers: EmployerEntity[] = await this._employerRepository.find();
+    return employers;
+  }
+}
 // //   private employers: Employer[] = [];
 
 // //   createEmployer(companyName: string, status: EmployerStatus) {
