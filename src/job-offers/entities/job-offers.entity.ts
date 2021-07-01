@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { EmployerEntity } from '../../employers/entities/employers.entity';
 
 @Entity('job_offers')
 export class JobOfferEntity extends BaseEntity {
@@ -34,4 +41,7 @@ export class JobOfferEntity extends BaseEntity {
 
   @Column({ type: 'integer', nullable: true })
   max_age: number;
+
+  @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers)
+  employer: EmployerEntity;
 }
