@@ -15,7 +15,7 @@ import { EmployerEntity } from '../entities/employers.entity';
 @Controller('employers')
 export class EmployersController {
   constructor(
-    @Inject('EmployersService')
+    @Inject('IEmployersService')
     private readonly _employersService: IEmployersService,
   ) {}
 

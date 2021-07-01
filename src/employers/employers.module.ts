@@ -7,7 +7,12 @@ import { EmployersRepository } from './infrastructure/employers.repository';
 
 @Module({
   controllers: [EmployersController],
-  providers: [EmployersService],
+  providers: [
+    {
+      provide: 'IEmployersService',
+      useClass: EmployersService,
+    },
+  ],
   imports: [TypeOrmModule.forFeature([EmployersRepository]), SharedModule],
 })
 export class EmployersModule {}
