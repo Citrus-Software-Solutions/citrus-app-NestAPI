@@ -21,24 +21,6 @@ export class JobOfferService implements JobOffersInteractor {
 
   async getAll(): Promise<JobOffer[]> {
     const jobOffers: JobOfferEntity[] = await this._jobOffersRepository.find();
-    // const offerOne = {
-    //   id: 1,
-    //   name: 'Oferta 1',
-    //   description: 'descripción oferta 1',
-    // };
-    // this.jobOffers.push(offerOne);
-    // const offerTwo = {
-    //   id: 2,
-    //   name: 'Oferta 2',
-    //   description: 'descripción oferta 2',
-    // };
-    // this.jobOffers.push(offerTwo);
-    // const offerThree = {
-    //   id: 3,
-    //   name: 'Oferta 3',
-    //   description: 'descripción oferta 3',
-    // };
-    // this.jobOffers.push(offerThree);
     return jobOffers;
   }
 
