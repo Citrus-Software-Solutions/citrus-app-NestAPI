@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
 import { EmployersRepository } from '../../employers/infrastructure/employers.repository';
-import { MapperService } from '../../shared/mapper.service';
 import { JobOffer } from '../domain/job-offer.model';
 import { JobOfferEntity } from '../entities/job-offers.entity';
 import { JobOffersRepository } from '../infrastructure/job-offers.repository';
@@ -18,7 +17,6 @@ export class JobOfferService implements JobOffersInteractor {
   constructor(
     private readonly _jobOffersRepository: JobOffersRepository,
     private readonly _employerRepository: EmployersRepository,
-    private readonly _mapper: MapperService,
   ) {}
 
   async getAll(): Promise<JobOffer[]> {
@@ -41,10 +39,7 @@ export class JobOfferService implements JobOffersInteractor {
     //   description: 'descripción oferta 3',
     // };
     // this.jobOffers.push(offerThree);
-    return this._mapper.mapCollection<JobOfferEntity, JobOffer>(
-      jobOffers,
-      new JobOffer(),
-    );
+    return jobOffers;
   }
 
   async getByEmployerId(employerId: number): Promise<JobOffer[]> {
