@@ -17,7 +17,7 @@ export class JobOfferService implements JobOffersInteractor {
   constructor(
     private readonly _jobOffersRepository: JobOffersRepository,
     private readonly _employerRepository: EmployersRepository,
-  ) {}
+  ) { }
 
   async getAll(): Promise<JobOffer[]> {
     const jobOffers: JobOfferEntity[] = await this._jobOffersRepository.find();
@@ -48,5 +48,21 @@ export class JobOfferService implements JobOffersInteractor {
     }
 
     return jobOffers;
+  }
+  async getJobOfferEntityById(jobOfferId: number): Promise<JobOfferEntity> {
+    if (!jobOfferId) {
+      throw new BadRequestException('id must be sent');
+    }
+    const jobOffer: JobOfferEntity = await this._jobOffersRepository.findOne(jobOfferId);
+
+    return jobOffer;
+  }
+  async updateJobOfferStatus(jobOfferId: number): Promise<JobOffer> {
+    if (!jobOfferId) {
+      throw new BadRequestException('id must be sent');
+    }
+    const jobOffer: JobOfferEntity = await this.getJobOfferEntityById(jobOfferId);
+
+    return jobOffer;
   }
 }

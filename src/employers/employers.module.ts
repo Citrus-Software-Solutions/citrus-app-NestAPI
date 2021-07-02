@@ -15,4 +15,4 @@ import { EmployersRepository } from './infrastructure/employers.repository';
   ],
   imports: [TypeOrmModule.forFeature([EmployersRepository]), SharedModule],
 })
-export class EmployersModule {}
+export class EmployersModule { }
