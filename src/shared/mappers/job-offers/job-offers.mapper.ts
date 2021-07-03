@@ -24,7 +24,6 @@ export class JobOfferDataMapper
     // employer.creador.id = entity.employer.id;
     // employer.creador.name = Name.create(entity.employer.name);
 
-    console.log(jobOffer);
     return jobOffer;
   }
 

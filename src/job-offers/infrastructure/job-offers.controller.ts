@@ -29,7 +29,7 @@ export class JobOffersController {
     return this._jobOfferService.getAll();
   }
 
-  @Get('offersOf/:employerId')
+  @Get('employers/:employerId')
   getByEmployerId(
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<JobOffer[]> {
