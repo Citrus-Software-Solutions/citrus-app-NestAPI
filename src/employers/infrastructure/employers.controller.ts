@@ -3,14 +3,16 @@ import {
   Controller,
   //   Delete,
   Get,
+  HttpStatus,
   Inject,
+  Res,
   //   Param,
   //   Patch,
   //   Post,
 } from '@nestjs/common';
 import { Employer } from '../domain/employer.model';
 import { IEmployersService } from '../application/employers.service.interface';
-import { EmployerEntity } from '../entities/employers.entity';
+import { ReadEmployerDto } from '../dtos/read-employer.dto';
 
 @Controller('employers')
 export class EmployersController {
@@ -27,8 +29,8 @@ export class EmployersController {
   //     this.employersService.createEmployer(companyName, status);
   //   }
 
-  @Get('all')
-  getAllEmployers(): Promise<EmployerEntity[]> {
+  @Get()
+  getAllEmployers(): Promise<ReadEmployerDto[]> {
     return this._employersService.getEmployers();
   }
 
