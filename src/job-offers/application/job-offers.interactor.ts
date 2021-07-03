@@ -5,5 +5,5 @@ export interface JobOffersInteractor {
   getAll(): Promise<JobOffer[]>;
   getByEmployerId(id: number): Promise<JobOffer[]>;
   getJobOfferEntityById(id: number): Promise<JobOfferEntity>;
-  updateJobOfferStatus(id: number): Promise<JobOffer>;
+  updateJobOfferStatus(id: number): Promise<string>;
 }

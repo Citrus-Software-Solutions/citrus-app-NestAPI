@@ -23,7 +23,7 @@ export class JobOffersController {
   @Put(':jobOfferId')
   updateJobOffer(
     @Param('jobOfferId', ParseIntPipe) employerId: number,
-  ): Promise<JobOffer> {
-    return this._jobOfferInteractor.getJobOfferEntityById(employerId);
+  ): Promise<string> {
+    return this._jobOfferInteractor.updateJobOfferStatus(employerId);
   }
 }

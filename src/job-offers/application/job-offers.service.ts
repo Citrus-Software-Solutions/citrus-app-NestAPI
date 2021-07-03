@@ -57,12 +57,26 @@ export class JobOfferService implements JobOffersInteractor {
 
     return jobOffer;
   }
-  async updateJobOfferStatus(jobOfferId: number): Promise<JobOffer> {
+  async updateJobOfferStatus(jobOfferId: number): Promise<string> {
     if (!jobOfferId) {
       throw new BadRequestException('id must be sent');
     }
     const jobOffer: JobOfferEntity = await this.getJobOfferEntityById(jobOfferId);
+    let message: string;
+    if (jobOffer.status == 'Hidden') {
+      await this._jobOffersRepository.update(jobOfferId, {
+        status: 'Published',
+      });
+      message = 'Status changed successfully';
+    } else if (jobOffer.status == 'Published') {
+      await this._jobOffersRepository.update(jobOfferId, {
+        status: 'Hidden',
+      });
+      message = 'Status changed successfully';
+    } else {
+      message = 'The value of the status attribute is invalid, it must be "Hidden" or "Published"';
+    }
 
-    return jobOffer;
+    return message;
   }
 }
