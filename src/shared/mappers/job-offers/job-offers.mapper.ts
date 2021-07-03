@@ -21,8 +21,6 @@ export class JobOfferDataMapper
     jobOffer.min_age = entity.min_age;
     jobOffer.max_age = entity.max_age;
     jobOffer.creador = this._mapperEmployer.toDomain(entity.employer);
-    // employer.creador.id = entity.employer.id;
-    // employer.creador.name = Name.create(entity.employer.name);
 
     return jobOffer;
   }
@@ -40,9 +38,11 @@ export class JobOfferDataMapper
     jobOfferEntity.salary = jobOffer.salary;
     jobOfferEntity.min_age = jobOffer.min_age;
     jobOfferEntity.max_age = jobOffer.max_age;
-    jobOfferEntity.employer = this._mapperEmployer.toDalEntity(
-      jobOffer.creador,
-    );
+    if (jobOffer.creador) {
+      jobOfferEntity.employer = this._mapperEmployer.toDalEntity(
+        jobOffer.creador,
+      );
+    }
 
     return jobOfferEntity;
   }
