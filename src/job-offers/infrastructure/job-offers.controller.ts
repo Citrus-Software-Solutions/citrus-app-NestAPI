@@ -16,6 +16,7 @@ export class JobOffersController {
     @Inject('JobOfferService')
     private readonly _jobOfferService: IJobOffersService,
   ) {}
+
   @Post(':employerId')
   createRole(
     @Body() offer: JobOffer,

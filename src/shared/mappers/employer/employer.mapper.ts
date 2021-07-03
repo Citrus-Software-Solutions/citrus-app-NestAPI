@@ -2,9 +2,7 @@ import { Name } from '../../../shared/domain/name.model';
 import { Employer } from '../../../employers/domain/employer.model';
 import { EmployerEntity } from '../../../employers/entities/employers.entity';
 import { DataMapper } from '../data-mapper.interface';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class EmployerDataMapper
   implements DataMapper<Employer, EmployerEntity>
 {
