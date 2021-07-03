@@ -4,4 +4,5 @@ export enum Configuration {
   USERNAME = 'USERNAME',
   PASSWORD = 'PASSWORD',
   DATABASE = 'DATABASE',
+  DATABASE_PORT = 'DATABASE_PORT',
 }
