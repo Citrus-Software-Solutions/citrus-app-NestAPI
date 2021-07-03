@@ -1,7 +1,7 @@
 import { JobOffer } from '../domain/job-offer.model';
 
-export interface JobOffersInteractor {
+export interface IJobOffersService {
   getAll(): Promise<JobOffer[]>;
   getByEmployerId(id: number): Promise<JobOffer[]>;
-  createOffer(offer: Partial<JobOffer>, employerId: number): Promise<JobOffer>;
+  createOffer(offer: JobOffer, employerId: number): Promise<JobOffer>;
 }

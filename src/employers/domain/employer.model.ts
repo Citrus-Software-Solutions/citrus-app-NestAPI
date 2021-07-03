@@ -4,16 +4,16 @@ import { EmployerStatus } from './employer-status.model';
 
 export class Employer {
   public id: number;
-  private name: Name;
+  public name: Name;
   //private _status: EmployerStatus;
-  public jobOffers: JobOffer[];
+  public jobOffers?: JobOffer[];
 
-  public get companyName(): string {
-    return this.name.value;
-  }
-  public set companyName(name: string) {
-    this.name = Name.create(name);
-  }
+  // public get name(): string {
+  //   return this._name.value;
+  // }
+  // public set name(name: string) {
+  //   this._name = Name.create(name);
+  // }
 
   // public get status(): EmployerStatus {
   //   return this._status;
