@@ -9,11 +9,12 @@ export const databaseProviders = [
     imports: [ConfigModule],
     inject: [ConfigService],
     async useFactory(config: ConfigService) {
+      const db_port = parseInt(config.get(Configuration.DATABASE_PORT));
       return {
         type: 'postgres' as const,
         host: config.get(Configuration.HOST),
         username: config.get(Configuration.USERNAME),
-        port: 5444,
+        port: db_port,
         database: config.get(Configuration.DATABASE),
         password: config.get(Configuration.PASSWORD),
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],

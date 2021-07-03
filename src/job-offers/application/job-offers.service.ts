@@ -49,4 +49,37 @@ export class JobOfferService implements JobOffersInteractor {
 
     return jobOffers;
   }
+
+  async createOffer(
+    offer: Partial<JobOffer>,
+    employerId: number,
+  ): Promise<JobOffer> {
+    if (!offer) {
+      throw new BadRequestException('Offer can not be empty');
+    }
+
+    const employer: EmployerEntity = await this._employerRepository.findOne(
+      employerId,
+    );
+
+    if (!employer) {
+      throw new NotFoundException('Does not exist a employer with id sent');
+    }
+
+    const savedOffer: JobOfferEntity = await this._jobOffersRepository.save({
+      name: offer.name,
+      description: offer.description,
+      available_vacans: offer.available_vacans,
+      date_begin: offer.date_begin,
+      date_end: offer.date_end,
+      status: offer.status,
+      gender: offer.gender,
+      salary: offer.salary,
+      min_age: offer.min_age,
+      max_age: offer.max_age,
+      employer: employer,
+    });
+
+    return savedOffer;
+  }
 }
