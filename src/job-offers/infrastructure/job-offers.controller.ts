@@ -10,14 +10,13 @@ import {
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
 
-@Controller('jobOffers')
+@Controller('job-offers')
 export class JobOffersController {
   constructor(
     @Inject('JobOfferService')
     private readonly _jobOfferService: IJobOffersService,
   ) {}
-
-  @Post('createOffer/:employerId')
+  @Post(':employerId')
   createRole(
     @Body() offer: JobOffer,
     @Param('employerId', ParseIntPipe) employerId: number,
