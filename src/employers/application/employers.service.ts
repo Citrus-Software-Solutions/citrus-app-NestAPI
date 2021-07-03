@@ -3,19 +3,25 @@
 // import { EmployerStatus } from '../domain/employer-status.model';
 // import { Employer } from '../domain/employer.model';
 
-import { Injectable } from '@nestjs/common';
-import { classToClass } from 'class-transformer';
+import { Inject, Injectable } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
 import { Employer } from '../domain/employer.model';
-import { EmployerEntity } from '../entities/employers.entity';
-import { EmployersRepository } from '../infrastructure/employers.repository';
+import { ReadEmployerDto } from '../dtos/read-employer.dto';
+import { IEmployerRepository } from './employers.repository.interface';
 import { IEmployersService } from './employers.service.interface';
 @Injectable()
 export class EmployersService implements IEmployersService {
-  constructor(private readonly _employerRepository: EmployersRepository) {}
+  constructor(
+    @Inject('EmployersRepository')
+    private readonly _employerRepository: IEmployerRepository,
+  ) {}
 
-  async getEmployers(): Promise<EmployerEntity[]> {
-    const employers: EmployerEntity[] = await this._employerRepository.find();
-    return employers;
+  async getEmployers(): Promise<ReadEmployerDto[]> {
+    const employer: Employer[] = await this._employerRepository.getEmployers();
+
+    return employer.map((empl: Employer) =>
+      plainToClass(ReadEmployerDto, empl),
+    );
   }
 }
 // //   private employers: Employer[] = [];

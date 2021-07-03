@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
+import { EmployerDataMapper } from './mappers/employer/employer.mapper';
+import { JobOfferDataMapper } from './mappers/job-offers/job-offers.mapper';
 
 @Module({
-  exports: [],
-  providers: [],
+  exports: [EmployerDataMapper, JobOfferDataMapper],
+  providers: [EmployerDataMapper, JobOfferDataMapper],
 })
 export class SharedModule {}

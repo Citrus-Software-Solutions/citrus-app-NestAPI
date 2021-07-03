@@ -1,18 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SharedModule } from '../shared/shared.module';
+import { EmployersRepository } from './application/employers.repository';
 import { EmployersService } from './application/employers.service';
 import { EmployersController } from './infrastructure/employers.controller';
-import { EmployersRepository } from './infrastructure/employers.repository';
+import { EmployersPersisteceAdapter } from './infrastructure/employers.persistence.adapter';
 
 @Module({
   controllers: [EmployersController],
   providers: [
-    {
-      provide: 'IEmployersService',
-      useClass: EmployersService,
-    },
+    EmployersService,
+    EmployersPersisteceAdapter,
+    EmployersRepository,
   ],
-  imports: [TypeOrmModule.forFeature([EmployersRepository]), SharedModule],
+  imports: [
+    TypeOrmModule.forFeature([EmployersPersisteceAdapter]),
+    SharedModule,
+  ],
+  exports: [EmployersPersisteceAdapter],
 })
 export class EmployersModule { }

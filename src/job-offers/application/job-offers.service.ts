@@ -1,26 +1,25 @@
 import {
   BadRequestException,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { EmployerEntity } from '../../employers/entities/employers.entity';
-import { EmployersRepository } from '../../employers/infrastructure/employers.repository';
 import { JobOffer } from '../domain/job-offer.model';
+import { IJobOffersService } from './job-offers.service.interface';
+import { IJobOfferRepository } from './job-offers.repository.interface';
+import { EmployersRepository } from 'src/employers/application/employers.repository';
 import { JobOfferEntity } from '../entities/job-offers.entity';
-import { JobOffersRepository } from '../infrastructure/job-offers.repository';
-import { JobOffersInteractor } from './job-offers.interactor';
 
 @Injectable()
-export class JobOfferService implements JobOffersInteractor {
-  //private jobOffers: JobOffer[] = [];
-
+export class JobOfferService implements IJobOffersService {
   constructor(
-    private readonly _jobOffersRepository: JobOffersRepository,
+    @Inject('JobOfferRepository')
+    private readonly _jobOfferRepository: IJobOfferRepository,
     private readonly _employerRepository: EmployersRepository,
-  ) { }
+  ) {}
 
   async getAll(): Promise<JobOffer[]> {
-    const jobOffers: JobOfferEntity[] = await this._jobOffersRepository.find();
+    const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll();
     return jobOffers;
   }
 
@@ -29,52 +28,61 @@ export class JobOfferService implements JobOffersInteractor {
       throw new BadRequestException('id must be sent');
     }
 
-    const employerExist: EmployerEntity =
-      await this._employerRepository.findOne(employerId);
-
-    if (!employerExist) {
-      throw new NotFoundException();
-    }
-
-    const jobOffers: JobOfferEntity[] = await this._jobOffersRepository.find({
-      relations: ['employer'],
-      where: { employer: employerExist },
-    });
-
-    if (!jobOffers) {
-      throw new NotFoundException(
-        'This employer does not have job offers created',
-      );
-    }
+    const jobOffers: JobOffer[] = await this._jobOfferRepository.getByEmployer(
+      employerId,
+    );
 
     return jobOffers;
   }
+
+  async createOffer(offer: JobOffer, employerId: number): Promise<JobOffer> {
+    if (!offer) {
+      throw new BadRequestException('Offer can not be empty');
+    }
+    if (!employerId) {
+      throw new NotFoundException('Id can not be empty');
+    }
+
+    const savedOffer: JobOffer = await this._jobOfferRepository.create(
+      offer,
+      employerId,
+    );
+
+    return savedOffer;
+  }
+  // TODO: Make refactor to mapping and hexagonal architecture
   async getJobOfferEntityById(jobOfferId: number): Promise<JobOfferEntity> {
     if (!jobOfferId) {
       throw new BadRequestException('id must be sent');
     }
-    const jobOffer: JobOfferEntity = await this._jobOffersRepository.findOne(jobOfferId);
+    const jobOffer: JobOfferEntity = await this._jobOfferRepository.findOne(
+      jobOfferId,
+    );
 
     return jobOffer;
   }
+  // TODO: Make refactor to mapping and hexagonal architecture
   async updateJobOfferStatus(jobOfferId: number): Promise<string> {
     if (!jobOfferId) {
       throw new BadRequestException('id must be sent');
     }
-    const jobOffer: JobOfferEntity = await this.getJobOfferEntityById(jobOfferId);
+    const jobOffer: JobOfferEntity = await this.getJobOfferEntityById(
+      jobOfferId,
+    );
     let message: string;
     if (jobOffer.status == 'Hidden') {
-      await this._jobOffersRepository.update(jobOfferId, {
+      await this._jobOfferRepository.update(jobOfferId, {
         status: 'Published',
       });
       message = 'Status changed successfully';
     } else if (jobOffer.status == 'Published') {
-      await this._jobOffersRepository.update(jobOfferId, {
+      await this._jobOfferRepository.update(jobOfferId, {
         status: 'Hidden',
       });
       message = 'Status changed successfully';
     } else {
-      message = 'The value of the status attribute is invalid, it must be "Hidden" or "Published"';
+      message =
+        'The value of the status attribute is invalid, it must be "Hidden" or "Published"';
     }
 
     return message;

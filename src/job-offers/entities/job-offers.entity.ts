@@ -42,6 +42,8 @@ export class JobOfferEntity extends BaseEntity {
   @Column({ type: 'integer', nullable: true })
   max_age: number;
 
-  @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers)
+  @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers, {
+    eager: true,
+  })
   employer: EmployerEntity;
 }
