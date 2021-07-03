@@ -19,4 +19,4 @@ import { EmployersPersisteceAdapter } from './infrastructure/employers.persisten
   ],
   exports: [EmployersPersisteceAdapter],
 })
-export class EmployersModule { }
+export class EmployersModule {}

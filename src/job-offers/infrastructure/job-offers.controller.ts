@@ -37,8 +37,9 @@ export class JobOffersController {
   ): Promise<JobOffer[]> {
     return this._jobOfferService.getByEmployerId(employerId);
   }
+
   @Put(':jobOfferId')
-  updateJobOffer(
+  updateJobOfferStatus(
     @Param('jobOfferId', ParseIntPipe) employerId: number,
   ): Promise<string> {
     return this._jobOfferService.updateJobOfferStatus(employerId);
