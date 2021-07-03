@@ -17,7 +17,6 @@ export class JobOfferService implements IJobOffersService {
 
   async getAll(): Promise<JobOffer[]> {
     const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll();
-
     return jobOffers;
   }
 
