@@ -10,14 +10,13 @@ import {
 import { JobOffersInteractor } from '../application/job-offers.interactor';
 import { JobOffer } from '../domain/job-offer.model';
 
-@Controller('jobOffers')
+@Controller('job-offers')
 export class JobOffersController {
   constructor(
     @Inject('JobOfferService')
     private readonly _jobOfferInteractor: JobOffersInteractor,
   ) {}
-
-  @Post('createOffer/:employerId')
+  @Post(':employerId')
   createRole(
     @Body() offer: Partial<JobOffer>,
     @Param('employerId', ParseIntPipe) employerId: number,
@@ -25,7 +24,7 @@ export class JobOffersController {
     return this._jobOfferInteractor.createOffer(offer, employerId);
   }
 
-  @Get('all')
+  @Get()
   getAllJobOffers(): Promise<JobOffer[]> {
     return this._jobOfferInteractor.getAll();
   }
