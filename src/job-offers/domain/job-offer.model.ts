@@ -1,3 +1,5 @@
+import { Employer } from '../../employers/domain/employer.model';
+
 export class JobOffer {
   public id: number;
   public name: string;
@@ -8,6 +10,7 @@ export class JobOffer {
   public status: string;
   public gender: string;
   public salary: number;
-  public min_age: number;
-  public max_age: number;
+  public min_age?: number;
+  public max_age?: number;
+  public creador: Employer;
 }

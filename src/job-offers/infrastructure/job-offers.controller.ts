@@ -7,33 +7,33 @@ import {
   ParseIntPipe,
   Post,
 } from '@nestjs/common';
-import { JobOffersInteractor } from '../application/job-offers.interactor';
+import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
 
 @Controller('jobOffers')
 export class JobOffersController {
   constructor(
     @Inject('JobOfferService')
-    private readonly _jobOfferInteractor: JobOffersInteractor,
+    private readonly _jobOfferService: IJobOffersService,
   ) {}
 
   @Post('createOffer/:employerId')
   createRole(
-    @Body() offer: Partial<JobOffer>,
+    @Body() offer: JobOffer,
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<JobOffer> {
-    return this._jobOfferInteractor.createOffer(offer, employerId);
+    return this._jobOfferService.createOffer(offer, employerId);
   }
 
-  @Get('all')
+  @Get()
   getAllJobOffers(): Promise<JobOffer[]> {
-    return this._jobOfferInteractor.getAll();
+    return this._jobOfferService.getAll();
   }
 
-  @Get(':employerId')
+  @Get('offersOf/:employerId')
   getByEmployerId(
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<JobOffer[]> {
-    return this._jobOfferInteractor.getByEmployerId(employerId);
+    return this._jobOfferService.getByEmployerId(employerId);
   }
 }

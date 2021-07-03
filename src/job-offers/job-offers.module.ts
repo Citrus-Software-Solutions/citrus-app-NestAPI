@@ -1,17 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EmployersRepository } from '../employers/infrastructure/employers.repository';
 import { SharedModule } from '../shared/shared.module';
 import { JobOfferService } from './application/job-offers.service';
 import { JobOffersController } from './infrastructure/job-offers.controller';
-import { JobOffersRepository } from './infrastructure/job-offers.repository';
+import { JobOfferPersisteceAdapter } from './infrastructure/job-offers.persistence.adapter';
+import { JobOfferRepository } from './application/job-offers.repository';
+import { EmployersPersisteceAdapter } from '../employers/infrastructure/employers.persistence.adapter';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([JobOffersRepository, EmployersRepository]),
+    TypeOrmModule.forFeature([
+      JobOfferPersisteceAdapter,
+      EmployersPersisteceAdapter,
+    ]),
     SharedModule,
   ],
-  providers: [JobOfferService],
+  providers: [JobOfferService, JobOfferPersisteceAdapter, JobOfferRepository],
   controllers: [JobOffersController],
 })
 export class JobOffersModule {}
