@@ -10,8 +10,12 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
-    entities: [join(__dirname, '../**/**/*.entity{.ts,.js}')],
+    entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
     autoLoadEntities: true,
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
 
     // Implementaremos Migrations.
     /** Recursos
@@ -21,7 +25,7 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
     migrationsTableName: 'migration_typeorm',
     cli: {
-      migrationsDir: '../migration',
+      migrationsDir: 'src/migration',
     },
 
     // Activar SOLO MANUALMENTE en DESARROLLO SI ES NECESARIO (DESACTIVAR EN PRODUCCION).
