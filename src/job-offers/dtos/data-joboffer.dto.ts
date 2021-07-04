@@ -25,10 +25,6 @@ export class DataJobOfferDto {
 
   @Expose()
   @IsString()
-  readonly status: string;
-
-  @Expose()
-  @IsString()
   readonly gender: string;
 
   @Expose()

@@ -68,7 +68,7 @@ export class JobOfferRepository implements IJobOfferRepository {
     realJobOffer.minAge = dtoJob.minAge;
     realJobOffer.name = dtoJob.name;
     realJobOffer.salary = dtoJob.salary;
-    realJobOffer.status = dtoJob.status;
+    realJobOffer.status = 'Published';
     return realJobOffer;
   }
 }
