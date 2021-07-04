@@ -4,8 +4,10 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ApplicationModule } from './application/application.module';
 import { TYPEORM_CONFIG } from './config/constants';
 import databaseConfig from './config/database.config';
+import { EmployeeModule } from './employee/employee.module';
 import { EmployersModule } from './employers/employers.module';
 import { JobOffersModule } from './job-offers/job-offers.module';
 
@@ -28,6 +30,8 @@ import { JobOffersModule } from './job-offers/job-offers.module';
     }),
     JobOffersModule,
     EmployersModule,
+    EmployeeModule,
+    ApplicationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

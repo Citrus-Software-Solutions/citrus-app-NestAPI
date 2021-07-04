@@ -8,16 +8,9 @@
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+
 <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
@@ -58,16 +51,128 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Authors
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<p>
+    <img
+      alt="alejjb Github Avatar" 
+      width="80" 
+      src="https://github.com/alejjb.png?size=80"
+    >
+      Alejandro Jauregui
+	<p>
+    <img
+      alt="firstguzman Github Avatar" 
+      width="80" 
+      src="https://github.com/firstguzman.png?size=80"
+    >
+        Cesar Guzman
+	<p>
+    <img
+      alt="YkBastidas Github Avatar" 
+      width="80" 
+      src="https://github.com/YkBastidas.png?size=80"
+    >
+        Yorfrank Bastidas
+    
+## Routes
+    
+### GET:
+    
+#### /api-nest/employers
 
-## Stay in touch
+	Returns array of employer
+	example: [{
+    "id": 1,
+    "name": "Citrus"
+  },
+    
+  {
+    "id": 2,
+    "name": "Microsoft"
+  },]
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### /api-nest/job-offers
 
-## License
+	Returns array of job-offers with all its attributes
+	example:[{
+    "id": 1,
+    "name": "Job Offer One",
+    "description": "Test description",
+    "available_vacans": 10,
+    "date_begin": "2021-07-01",
+    "date_end": "2021-08-01",
+    "status": "Published",
+    "gender": "M",
+    "salary": 1900,
+    "min_age": null,
+    "max_age": null,
+    "creador": {
+      "id": 1,
+      "name": {
+        "props": {
+          "value": "Citrus"
+        }
+      }
+    }
+  },]
 
-Nest is [MIT licensed](LICENSE).
+#### api-nest/job-offers/employers/:employerId
+    
+	Returns array of job-offers with all its attributes given the id of an existing employer
+	example:[ {
+    "id": 1,
+    "name": "Job Offer One",
+    "description": "Test description",
+    "available_vacans": 10,
+    "date_begin": "2021-07-01",
+    "date_end": "2021-08-01",
+    "status": "Published",
+    "gender": "M",
+    "salary": 1900,
+    "min_age": null,
+    "max_age": null,
+    "creador": {
+      "id": 1,
+      "name": {
+        "props": {
+          "value": "Citrus"
+        }
+      }
+    }
+  },]
+    
+### POST:
+    
+#### api-nest/job-offers/:employerId
+
+	Creates a job-offers given the id of an existing employer, receives the job-offer data to be created as a body,
+    returns the job-offer created
+	example: {
+    "id": 1,
+    "name": "Job Offer One",
+    "description": "Test description",
+    "available_vacans": 10,
+    "date_begin": "2021-07-01",
+    "date_end": "2021-08-01",
+    "status": "Published",
+    "gender": "M",
+    "salary": 1900,
+    "min_age": null, //opcional
+    "max_age": null,//opcional
+    "creador": {
+      "id": 1,
+      "name": {
+        "props": {
+          "value": "Citrus"
+        }
+      }
+    }
+  }
+
+### PUT:
+    
+#### /api-nest/job-offers/:jobOfferId
+    
+modifies the status of the job Offer with the received id from 'Hidden' to 'Published' and from 'Published' to 'Hidden',
+    returns a string that gives the response to the request

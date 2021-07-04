@@ -4,13 +4,13 @@ export class JobOffer {
   public id: number;
   public name: string;
   public description: string;
-  public available_vacans: number;
-  public date_begin: Date;
-  public date_end: Date;
+  public availableVacans: number;
+  public dateBegin: Date;
+  public dateEnd: Date;
   public status: string;
   public gender: string;
   public salary: number;
-  public min_age?: number;
-  public max_age?: number;
+  public minAge?: number;
+  public maxAge?: number;
   public creador: Employer;
 }
