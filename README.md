@@ -33,7 +33,7 @@ $ npm run start:prod
 
 To test the API you must set Environment Variables, follow the .env.sample file to set your own.
 
-## Test (Not ready yet)
+## Test (Isn't Implemented)
 
 ```bash
 # unit tests
