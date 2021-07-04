@@ -6,9 +6,8 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
+  <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-
 <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
 
 </p>
@@ -53,127 +52,56 @@ $ npm run test:cov
 
 ## Authors
 
-<p>
-    <img
-      alt="alejjb Github Avatar" 
-      width="80" 
-      src="https://github.com/alejjb.png?size=80"
-    >
-      Alejandro Jauregui
-	<p>
-    <img
-      alt="firstguzman Github Avatar" 
-      width="80" 
-      src="https://github.com/firstguzman.png?size=80"
-    >
-        Cesar Guzman
-	<p>
+<style>
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+<div class="row">
+  <div class="column">
+  <figure>
     <img
       alt="YkBastidas Github Avatar" 
-      width="80" 
-      src="https://github.com/YkBastidas.png?size=80"
+      width="100%" 
+      src="https://github.com/YkBastidas.png"
     >
-        Yorfrank Bastidas
-    
-## Routes
-### host : https://citrus-api-nest.herokuapp.com/api-nest
-### GET:
-    
-#### All Employers - `/employers`
+    <figcaption>Yorfrank Bastidas</figcaption>        
+  </figure>
+  </div>
+  <div class="column">
+  <figure>
+    <img
+      alt="firstguzman Github Avatar" 
+      width=100%" 
+      src="https://github.com/firstguzman.png"
+    >
+    <figcaption>
+      Cesar Guzman
+    </figcaption>
+  </figure>
+  </div>
+  <div class="column">
+  <figure>
+    <img
+      alt="alejjb Github Avatar" 
+      width="100%" 
+      src="https://github.com/alejjb.png"
+    >
+    <figcaption>
+      Alejandro Jauregui
+    </figcaption>
+  </figure>
+  </div>
+</div>
 
-    Returns array of employer
-    [{
-      "id": 1,
-      "name": "Citrus"
-    },
-    {
-      "id": 2,
-      "name": "Microsoft"
-    },]
+## Routes (made with Swagger)
 
-#### `/job-offers`
-
-    Returns array of job-offers with all its attributes
-    [{
-      "id": 1,
-      "name": "Job Offer One",
-      "description": "Test description",
-      "available_vacans": 10,
-      "date_begin": "2021-07-01",
-      "date_end": "2021-08-01",
-      "status": "Published",
-      "gender": "M",
-      "salary": 1900,
-      "min_age": null,
-      "max_age": null,
-      "creador": {
-        "id": 1,
-        "name": {
-          "props": {
-            "value": "Citrus"
-          }
-        }
-      }
-    }]
-
-#### `/job-offers/employers/:employerId`
-
-    Returns array of job-offers with all its attributes given the id of an existing employer
-    [{
-      "id": 1,
-      "name": "Job Offer One",
-      "description": "Test description",
-      "available_vacans": 10,
-      "date_begin": "2021-07-01",
-      "date_end": "2021-08-01",
-      "status": "Published",
-      "gender": "M",
-      "salary": 1900,
-      "min_age": null,
-      "max_age": null,
-      "creador": {
-        "id": 1,
-        "name": {
-          "props": {
-            "value": "Citrus"
-          }
-        }
-      }
-    }]
-
-### POST:
-
-#### `/job-offers/:employerId`
-
-    Creates a job-offers given the id of an existing employer, receives the job-offer data to be created as a body,
-    returns the job-offer created
-    example: {
-      "id": 1,
-      "name": "Job Offer One",
-      "description": "Test description",
-      "available_vacans": 10,
-      "date_begin": "2021-07-01",
-      "date_end": "2021-08-01",
-      "status": "Published",
-      "gender": "M",
-      "salary": 1900,
-      "min_age": null, //opcional
-      "max_age": null,//opcional
-      "creador": {
-        "id": 1,
-        "name": {
-          "props": {
-            "value": "Citrus"
-          }
-        }
-      }
-    }
-
-### PUT:
-
-#### `/job-offers/:jobOfferId`
-
-Modifies the status of the job Offer with the received id from 'Hidden' to 'Published' and from 'Published' to 'Hidden',
-Returns a "string" message of success or failure
-
-      Status changed successfully
+### https://citrus-api-nest.herokuapp.com/docs
