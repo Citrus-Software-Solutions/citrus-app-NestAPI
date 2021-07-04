@@ -59,6 +59,8 @@ $ npm run test:cov
   </tr>
 </tbody></table>
 
+Everyone is welcome to contribute code via pull requests, to file issues on GitHub, to fix bugs that people have filed, to add to our documentation, or to help out in any other way.
+
 ## References
 
 DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together – @hgraca
