@@ -1,4 +1,4 @@
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
@@ -8,7 +8,6 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Employee } from 'src/employee/domain/employee.model';
 import { ReadEmployeeInApplicationDto } from '../../employee/dtos/read-employee-in-application.dto';
 import { ReadJobOffertDto } from '../../job-offers/dtos/read-job-offert.dto';
 

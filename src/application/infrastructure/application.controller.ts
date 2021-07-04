@@ -1,6 +1,5 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { IApplicationService } from '../application/application.service.interface';
-import { Application } from '../domain/application.model';
 import { ApplicationResultDto } from '../dtos/application-result.dto';
 import { ApplyOfferDto } from '../dtos/apply-offer.dto';
 
