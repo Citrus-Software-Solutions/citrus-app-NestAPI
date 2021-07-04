@@ -6,6 +6,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
@@ -35,5 +36,12 @@ export class JobOffersController {
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<JobOffer[]> {
     return this._jobOfferService.getByEmployerId(employerId);
+  }
+
+  @Put(':jobOfferId')
+  updateJobOfferStatus(
+    @Param('jobOfferId', ParseIntPipe) employerId: number,
+  ): Promise<string> {
+    return this._jobOfferService.updateJobOfferStatus(employerId);
   }
 }

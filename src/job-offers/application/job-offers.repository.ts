@@ -44,4 +44,8 @@ export class JobOfferRepository implements IJobOfferRepository {
 
     return this._mapper.toDomain(createdOffer);
   }
+
+  async updateStatus(jobOfferId: number): Promise<string> {
+    return this._jobOfferPersistence.updateJobOfferStatus(jobOfferId);
+  }
 }
