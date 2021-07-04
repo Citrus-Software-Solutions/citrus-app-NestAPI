@@ -6,4 +6,5 @@ export interface IApplicationRepository {
     offerId: number,
     fecha: Date,
   ): Promise<Application>;
+  appliedToAOffer(employeeId: number, offerId: number): Promise<boolean>;
 }
