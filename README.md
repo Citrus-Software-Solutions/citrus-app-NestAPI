@@ -5,18 +5,16 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">An API for a Job Offering platform made in the <a href="https://nestjs.com/" target="_blank">Nest.js</a> framework using CLEAN or Hexagonal Architecture.</p>
-  <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-
-</p>
+  <p align="center">This repository contain our API developed in the <a href="https://nestjs.com/" target="_blank">Nest.js</a> framework using CLEAN or Hexagonal Architecture.</p>
 
 ## Description
 
 Citrus App is a job finder app created and developed by Citrus Software Solutions.
 
-This repository contain our API developed in [Nest](https://github.com/nestjs/nest).
+<p align="center">
+  <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+  <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+</p>
 
 ## Installation & Requirements
 
