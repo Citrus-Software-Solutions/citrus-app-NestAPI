@@ -8,10 +8,13 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
+import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 
+@ApiTags('job-offers')
 @Controller('job-offers')
 export class JobOffersController {
   constructor(
@@ -20,11 +23,13 @@ export class JobOffersController {
   ) {}
 
   @Get()
+  @ApiOperation({ summary: 'Get all job offers' })
   getAllJobOffers(): Promise<ReadJobOfferDto[]> {
     return this._jobOfferService.getAll();
   }
 
   @Get('employers/:employerId')
+  @ApiOperation({ summary: 'Get all offers from a employer' })
   getByEmployerId(
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<ReadJobOfferDto[]> {
@@ -32,6 +37,7 @@ export class JobOffersController {
   }
 
   @Get('/:jobOfferId')
+  @ApiOperation({ summary: 'Get job offer data by its id' })
   getById(
     @Param('jobOfferId', ParseIntPipe) jobOfferId: number,
   ): Promise<ReadJobOfferDto> {
@@ -40,6 +46,7 @@ export class JobOffersController {
 
   //podría retornar la oferta con el estatus cambiado
   @Put(':jobOfferId')
+  @ApiOperation({ summary: 'Update job offer status' })
   updateJobOfferStatus(
     @Param('jobOfferId', ParseIntPipe) employerId: number,
   ): Promise<{ message: string }> {
@@ -47,8 +54,9 @@ export class JobOffersController {
   }
 
   @Post(':employerId')
-  createRole(
-    @Body() offer: Partial<JobOffer>,
+  @ApiOperation({ summary: 'Create a job offer' })
+  createJobOffer(
+    @Body() offer: DataJobOfferDto,
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<JobOffer> {
     return this._jobOfferService.createOffer(offer, employerId);

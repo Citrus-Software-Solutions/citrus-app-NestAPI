@@ -1,22 +1,12 @@
 <p align="center">
-  <a/>Citrus App NestJs API</a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">An API for a Job Offering platform made in the <a href="https://nestjs.com/" target="_blank">Nest.js</a> framework using CLEAN or Hexagonal Architecture.</p>
-  <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-
+  <h1 align="center"/>Citrus App NestJs API</h1>
 </p>
 
 ## Description
 
 Citrus App is a job finder app created and developed by Citrus Software Solutions.
 
-This repository contain our API developed in [Nest](https://github.com/nestjs/nest).
+<p>This repository contain our API developed in the <a href="https://nestjs.com/" target="_blank">Nest.js</a> framework using CLEAN or Hexagonal Architecture.</p>
 
 ## Installation & Requirements
 
@@ -55,6 +45,10 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## Routes (UI Presentation made with Swagger)
+
+### https://citrus-api-nest.herokuapp.com/docs
+
 ## Citrus BackEnd Developers
 
 <table align="center">
@@ -65,9 +59,7 @@ $ npm run test:cov
   </tr>
 </tbody></table>
 
-## Routes (UI Presentation made with Swagger)
-
-### https://citrus-api-nest.herokuapp.com/docs
+Everyone is welcome to contribute code via pull requests, to file issues on GitHub, to fix bugs that people have filed, to add to our documentation, or to help out in any other way.
 
 ## References
 

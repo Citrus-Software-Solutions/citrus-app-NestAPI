@@ -54,4 +54,15 @@ export class ApplicationRepository implements IApplicationRepository {
       return this.mapper.toDomain(createdApplication);
     }
   }
+
+  async appliedToAOffer(employeeId: number, offerId: number): Promise<boolean> {
+    const offer: JobOfferEntity = await this._jobOfferPersistence.getById(
+      offerId,
+    );
+    const employee: EmployeeEntity = await this.employeePersistence.getById(
+      employeeId,
+    );
+
+    return this.applicationPersistence.alreadyApplied(employee, offer);
+  }
 }
