@@ -38,6 +38,14 @@ export class JobOfferService implements IJobOffersService {
     );
   }
 
+  async updateJobOfferStatus(jobOfferId: number): Promise<string> {
+    if (!jobOfferId) {
+      throw new BadRequestException('id must be sent');
+    }
+
+    return this._jobOfferRepository.updateStatus(jobOfferId);
+  }
+
   async createOffer(offer: JobOffer, employerId: number): Promise<JobOffer> {
     if (!offer) {
       throw new BadRequestException('Offer can not be empty');
@@ -45,20 +53,11 @@ export class JobOfferService implements IJobOffersService {
     if (!employerId) {
       throw new NotFoundException('Id can not be empty');
     }
-
     const savedOffer: JobOffer = await this._jobOfferRepository.create(
       offer,
       employerId,
     );
 
     return savedOffer;
-  }
-
-  async updateJobOfferStatus(jobOfferId: number): Promise<string> {
-    if (!jobOfferId) {
-      throw new BadRequestException('id must be sent');
-    }
-
-    return this._jobOfferRepository.updateStatus(jobOfferId);
   }
 }

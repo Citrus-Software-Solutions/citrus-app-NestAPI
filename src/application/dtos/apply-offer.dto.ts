@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsDate, IsNumber } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 @Exclude()
 export class ApplyOfferDto {
@@ -12,6 +12,6 @@ export class ApplyOfferDto {
   readonly offerId: number;
 
   @Expose()
-  @IsDate()
-  readonly date_application: Date;
+  @IsString()
+  readonly applicationDate: string;
 }

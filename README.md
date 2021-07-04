@@ -28,17 +28,17 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
+# run server
 $ npm run start
 
-# watch mode
+# development (watch mode)
 $ npm run start:dev
 
-# production mode
+# production
 $ npm run start:prod
 ```
 
-## Test
+## Test (Not ready yet)
 
 ```bash
 # unit tests
@@ -76,103 +76,104 @@ $ npm run test:cov
         Yorfrank Bastidas
     
 ## Routes
-    
+### host : https://citrus-api-nest.herokuapp.com/api-nest
 ### GET:
     
-#### /api-nest/employers
+#### All Employers - `/employers`
 
-	Returns array of employer
-	example: [{
-    "id": 1,
-    "name": "Citrus"
-  },
-    
-  {
-    "id": 2,
-    "name": "Microsoft"
-  },]
-
-#### /api-nest/job-offers
-
-	Returns array of job-offers with all its attributes
-	example:[{
-    "id": 1,
-    "name": "Job Offer One",
-    "description": "Test description",
-    "available_vacans": 10,
-    "date_begin": "2021-07-01",
-    "date_end": "2021-08-01",
-    "status": "Published",
-    "gender": "M",
-    "salary": 1900,
-    "min_age": null,
-    "max_age": null,
-    "creador": {
+    Returns array of employer
+    [{
       "id": 1,
-      "name": {
-        "props": {
-          "value": "Citrus"
+      "name": "Citrus"
+    },
+    {
+      "id": 2,
+      "name": "Microsoft"
+    },]
+
+#### `/job-offers`
+
+    Returns array of job-offers with all its attributes
+    [{
+      "id": 1,
+      "name": "Job Offer One",
+      "description": "Test description",
+      "available_vacans": 10,
+      "date_begin": "2021-07-01",
+      "date_end": "2021-08-01",
+      "status": "Published",
+      "gender": "M",
+      "salary": 1900,
+      "min_age": null,
+      "max_age": null,
+      "creador": {
+        "id": 1,
+        "name": {
+          "props": {
+            "value": "Citrus"
+          }
         }
       }
-    }
-  },]
+    }]
 
-#### api-nest/job-offers/employers/:employerId
-    
-	Returns array of job-offers with all its attributes given the id of an existing employer
-	example:[ {
-    "id": 1,
-    "name": "Job Offer One",
-    "description": "Test description",
-    "available_vacans": 10,
-    "date_begin": "2021-07-01",
-    "date_end": "2021-08-01",
-    "status": "Published",
-    "gender": "M",
-    "salary": 1900,
-    "min_age": null,
-    "max_age": null,
-    "creador": {
+#### `/job-offers/employers/:employerId`
+
+    Returns array of job-offers with all its attributes given the id of an existing employer
+    [{
       "id": 1,
-      "name": {
-        "props": {
-          "value": "Citrus"
+      "name": "Job Offer One",
+      "description": "Test description",
+      "available_vacans": 10,
+      "date_begin": "2021-07-01",
+      "date_end": "2021-08-01",
+      "status": "Published",
+      "gender": "M",
+      "salary": 1900,
+      "min_age": null,
+      "max_age": null,
+      "creador": {
+        "id": 1,
+        "name": {
+          "props": {
+            "value": "Citrus"
+          }
         }
       }
-    }
-  },]
-    
+    }]
+
 ### POST:
-    
-#### api-nest/job-offers/:employerId
 
-	Creates a job-offers given the id of an existing employer, receives the job-offer data to be created as a body,
+#### `/job-offers/:employerId`
+
+    Creates a job-offers given the id of an existing employer, receives the job-offer data to be created as a body,
     returns the job-offer created
-	example: {
-    "id": 1,
-    "name": "Job Offer One",
-    "description": "Test description",
-    "available_vacans": 10,
-    "date_begin": "2021-07-01",
-    "date_end": "2021-08-01",
-    "status": "Published",
-    "gender": "M",
-    "salary": 1900,
-    "min_age": null, //opcional
-    "max_age": null,//opcional
-    "creador": {
+    example: {
       "id": 1,
-      "name": {
-        "props": {
-          "value": "Citrus"
+      "name": "Job Offer One",
+      "description": "Test description",
+      "available_vacans": 10,
+      "date_begin": "2021-07-01",
+      "date_end": "2021-08-01",
+      "status": "Published",
+      "gender": "M",
+      "salary": 1900,
+      "min_age": null, //opcional
+      "max_age": null,//opcional
+      "creador": {
+        "id": 1,
+        "name": {
+          "props": {
+            "value": "Citrus"
+          }
         }
       }
     }
-  }
 
 ### PUT:
-    
-#### /api-nest/job-offers/:jobOfferId
-    
-modifies the status of the job Offer with the received id from 'Hidden' to 'Published' and from 'Published' to 'Hidden',
-    returns a string that gives the response to the request
+
+#### `/job-offers/:jobOfferId`
+
+Modifies the status of the job Offer with the received id from 'Hidden' to 'Published' and from 'Published' to 'Hidden',
+Returns a "string" message of success or failure
+
+      Status changed successfully

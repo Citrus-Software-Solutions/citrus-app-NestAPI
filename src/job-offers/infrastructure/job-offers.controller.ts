@@ -19,14 +19,6 @@ export class JobOffersController {
     private readonly _jobOfferService: IJobOffersService,
   ) {}
 
-  @Post(':employerId')
-  createRole(
-    @Body() offer: JobOffer,
-    @Param('employerId', ParseIntPipe) employerId: number,
-  ): Promise<JobOffer> {
-    return this._jobOfferService.createOffer(offer, employerId);
-  }
-
   @Get()
   getAllJobOffers(): Promise<ReadJobOfferDto[]> {
     return this._jobOfferService.getAll();
@@ -45,5 +37,13 @@ export class JobOffersController {
     @Param('jobOfferId', ParseIntPipe) employerId: number,
   ): Promise<string> {
     return this._jobOfferService.updateJobOfferStatus(employerId);
+  }
+
+  @Post(':employerId')
+  createRole(
+    @Body() offer: Partial<JobOffer>,
+    @Param('employerId', ParseIntPipe) employerId: number,
+  ): Promise<JobOffer> {
+    return this._jobOfferService.createOffer(offer, employerId);
   }
 }

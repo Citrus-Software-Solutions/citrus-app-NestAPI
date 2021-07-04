@@ -3,8 +3,8 @@ import { IApplicationPersistence } from '../application/application.persistence.
 import { ApplicationEntity } from '../entities/application.entity';
 import { ApplicationEntityRepository } from './application.entity.repository';
 import { Injectable } from '@nestjs/common';
-import { EmployeeEntity } from 'src/employee/entities/employee.entity';
-import { JobOfferEntity } from 'src/job-offers/entities/job-offers.entity';
+import { EmployeeEntity } from '../../employee/entities/employee.entity';
+import { JobOfferEntity } from '../../job-offers/entities/job-offers.entity';
 
 @Injectable()
 export class ApplicationPersistenceAdapter implements IApplicationPersistence {
