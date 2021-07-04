@@ -8,7 +8,7 @@ import { IJobOfferRepository } from './job-offers.repository.interface';
 @Injectable()
 export class JobOfferRepository implements IJobOfferRepository {
   constructor(
-    @Inject('JobOfferPersisteceAdapter')
+    @Inject('JobOfferPersistenceAdapter')
     private readonly _jobOfferPersistence: IJobOffersPersistence,
     private readonly _mapper: JobOfferDataMapper,
   ) {}
