@@ -11,7 +11,7 @@ import {
 import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
 
 @Exclude()
-export class ReadJobOffertDto {
+export class ReadJobOfferDto {
   @Expose()
   @IsNumber()
   readonly id: number;

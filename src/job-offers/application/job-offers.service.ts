@@ -7,6 +7,8 @@ import {
 import { JobOffer } from '../domain/job-offer.model';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { IJobOfferRepository } from '../application/job-offers.repository.interface';
+import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class JobOfferService implements IJobOffersService {
@@ -15,12 +17,14 @@ export class JobOfferService implements IJobOffersService {
     private readonly _jobOfferRepository: IJobOfferRepository,
   ) {}
 
-  async getAll(): Promise<JobOffer[]> {
+  async getAll(): Promise<ReadJobOfferDto[]> {
     const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll();
-    return jobOffers;
+    return jobOffers.map((offer: JobOffer) =>
+      plainToClass(ReadJobOfferDto, offer),
+    );
   }
 
-  async getByEmployerId(employerId: number): Promise<JobOffer[]> {
+  async getByEmployerId(employerId: number): Promise<ReadJobOfferDto[]> {
     if (!employerId) {
       throw new BadRequestException('id must be sent');
     }
@@ -29,7 +33,9 @@ export class JobOfferService implements IJobOffersService {
       employerId,
     );
 
-    return jobOffers;
+    return jobOffers.map((offer: JobOffer) =>
+      plainToClass(ReadJobOfferDto, offer),
+    );
   }
 
   async updateJobOfferStatus(jobOfferId: number): Promise<string> {

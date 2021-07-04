@@ -9,7 +9,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { ReadEmployeeInApplicationDto } from '../../employee/dtos/read-employee-in-application.dto';
-import { ReadJobOffertDto } from '../../job-offers/dtos/read-job-offert.dto';
+import { ReadJobOfferInApplicationDto } from '../../job-offers/dtos/read-joboffert-in-application.dto';
 
 @Exclude()
 export class ApplicationResultDto {
@@ -38,6 +38,6 @@ export class ApplicationResultDto {
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
-  @Type(() => ReadJobOffertDto)
-  readonly jobOffer: ReadJobOffertDto;
+  @Type(() => ReadJobOfferInApplicationDto)
+  readonly jobOffer: ReadJobOfferInApplicationDto;
 }

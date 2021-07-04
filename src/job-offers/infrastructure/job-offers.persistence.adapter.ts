@@ -20,7 +20,9 @@ export class JobOfferPersistenceAdapter
 
   async getJobOffers(): Promise<JobOfferEntity[]> {
     const jobOfferRepository = getRepository(JobOfferEntity);
-    const jobOffers: JobOfferEntity[] = await jobOfferRepository.find();
+    const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
+      where: { status: 'Published' },
+    });
 
     return jobOffers;
   }
@@ -36,7 +38,7 @@ export class JobOfferPersistenceAdapter
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
       relations: ['employer'],
-      where: { employer: employer },
+      where: { employer: employer, status: 'Published' },
     });
 
     if (!jobOffers) {
@@ -88,6 +90,7 @@ export class JobOfferPersistenceAdapter
 
     return existOffer;
   }
+
   async updateJobOfferStatus(jobOfferId: number): Promise<string> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 
