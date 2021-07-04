@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
 import { Employee } from '../domain/employee.model';
+import { ReadEmployeeDto } from '../dtos/read-employee.dto';
 import { IEmployeeRepository } from './employee.repository.interface';
 import { IEmployeeService } from './employee.service.interface';
 
@@ -10,8 +12,8 @@ export class EmployeeService implements IEmployeeService {
     private readonly _employeeRepository: IEmployeeRepository,
   ) {}
 
-  async getEmployee(): Promise<Employee[]> {
+  async getEmployee(): Promise<ReadEmployeeDto[]> {
     const employee: Employee[] = await this._employeeRepository.getEmployee();
-    return employee;
+    return employee.map((emp: Employee) => plainToClass(ReadEmployeeDto, emp));
   }
 }

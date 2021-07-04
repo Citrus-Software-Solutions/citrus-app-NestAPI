@@ -1,5 +1,5 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { IsNumber, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsString } from 'class-validator';
 import { Name } from '../../shared/domain/name.model';
 
 @Exclude()
@@ -27,4 +27,12 @@ export class ReadEmployeeDto {
   @IsString()
   @Transform(({ value }) => value.props.value)
   readonly secondLastName?: Name;
+
+  @Expose()
+  @IsString()
+  readonly gender: string;
+
+  @Expose()
+  @IsDate()
+  readonly birthDate: Date;
 }

@@ -1,5 +1,5 @@
-import { Employee } from '../domain/employee.model';
+import { ReadEmployeeDto } from '../dtos/read-employee.dto';
 
 export interface IEmployeeService {
-  getEmployee(): Promise<Employee[]>;
+  getEmployee(): Promise<ReadEmployeeDto[]>;
 }
