@@ -1,8 +1,10 @@
+import { ApplicationEntity } from '../../application/entities/application.entity';
 import {
   BaseEntity,
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
@@ -46,4 +48,7 @@ export class JobOfferEntity extends BaseEntity {
     eager: true,
   })
   employer: EmployerEntity;
+
+  @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)
+  applicants?: ApplicationEntity[];
 }
