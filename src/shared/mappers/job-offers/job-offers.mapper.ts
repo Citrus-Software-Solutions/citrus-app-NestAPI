@@ -12,14 +12,14 @@ export class JobOfferDataMapper
     jobOffer.id = entity.id;
     jobOffer.name = entity.name;
     jobOffer.description = entity.description;
-    jobOffer.available_vacans = entity.available_vacans;
-    jobOffer.date_begin = entity.date_begin;
-    jobOffer.date_end = entity.date_end;
+    jobOffer.availableVacans = entity.available_vacans;
+    jobOffer.dateBegin = entity.date_begin;
+    jobOffer.dateEnd = entity.date_end;
     jobOffer.status = entity.status;
     jobOffer.gender = entity.gender;
     jobOffer.salary = entity.salary;
-    jobOffer.min_age = entity.min_age;
-    jobOffer.max_age = entity.max_age;
+    jobOffer.minAge = entity.min_age;
+    jobOffer.maxAge = entity.max_age;
     jobOffer.creador = this._mapperEmployer.toDomain(entity.employer);
 
     return jobOffer;
@@ -30,14 +30,14 @@ export class JobOfferDataMapper
     jobOfferEntity.id = jobOffer.id;
     jobOfferEntity.name = jobOffer.name;
     jobOfferEntity.description = jobOffer.description;
-    jobOfferEntity.available_vacans = jobOffer.available_vacans;
-    jobOfferEntity.date_begin = jobOffer.date_begin;
-    jobOfferEntity.date_end = jobOffer.date_end;
+    jobOfferEntity.available_vacans = jobOffer.availableVacans;
+    jobOfferEntity.date_begin = jobOffer.dateBegin;
+    jobOfferEntity.date_end = jobOffer.dateEnd;
     jobOfferEntity.status = jobOffer.status;
     jobOfferEntity.gender = jobOffer.gender;
     jobOfferEntity.salary = jobOffer.salary;
-    jobOfferEntity.min_age = jobOffer.min_age;
-    jobOfferEntity.max_age = jobOffer.max_age;
+    jobOfferEntity.min_age = jobOffer.minAge;
+    jobOfferEntity.max_age = jobOffer.maxAge;
     if (jobOffer.creador) {
       jobOfferEntity.employer = this._mapperEmployer.toDalEntity(
         jobOffer.creador,

@@ -17,7 +17,7 @@ import { ReadEmployerDto } from '../dtos/read-employer.dto';
 @Controller('employers')
 export class EmployersController {
   constructor(
-    @Inject('IEmployersService')
+    @Inject('EmployersService')
     private readonly _employersService: IEmployersService,
   ) {}
 
