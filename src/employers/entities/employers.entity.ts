@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('employers')
+@Entity('employer')
 export class EmployerEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
