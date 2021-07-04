@@ -38,6 +38,17 @@ export class JobOfferService implements IJobOffersService {
     );
   }
 
+  async getById(jobOfferId: number): Promise<ReadJobOfferDto> {
+    if (!jobOfferId) {
+      throw new BadRequestException('id must be sent');
+    }
+
+    return plainToClass(
+      ReadJobOfferDto,
+      this._jobOfferRepository.getById(jobOfferId),
+    );
+  }
+
   async updateJobOfferStatus(jobOfferId: number): Promise<{ message: string }> {
     if (!jobOfferId) {
       throw new BadRequestException('id must be sent');
