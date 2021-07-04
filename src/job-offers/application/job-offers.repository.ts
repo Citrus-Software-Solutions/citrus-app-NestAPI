@@ -1,6 +1,8 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { JobOfferDataMapper } from '../../shared/mappers/job-offers/job-offers.mapper';
 import { JobOffer } from '../domain/job-offer.model';
+import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { ReadJobOfferInApplicationDto } from '../dtos/read-joboffert-in-application.dto';
 import { JobOfferEntity } from '../entities/job-offers.entity';
 import { IJobOffersPersistence } from './job-offers.persistence.interface';
 import { IJobOfferRepository } from './job-offers.repository.interface';
@@ -39,8 +41,10 @@ export class JobOfferRepository implements IJobOfferRepository {
     return this._jobOfferPersistence.updateJobOfferStatus(jobOfferId);
   }
 
-  async create(offer: JobOffer, employerId: number): Promise<JobOffer> {
-    const jobOfferEntity: JobOfferEntity = this._mapper.toDalEntity(offer);
+  async create(offer: DataJobOfferDto, employerId: number): Promise<JobOffer> {
+    const realJobOffer = this.dtoJobtoReal(offer);
+    const jobOfferEntity: JobOfferEntity =
+      this._mapper.toDalEntity(realJobOffer);
 
     const createdOffer: JobOfferEntity =
       await this._jobOfferPersistence.createJobOffer(
@@ -53,5 +57,19 @@ export class JobOfferRepository implements IJobOfferRepository {
     }
 
     return this._mapper.toDomain(createdOffer);
+  }
+  private dtoJobtoReal(dtoJob: DataJobOfferDto) {
+    const realJobOffer = new JobOffer();
+    realJobOffer.availableVacans = dtoJob.availableVacans;
+    realJobOffer.dateBegin = new Date(dtoJob.dateBegin);
+    realJobOffer.dateEnd = new Date(dtoJob.dateEnd);
+    realJobOffer.description = dtoJob.description;
+    realJobOffer.gender = dtoJob.gender;
+    realJobOffer.maxAge = dtoJob.maxAge;
+    realJobOffer.minAge = dtoJob.minAge;
+    realJobOffer.name = dtoJob.name;
+    realJobOffer.salary = dtoJob.salary;
+    realJobOffer.status = dtoJob.status;
+    return realJobOffer;
   }
 }

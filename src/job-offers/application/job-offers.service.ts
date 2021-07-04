@@ -9,6 +9,7 @@ import { IJobOffersService } from '../application/job-offers.service.interface';
 import { IJobOfferRepository } from '../application/job-offers.repository.interface';
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 import { plainToClass } from 'class-transformer';
+import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
 
 @Injectable()
 export class JobOfferService implements IJobOffersService {
@@ -57,7 +58,10 @@ export class JobOfferService implements IJobOffersService {
     return this._jobOfferRepository.updateStatus(jobOfferId);
   }
 
-  async createOffer(offer: JobOffer, employerId: number): Promise<JobOffer> {
+  async createOffer(
+    offer: DataJobOfferDto,
+    employerId: number,
+  ): Promise<JobOffer> {
     if (!offer) {
       throw new BadRequestException('Offer can not be empty');
     }
