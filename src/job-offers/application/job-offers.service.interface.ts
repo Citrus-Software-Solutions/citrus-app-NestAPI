@@ -3,5 +3,5 @@ export interface IJobOffersService {
   getAll(): Promise<JobOffer[]>;
   getByEmployerId(id: number): Promise<JobOffer[]>;
   updateJobOfferStatus(id: number): Promise<string>;
-  createOffer(offer: JobOffer, employerId: number): Promise<JobOffer>;
+  createOffer(offer: Partial<JobOffer>, employerId: number): Promise<JobOffer>;
 }
