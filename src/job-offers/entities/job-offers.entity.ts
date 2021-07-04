@@ -29,10 +29,10 @@ export class JobOfferEntity extends BaseEntity {
   @Column({ type: 'date', nullable: false })
   date_end: Date;
 
-  @Column({ type: 'varchar', enum: ['Hidden', 'Published'] })
+  @Column({ type: 'varchar' })
   status: string;
 
-  @Column({ type: 'varchar', enum: ['M', 'F'] })
+  @Column({ type: 'varchar' })
   gender: string;
 
   @Column({ type: 'float', nullable: false })
