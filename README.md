@@ -53,3 +53,5 @@ $ npm run test:cov
 ## Routes (made with Swagger)
 
 ### https://citrus-api-nest.herokuapp.com/docs
+
+## References
