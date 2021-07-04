@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
 
-@Entity('job_offers')
+@Entity('job_offer')
 export class JobOfferEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
