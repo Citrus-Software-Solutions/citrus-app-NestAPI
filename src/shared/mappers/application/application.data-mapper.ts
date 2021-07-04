@@ -10,7 +10,6 @@ export class ApplicationDataMapper
   employeeMapper = new EmployeeDataMapper();
   jobOfferMapper = new JobOfferDataMapper();
   public toDomain(entity: ApplicationEntity): Application {
-    console.log(entity.employee);
     const application = new Application(
       entity.id,
       entity.status,

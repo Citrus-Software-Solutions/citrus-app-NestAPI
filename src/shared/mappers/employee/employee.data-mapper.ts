@@ -28,7 +28,6 @@ export class EmployeeDataMapper
     employeeEntity.gender = employee.gender;
     employeeEntity.birth_date = employee.birthDate;
     if (employee.secondName) {
-      console.log(employee.secondName);
       employeeEntity.second_name = employee.secondName.props.value;
     } else employeeEntity.second_name = undefined;
     return employeeEntity;
