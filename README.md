@@ -55,8 +55,9 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## Citrus BackEnd Developers
 
-<table>
+<table align="center">
   <tbody><tr>
     <td align="center"><a href="https://github.com/YkBastidas" rel="nofollow"><img src="https://avatars.githubusercontent.com/u/44125021?v=4" width="150px;" alt="" style="max-width:100%;"><br><sub><b>Yorfrank Bastidas</b></sub></a><br><a href="https://github.com/Citrus-Software-Solutions/citrus-app-NestAPI/commits?author=ykbastidas" title="Commits"><g-emoji class="g-emoji" alias="book" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d6.png">📖</g-emoji></a></td>
     <td align="center"><a href="https://github.com/firstguzman"><img src="https://avatars.githubusercontent.com/u/50277994?v=4" width="150px;" alt="" style="max-width:100%;"><br><sub><b>César Guzmán</b></sub></a><br><a href="https://github.com/Citrus-Software-Solutions/citrus-app-NestAPI/commits?author=firstguzman" title="Documentation"><g-emoji class="g-emoji" alias="book" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d6.png">📖</g-emoji></a></td>
