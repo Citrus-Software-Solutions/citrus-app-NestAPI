@@ -29,6 +29,10 @@ export class JobOfferRepository implements IJobOfferRepository {
     );
   }
 
+  async updateStatus(jobOfferId: number): Promise<string> {
+    return this._jobOfferPersistence.updateJobOfferStatus(jobOfferId);
+  }
+
   async create(offer: JobOffer, employerId: number): Promise<JobOffer> {
     const jobOfferEntity: JobOfferEntity = this._mapper.toDalEntity(offer);
 
@@ -43,9 +47,5 @@ export class JobOfferRepository implements IJobOfferRepository {
     }
 
     return this._mapper.toDomain(createdOffer);
-  }
-
-  async updateStatus(jobOfferId: number): Promise<string> {
-    return this._jobOfferPersistence.updateJobOfferStatus(jobOfferId);
   }
 }
