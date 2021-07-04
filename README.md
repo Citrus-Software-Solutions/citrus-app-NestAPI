@@ -4,7 +4,8 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Citrus App is a job finder app created and developed by Citrus Software Solutions.
+This repository contain our API developed in [Nest](https://github.com/nestjs/nest).
 
 ## Installation
 
