@@ -1,5 +1,5 @@
 <p align="center">
-  <a/>## Citrus App NestJs API</a>
+  <h2/>Citrus App NestJs API</h2>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
