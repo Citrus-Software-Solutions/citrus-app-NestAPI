@@ -14,7 +14,7 @@ import { DatabaseModule } from './database/database.module';
 export class AppModule {
   static port: number | string;
 
-  constructor(private readonly _confiService: ConfigService) {
-    AppModule.port = this._confiService.get(Configuration.PORT);
+  constructor(private readonly _configService: ConfigService) {
+    AppModule.port = this._configService.get(Configuration.PORT);
   }
 }
