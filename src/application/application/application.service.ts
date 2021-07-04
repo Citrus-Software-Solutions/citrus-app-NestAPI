@@ -21,21 +21,22 @@ export class ApplicationService implements IApplicationService {
   async applyToOffer(
     applicationData: ApplyOfferDto,
   ): Promise<ApplicationResultDto> {
+    const applicationDateInString = applicationData.applicationDate;
     if (!applicationData.employeeId) {
       throw new BadRequestException('Employee Id can not be empty');
     }
     if (!applicationData.offerId) {
       throw new NotFoundException('Offer Id can not be empty');
     }
-    if (!applicationData.date_application) {
+    if (!applicationDateInString) {
       throw new NotFoundException('Date not provided');
     }
-
+    const applicationDate = new Date(applicationDateInString);
     const savedApplication: Application =
       await this.applicationRepository.createApplication(
         applicationData.employeeId,
         applicationData.offerId,
-        applicationData.date_application,
+        applicationDate,
       );
 
     return plainToClass(ApplicationResultDto, savedApplication);
