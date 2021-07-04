@@ -7,7 +7,7 @@ import { JobOfferEntity } from '../entities/job-offers.entity';
 
 @EntityRepository(JobOfferEntity)
 @Injectable()
-export class JobOfferPersisteceAdapter
+export class JobOfferPersistenceAdapter
   extends Repository<JobOfferEntity>
   implements IJobOffersPersistence
 {
@@ -77,6 +77,17 @@ export class JobOfferPersisteceAdapter
     return savedOffer;
   }
 
+  async getById(offerId: number): Promise<JobOfferEntity> {
+    const jobOfferRepository = getRepository(JobOfferEntity);
+
+    const existOffer = await jobOfferRepository.findOne(offerId);
+
+    if (!existOffer) {
+      throw new NotFoundException('This offer does not exist');
+    }
+
+    return existOffer;
+    
   async updateJobOfferStatus(jobOfferId: number): Promise<string> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 

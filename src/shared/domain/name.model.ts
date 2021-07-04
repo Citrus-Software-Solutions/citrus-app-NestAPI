@@ -14,13 +14,11 @@ export class Name extends ValueObject<NameProps> {
   }
 
   public static create(name: string): Name {
-    if (
-      name === undefined ||
-      name === null ||
-      name.length <= 2 ||
-      name.length > 100
-    ) {
-      throw new Error('User must be greater than 2 chars and less than 100.');
+    if (name === undefined || name === null) {
+      return new Name({ value: '' });
+    }
+    if (name.length <= 2 || name.length > 100) {
+      throw new Error('Name must be greater than 2 chars and less than 100.');
     } else {
       return new Name({ value: name });
     }
