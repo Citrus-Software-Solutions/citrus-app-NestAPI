@@ -38,7 +38,7 @@ export class JobOfferService implements IJobOffersService {
     );
   }
 
-  async updateJobOfferStatus(jobOfferId: number): Promise<string> {
+  async updateJobOfferStatus(jobOfferId: number): Promise<{ message: string }> {
     if (!jobOfferId) {
       throw new BadRequestException('id must be sent');
     }

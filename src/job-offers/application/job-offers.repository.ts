@@ -29,7 +29,7 @@ export class JobOfferRepository implements IJobOfferRepository {
     );
   }
 
-  async updateStatus(jobOfferId: number): Promise<string> {
+  async updateStatus(jobOfferId: number): Promise<{ message: string }> {
     return this._jobOfferPersistence.updateJobOfferStatus(jobOfferId);
   }
 

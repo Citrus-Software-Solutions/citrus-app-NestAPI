@@ -91,7 +91,7 @@ export class JobOfferPersistenceAdapter
     return existOffer;
   }
 
-  async updateJobOfferStatus(jobOfferId: number): Promise<string> {
+  async updateJobOfferStatus(jobOfferId: number): Promise<{ message: string }> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 
     const jobOffer: JobOfferEntity = await jobOfferRepository.findOne(
@@ -102,22 +102,22 @@ export class JobOfferPersistenceAdapter
       throw new NotFoundException();
     }
 
-    let message: string;
+    let response: string;
 
     if (jobOffer.status == 'Hidden') {
       await jobOfferRepository.update(jobOfferId, {
         status: 'Published',
       });
-      message = 'Status changed successfully';
+      response = 'Status changed successfully';
     } else if (jobOffer.status == 'Published') {
       await jobOfferRepository.update(jobOfferId, {
         status: 'Hidden',
       });
-      message = 'Status changed successfully';
+      response = 'Status changed successfully';
     } else {
-      message = 'Status could not be changed';
+      response = 'Status could not be changed';
     }
 
-    return message;
+    return { message: response };
   }
 }
