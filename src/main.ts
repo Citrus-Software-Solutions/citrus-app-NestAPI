@@ -2,7 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-// import { initSwagger } from './app.swagger';
+import { initSwagger } from './app.swagger';
 import { generateTypeormConfigFile } from './scripts';
 
 async function bootstrap() {
@@ -11,7 +11,7 @@ async function bootstrap() {
   const config = app.get(ConfigService);
   const port = process.env.PORT || 5432;
   app.setGlobalPrefix('api-nest');
-  // initSwagger(app);
+  initSwagger(app);
   generateTypeormConfigFile(config);
   app.useGlobalPipes(
     new ValidationPipe({
