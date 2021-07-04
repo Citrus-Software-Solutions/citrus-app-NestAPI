@@ -82,7 +82,9 @@ export class JobOfferPersistenceAdapter
   async getById(offerId: number): Promise<JobOfferEntity> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 
-    const existOffer = await jobOfferRepository.findOne(offerId);
+    const existOffer = await jobOfferRepository.findOne(offerId, {
+      where: { status: 'Published' },
+    });
 
     if (!existOffer) {
       throw new NotFoundException('This offer does not exist');
