@@ -8,7 +8,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { ReadEmployerDto } from 'src/employers/dtos/read-employer.dto';
+import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
 
 @Exclude()
 export class ReadJobOffertDto {
