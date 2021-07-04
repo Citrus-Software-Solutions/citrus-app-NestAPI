@@ -15,8 +15,8 @@ export class ApplicationEntity extends BaseEntity {
 
   @Column({
     type: 'varchar',
-    enum: ['Pending', 'Accepted', 'Rejected'],
     nullable: false,
+    default: 'Pending',
   })
   status: string;
 

@@ -1,5 +1,9 @@
 import { Application } from '../domain/application.model';
 
 export interface IApplicationRepository {
-  createApplication(applicationData: Application): Promise<Application>;
+  createApplication(
+    employeeId: number,
+    offerId: number,
+    fecha: Date,
+  ): Promise<Application>;
 }

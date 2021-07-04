@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EmployeePersistenceAdapter } from '../employee/infrastructure/employee.persistence.adapter';
+import { JobOfferPersistenceAdapter } from '../job-offers/infrastructure/job-offers.persistence.adapter';
 import { SharedModule } from '../shared/shared.module';
 import { ApplicationRepository } from './application/application.repository';
 import { ApplicationService } from './application/application.service';
@@ -9,13 +11,17 @@ import { ApplicationPersistenceAdapter } from './infrastructure/application.pers
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ApplicationEntityRepository]),
+    TypeOrmModule.forFeature([
+      ApplicationEntityRepository,
+      JobOfferPersistenceAdapter,
+    ]),
     SharedModule,
   ],
   providers: [
     ApplicationService,
     ApplicationRepository,
     ApplicationPersistenceAdapter,
+    EmployeePersistenceAdapter,
   ],
   controllers: [ApplicationController],
 })

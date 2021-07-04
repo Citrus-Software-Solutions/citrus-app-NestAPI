@@ -1,5 +1,7 @@
 import { Application } from '../domain/application.model';
+import { ApplicationResultDto } from '../dtos/application-result.dto';
+import { ApplyOfferDto } from '../dtos/apply-offer.dto';
 
 export interface IApplicationService {
-  applyToOffer(application: Application): Promise<Application>;
+  applyToOffer(application: ApplyOfferDto): Promise<ApplicationResultDto>;
 }

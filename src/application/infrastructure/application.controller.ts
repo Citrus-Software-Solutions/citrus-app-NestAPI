@@ -1,6 +1,8 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { IApplicationService } from '../application/application.service.interface';
 import { Application } from '../domain/application.model';
+import { ApplicationResultDto } from '../dtos/application-result.dto';
+import { ApplyOfferDto } from '../dtos/apply-offer.dto';
 
 @Controller('application')
 export class ApplicationController {
@@ -10,7 +12,9 @@ export class ApplicationController {
   ) {}
 
   @Post()
-  create(@Body() applicationData: Application): Promise<Application> {
+  create(
+    @Body() applicationData: ApplyOfferDto,
+  ): Promise<ApplicationResultDto> {
     return this.applicationService.applyToOffer(applicationData);
   }
 }
