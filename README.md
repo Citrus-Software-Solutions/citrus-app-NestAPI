@@ -50,58 +50,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Authors
-
-<style>
-.column {
-  float: left;
-  width: 33.33%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
-<div class="row">
-  <div class="column">
-  <figure>
-    <img
-      alt="YkBastidas Github Avatar" 
-      width="100%" 
-      src="https://github.com/YkBastidas.png"
-    >
-    <figcaption>Yorfrank Bastidas</figcaption>        
-  </figure>
-  </div>
-  <div class="column">
-  <figure>
-    <img
-      alt="firstguzman Github Avatar" 
-      width=100%" 
-      src="https://github.com/firstguzman.png"
-    >
-    <figcaption>
-      Cesar Guzman
-    </figcaption>
-  </figure>
-  </div>
-  <div class="column">
-  <figure>
-    <img
-      alt="alejjb Github Avatar" 
-      width="100%" 
-      src="https://github.com/alejjb.png"
-    >
-    <figcaption>
-      Alejandro Jauregui
-    </figcaption>
-  </figure>
-  </div>
-</div>
-
 ## Routes (made with Swagger)
 
 ### https://citrus-api-nest.herokuapp.com/docs
