@@ -1,7 +1,8 @@
 import { JobOffer } from '../domain/job-offer.model';
+import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 export interface IJobOffersService {
-  getAll(): Promise<JobOffer[]>;
-  getByEmployerId(id: number): Promise<JobOffer[]>;
+  getAll(): Promise<ReadJobOfferDto[]>;
+  getByEmployerId(id: number): Promise<ReadJobOfferDto[]>;
   updateJobOfferStatus(id: number): Promise<string>;
   createOffer(offer: JobOffer, employerId: number): Promise<JobOffer>;
 }

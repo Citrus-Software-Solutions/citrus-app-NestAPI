@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
+import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 
 @Controller('job-offers')
 export class JobOffersController {
@@ -27,17 +28,18 @@ export class JobOffersController {
   }
 
   @Get()
-  getAllJobOffers(): Promise<JobOffer[]> {
+  getAllJobOffers(): Promise<ReadJobOfferDto[]> {
     return this._jobOfferService.getAll();
   }
 
   @Get('employers/:employerId')
   getByEmployerId(
     @Param('employerId', ParseIntPipe) employerId: number,
-  ): Promise<JobOffer[]> {
+  ): Promise<ReadJobOfferDto[]> {
     return this._jobOfferService.getByEmployerId(employerId);
   }
 
+  //podría retornar la oferta con el estatus cambiado
   @Put(':jobOfferId')
   updateJobOfferStatus(
     @Param('jobOfferId', ParseIntPipe) employerId: number,
