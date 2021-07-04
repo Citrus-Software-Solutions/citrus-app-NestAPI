@@ -87,7 +87,7 @@ export class JobOfferPersistenceAdapter
     }
 
     return existOffer;
-    
+  }
   async updateJobOfferStatus(jobOfferId: number): Promise<string> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 
