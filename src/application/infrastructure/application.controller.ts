@@ -22,6 +22,7 @@ export class ApplicationController {
   }
 
   @Post('applied')
+  @ApiOperation({ summary: 'Verify if an employee aleady applied to an offer' })
   applied(@Body() data: AlreadyAppliedOfferDto): Promise<boolean> {
     return this.applicationService.alreadyApplied(data);
   }
