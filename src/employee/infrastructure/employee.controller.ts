@@ -1,6 +1,6 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { IEmployeeService } from '../application/employee.service.interface';
-import { EmployeeEntity } from '../entities/employee.entity';
+import { Employee } from '../domain/employee.model';
 
 @Controller('employees')
 export class EmployeeController {
@@ -10,7 +10,7 @@ export class EmployeeController {
   ) {}
 
   @Get('')
-  getAllEmployee(): Promise<EmployeeEntity[]> {
+  getAllEmployee(): Promise<Employee[]> {
     return this._employeeService.getEmployee();
   }
 }

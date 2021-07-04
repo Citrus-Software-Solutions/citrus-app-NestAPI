@@ -1,5 +1,5 @@
 import { Employee } from '../domain/employee.model';
 
-export interface IEmployeeService {
+export interface IEmployeeRepository {
   getEmployee(): Promise<Employee[]>;
 }

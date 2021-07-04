@@ -15,7 +15,7 @@ export class EmployeeEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 25, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', enum: ['M', 'F'] })
+  @Column({ type: 'varchar' })
   gender: string;
 
   @Column({ type: 'varchar', length: 25, nullable: true })
