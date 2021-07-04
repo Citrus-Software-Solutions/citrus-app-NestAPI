@@ -3,21 +3,18 @@ import {
   Controller,
   //   Delete,
   Get,
-  HttpStatus,
   Inject,
-  Res,
   //   Param,
   //   Patch,
   //   Post,
 } from '@nestjs/common';
-import { Employer } from '../domain/employer.model';
 import { IEmployersService } from '../application/employers.service.interface';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 
 @Controller('employers')
 export class EmployersController {
   constructor(
-    @Inject('IEmployersService')
+    @Inject('EmployersService')
     private readonly _employersService: IEmployersService,
   ) {}
 

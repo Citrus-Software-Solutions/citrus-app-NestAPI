@@ -5,8 +5,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { JobOffer } from '../domain/job-offer.model';
-import { IJobOffersService } from './job-offers.service.interface';
-import { IJobOfferRepository } from './job-offers.repository.interface';
+import { IJobOffersService } from '../application/job-offers.service.interface';
+import { IJobOfferRepository } from '../application/job-offers.repository.interface';
 
 @Injectable()
 export class JobOfferService implements IJobOffersService {
@@ -46,5 +46,13 @@ export class JobOfferService implements IJobOffersService {
     );
 
     return savedOffer;
+  }
+
+  async updateJobOfferStatus(jobOfferId: number): Promise<string> {
+    if (!jobOfferId) {
+      throw new BadRequestException('id must be sent');
+    }
+
+    return this._jobOfferRepository.updateStatus(jobOfferId);
   }
 }
