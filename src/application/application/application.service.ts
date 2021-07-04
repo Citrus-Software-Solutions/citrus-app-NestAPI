@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { Application } from '../domain/application.model';
+import { AlreadyAppliedOfferDto } from '../dtos/already-applied.dto';
 import { ApplicationResultDto } from '../dtos/application-result.dto';
 import { ApplyOfferDto } from '../dtos/apply-offer.dto';
 import { IApplicationRepository } from './application.repository.interface';
@@ -40,5 +41,22 @@ export class ApplicationService implements IApplicationService {
       );
 
     return plainToClass(ApplicationResultDto, savedApplication);
+  }
+
+  alreadyApplied(data: AlreadyAppliedOfferDto): Promise<boolean> {
+    if (!data) {
+      throw new BadRequestException('You must send a body required');
+    }
+    if (!data.employeeId) {
+      throw new BadRequestException('Employee Id can not be empty');
+    }
+    if (!data.offerId) {
+      throw new NotFoundException('Offer Id can not be empty');
+    }
+
+    return this.applicationRepository.appliedToAOffer(
+      data.employeeId,
+      data.offerId,
+    );
   }
 }
