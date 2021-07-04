@@ -31,6 +31,13 @@ export class JobOffersController {
     return this._jobOfferService.getByEmployerId(employerId);
   }
 
+  @Get('/:jobOfferId')
+  getById(
+    @Param('jobOfferId', ParseIntPipe) jobOfferId: number,
+  ): Promise<ReadJobOfferDto> {
+    return this._jobOfferService.getById(jobOfferId);
+  }
+
   //podría retornar la oferta con el estatus cambiado
   @Put(':jobOfferId')
   updateJobOfferStatus(
