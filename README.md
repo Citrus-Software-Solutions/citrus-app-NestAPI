@@ -1,5 +1,5 @@
 <p align="center">
-  <a/>Citrus App NestJs API</a>
+  <a/>## Citrus App NestJs API</a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -55,6 +55,10 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## Routes (UI Presentation made with Swagger)
+
+### https://citrus-api-nest.herokuapp.com/docs
+
 ## Citrus BackEnd Developers
 
 <table align="center">
@@ -64,10 +68,6 @@ $ npm run test:cov
     <td align="center"><a href="https://github.com/alejjb" rel="nofollow"><img src="https://avatars.githubusercontent.com/u/55589316?v=4" width="150px;" alt="" style="max-width:100%;"><br><sub><b>Alejandro Jauregui</b></sub></a><br><a href="https://github.com/Citrus-Software-Solutions/citrus-app-NestAPI/commits?author=alejjb" title="Documentation"><g-emoji class="g-emoji" alias="book" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d6.png">📖</g-emoji></a></td>
   </tr>
 </tbody></table>
-
-## Routes (UI Presentation made with Swagger)
-
-### https://citrus-api-nest.herokuapp.com/docs
 
 ## References
 
