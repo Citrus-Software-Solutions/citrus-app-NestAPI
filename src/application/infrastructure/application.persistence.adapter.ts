@@ -3,6 +3,8 @@ import { IApplicationPersistence } from '../application/application.persistence.
 import { ApplicationEntity } from '../entities/application.entity';
 import { ApplicationEntityRepository } from './application.entity.repository';
 import { Injectable } from '@nestjs/common';
+import { EmployeeEntity } from 'src/employee/entities/employee.entity';
+import { JobOfferEntity } from 'src/job-offers/entities/job-offers.entity';
 
 @Injectable()
 export class ApplicationPersistenceAdapter implements IApplicationPersistence {
@@ -19,5 +21,23 @@ export class ApplicationPersistenceAdapter implements IApplicationPersistence {
       await applicationRepository.save(createdApplication);
 
     return savedApplication;
+  }
+
+  async alreadyApplied(
+    employee: EmployeeEntity,
+    offer: JobOfferEntity,
+  ): Promise<boolean> {
+    const applicationRepository = getCustomRepository(
+      ApplicationEntityRepository,
+    );
+
+    const applied: ApplicationEntity = await applicationRepository.findOne({
+      where: { employee: employee, jobOffer: offer },
+    });
+    if (applied) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

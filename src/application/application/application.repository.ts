@@ -32,18 +32,26 @@ export class ApplicationRepository implements IApplicationRepository {
     const employee: EmployeeEntity = await this.employeePersistence.getById(
       employeeId,
     );
+    const applied: boolean = await this.applicationPersistence.alreadyApplied(
+      employee,
+      offer,
+    );
 
-    const applicationEntity: ApplicationEntity = new ApplicationEntity();
-    applicationEntity.date_aplication = fecha;
-    applicationEntity.employee = employee;
-    applicationEntity.jobOffer = offer;
+    if (applied) {
+      throw new BadRequestException('You already have applied to this offer');
+    } else {
+      const applicationEntity: ApplicationEntity = new ApplicationEntity();
+      applicationEntity.date_aplication = fecha;
+      applicationEntity.employee = employee;
+      applicationEntity.jobOffer = offer;
 
-    const createdApplication: ApplicationEntity =
-      await this.applicationPersistence.persistApplication(applicationEntity);
+      const createdApplication: ApplicationEntity =
+        await this.applicationPersistence.persistApplication(applicationEntity);
 
-    if (!createdApplication) {
-      throw new BadRequestException('Application could not be created');
+      if (!createdApplication) {
+        throw new BadRequestException('Application could not be created');
+      }
+      return this.mapper.toDomain(createdApplication);
     }
-    return this.mapper.toDomain(createdApplication);
   }
 }
