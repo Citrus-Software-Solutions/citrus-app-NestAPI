@@ -20,18 +20,19 @@ $ npm install
 
 ## Running the app
 
+To test the API you must set Environment Variables, follow the .env.sample file to set your own.
+The credentials for the production server should be privately shared.
+
 ```bash
 # run server
 $ npm run start
 
 # development (watch mode)
-$ npm run start:dev
+$ NOD_ENV=development npm run start:dev
 
 # production
-$ npm run start:prod
+$ NOD_ENV=production npm run start:prod
 ```
-
-To test the API you must set Environment Variables, follow the .env.sample file to set your own.
 
 ## Test (Isn't Implemented)
 
