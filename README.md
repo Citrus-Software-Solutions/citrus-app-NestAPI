@@ -18,6 +18,16 @@ Citrus App is a job finder app created and developed by Citrus Software Solution
 $ npm install
 ```
 
+## Creating the Database
+
+This commands automatically generates the database in a local environment (not needed for production)
+A migration with the initial state of the database is already provided in the software files.
+
+```bash
+# run server
+$ npm run db:migration:generate
+```
+
 ## Running the app
 
 To test the API you must set Environment Variables, follow the .env.sample file to set your own.
