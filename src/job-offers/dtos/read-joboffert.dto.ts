@@ -8,6 +8,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { Employee } from '../../employee/domain/employee.model';
 import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
 
 @Exclude()
@@ -18,43 +19,27 @@ export class ReadJobOfferDto {
 
   @Expose()
   @IsString()
-  readonly name: string;
-
-  @Expose()
-  @IsString()
-  readonly description: string;
-
-  @Expose()
-  @IsNumber()
-  readonly availableVacans: number;
+  readonly title: string;
 
   @Expose()
   @IsDate()
-  readonly dateBegin: Date;
-
-  @Expose()
-  @IsDate()
-  readonly dateEnd: Date;
+  readonly dead_line: Date;
 
   @Expose()
   @IsString()
-  readonly status: string;
-
-  @Expose()
-  @IsString()
-  readonly gender: string;
+  readonly special_requirements: string;
 
   @Expose()
   @IsNumber()
-  readonly salary: number;
+  readonly duration: number;
 
   @Expose()
   @IsNumber()
-  readonly minAge?: number;
+  readonly hourly_rate: number;
 
   @Expose()
   @IsNumber()
-  readonly maxAge?: number;
+  readonly status: number;
 
   @Expose()
   @IsDefined()
@@ -62,5 +47,13 @@ export class ReadJobOfferDto {
   @IsObject()
   @ValidateNested()
   @Type(() => ReadEmployerDto)
-  readonly creador: ReadEmployerDto;
+  readonly employer: ReadEmployerDto;
+
+  @Expose()
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => Employee)
+  readonly employe?: Employee;
 }

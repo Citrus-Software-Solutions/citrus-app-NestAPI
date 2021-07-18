@@ -1,10 +1,12 @@
-import { ApplicationEntity } from '../../application/entities/application.entity';
+import { EmployeeEntity } from '../../employee/entities/employee.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
@@ -15,40 +17,39 @@ export class JobOfferEntity extends BaseEntity {
   id: number;
 
   @Column({ type: 'varchar', length: 25, nullable: false })
-  name: string;
-
-  @Column({ type: 'varchar', length: 700, nullable: false })
-  description: string;
-
-  @Column({ type: 'integer', nullable: false })
-  available_vacans: number;
-
-  @Column({ type: 'date', nullable: false })
-  date_begin: Date;
-
-  @Column({ type: 'date', nullable: false })
-  date_end: Date;
-
-  @Column({ type: 'varchar' })
-  status: string;
-
-  @Column({ type: 'varchar' })
-  gender: string;
-
-  @Column({ type: 'float', nullable: false })
-  salary: number;
-
-  @Column({ type: 'integer', nullable: true })
-  min_age: number;
-
-  @Column({ type: 'integer', nullable: true })
-  max_age: number;
+  title: string;
 
   @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers, {
     eager: true,
   })
   employer: EmployerEntity;
 
-  @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)
-  applicants?: ApplicationEntity[];
+  @Column({ type: 'date', nullable: false })
+  dead_line: Date;
+
+  // @OneToMany(() => JobScheduleEntity, (jobSchedule) => jobSchedule.jobOffer)
+  // schedule: JobScheduleEntity[];
+
+  @Column({ type: 'varchar', length: 700, nullable: false })
+  special_requirements: string;
+
+  @Column({ type: 'float', nullable: false })
+  duration: number;
+
+  @Column({ type: 'float', nullable: false })
+  hourly_rate: number;
+
+  @OneToOne(() => EmployeeEntity, {
+    cascade: true,
+    nullable: true,
+    eager: true,
+  })
+  @JoinColumn({ name: 'employee_id' })
+  employee: EmployeeEntity;
+
+  @Column({ type: 'integer', nullable: true })
+  status: number;
+
+  // @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)
+  // applicants?: ApplicationEntity[];
 }
