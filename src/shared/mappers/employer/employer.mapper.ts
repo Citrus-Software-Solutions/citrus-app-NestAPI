@@ -1,4 +1,4 @@
-import { Name } from '../../../shared/domain/name.model';
+import { Name } from '../../domain/name.vo';
 import { Employer } from '../../../employers/domain/employer.model';
 import { EmployerEntity } from '../../../employers/entities/employers.entity';
 import { DataMapper } from '../data-mapper.interface';
