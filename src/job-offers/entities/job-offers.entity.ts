@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
+import { JobScheduleEntity } from '../../jobs-schedule/entities/jobs-schedule.entity';
 
 @Entity('job_offer')
 export class JobOfferEntity extends BaseEntity {
@@ -27,11 +28,13 @@ export class JobOfferEntity extends BaseEntity {
   @Column({ type: 'date', nullable: false })
   dead_line: Date;
 
-  // @OneToMany(() => JobScheduleEntity, (jobSchedule) => jobSchedule.jobOffer)
-  // schedule: JobScheduleEntity[];
+  @OneToMany(() => JobScheduleEntity, (jobSchedule) => jobSchedule.jobOffer, {
+    eager: true,
+  })
+  schedule: JobScheduleEntity[];
 
-  @Column({ type: 'varchar', length: 700, nullable: false })
-  special_requirements: string;
+  @Column({ type: 'text', array: true, nullable: false })
+  special_requirements: string[];
 
   @Column({ type: 'float', nullable: false })
   duration: number;

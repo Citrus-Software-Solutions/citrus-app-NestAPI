@@ -8,28 +8,44 @@ import { JobOfferEntity } from '../../../job-offers/entities/job-offers.entity';
 import { DataMapper } from '../data-mapper.interface';
 import { EmployeeDataMapper } from '../employee/employee.data-mapper';
 import { EmployerDataMapper } from '../employer/employer.mapper';
+import { JobScheduleDataMapper } from '../jobs-schedule/jobs-schedule.mapper';
+import { JobSchedule } from '../../../jobs-schedule/domain/jobs-schedule.model';
+import { JobScheduleEntity } from '../../../jobs-schedule/entities/jobs-schedule.entity';
 
 export class JobOfferDataMapper
   implements DataMapper<JobOffer, JobOfferEntity>
 {
   _mapperEmployer = new EmployerDataMapper();
   _mapperEmployee = new EmployeeDataMapper();
-  // _mapperJobSchedule = new JobScheduleDataMapper();
+  _mapperJobSchedule = new JobScheduleDataMapper();
   public toDomain(entity: JobOfferEntity): JobOffer {
     const jobOffer = new JobOffer();
     jobOffer.id = entity.id;
     jobOffer.title = Title.create(entity.title);
     jobOffer.employer = this._mapperEmployer.toDomain(entity.employer);
     jobOffer.dead_line = DeadLine.create(entity.dead_line);
-    // jobOffer.schedules = entity.schedule.map((schedule: JobScheduleEntity) =>
-    //   this._mapperJobSchedule.toDomain(schedule),
-    // );
-    jobOffer.special_requirements = SpecialRequirement.create(
-      entity.special_requirements,
+    jobOffer.schedules = entity.schedule.map((schedule: JobScheduleEntity) =>
+      this._mapperJobSchedule.toDomain(schedule),
     );
+
+    jobOffer.special_requirements = [];
+    for (const special_requirement in entity.special_requirements) {
+      jobOffer.special_requirements.push(
+        SpecialRequirement.create(
+          entity.special_requirements[special_requirement],
+        ),
+      );
+    }
+
     jobOffer.duration = Duration.create(entity.duration);
     jobOffer.hourly_rate = Money.create(entity.hourly_rate);
-    jobOffer.employee = this._mapperEmployee.toDomain(entity.employee);
+
+    if (entity.employee) {
+      jobOffer.employee = this._mapperEmployee.toDomain(entity.employee);
+    } else {
+      jobOffer.employee = null;
+    }
+
     jobOffer.status = entity.status;
 
     return jobOffer;
@@ -47,10 +63,14 @@ export class JobOfferDataMapper
     }
 
     jobOfferEntity.dead_line = jobOffer.dead_line.value;
-    // jobOfferEntity.schedule = jobOffer.schedules.map((schedule: JobSchedule) =>
-    //   this._mapperJobSchedule.toDalEntity(schedule),
-    // );
-    jobOfferEntity.special_requirements = jobOffer.special_requirements.value;
+    jobOfferEntity.schedule = jobOffer.schedules.map((schedule: JobSchedule) =>
+      this._mapperJobSchedule.toDalEntity(schedule),
+    );
+
+    for (const special_requirement in jobOffer.special_requirements.values) {
+      jobOfferEntity.special_requirements.push(special_requirement);
+    }
+
     jobOfferEntity.duration = jobOffer.duration.value;
     jobOfferEntity.hourly_rate = jobOffer.hourly_rate.value;
     jobOfferEntity.employee = this._mapperEmployee.toDalEntity(

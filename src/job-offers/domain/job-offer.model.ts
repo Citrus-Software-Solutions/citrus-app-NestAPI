@@ -1,3 +1,4 @@
+import { JobSchedule } from '../../jobs-schedule/domain/jobs-schedule.model';
 import { Employee } from '../../employee/domain/employee.model';
 import { Employer } from '../../employers/domain/employer.model';
 import { DeadLine } from './value-objects/dead-line.vo';
@@ -12,9 +13,9 @@ export class JobOffer {
   public employer: Employer;
   //public location: Location;
   public dead_line: DeadLine;
-  // public schedules: JobSchedule[];
+  public schedules: JobSchedule[];
   //public skills: Skill[];
-  public special_requirements: SpecialRequirement;
+  public special_requirements: SpecialRequirement[];
   //public certifications: Certification[]; -- requiere de los cursos
   public duration: Duration;
   public hourly_rate: Money;

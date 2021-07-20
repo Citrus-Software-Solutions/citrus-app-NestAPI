@@ -1,4 +1,4 @@
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Type, Transform } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
@@ -10,6 +10,12 @@ import {
 } from 'class-validator';
 import { Employee } from '../../employee/domain/employee.model';
 import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
+import { Title } from '../domain/value-objects/title.vo';
+import { DeadLine } from '../domain/value-objects/dead-line.vo';
+import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
+import { Duration } from '../domain/value-objects/duration.vo';
+import { Money } from '../domain/value-objects/money.vo';
+import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -19,23 +25,33 @@ export class ReadJobOfferDto {
 
   @Expose()
   @IsString()
-  readonly title: string;
+  @Transform(({ value }) => value.props.value)
+  readonly title: Title;
 
   @Expose()
   @IsDate()
-  readonly dead_line: Date;
+  @Transform(({ value }) => value.props.value)
+  readonly dead_line: DeadLine;
 
   @Expose()
-  @IsString()
-  readonly special_requirements: string;
+  @ValidateNested({ each: true })
+  @Type(() => ReadJobScheduleDto)
+  readonly schedules: ReadJobScheduleDto[];
+
+  @Expose()
+  @ValidateNested({ each: true })
+  @Type(() => SpecialRequirement)
+  readonly special_requirements: SpecialRequirement[];
 
   @Expose()
   @IsNumber()
-  readonly duration: number;
+  @Transform(({ value }) => value.props.value)
+  readonly duration: Duration;
 
   @Expose()
   @IsNumber()
-  readonly hourly_rate: number;
+  @Transform(({ value }) => value.props.value)
+  readonly hourly_rate: Money;
 
   @Expose()
   @IsNumber()

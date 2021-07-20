@@ -24,6 +24,7 @@ export class JobOffersController {
   @Get()
   @ApiOperation({ summary: 'Get all job offers' })
   getAllJobOffers(): Promise<ReadJobOfferDto[]> {
+    console.log(this._jobOfferService.getAll());
     return this._jobOfferService.getAll();
   }
 
