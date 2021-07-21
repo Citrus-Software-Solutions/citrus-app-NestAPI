@@ -1,6 +1,6 @@
 import { Skill } from '../../shared/skill/domain/skill.model';
 import { Address } from '../../shared/address/domain/address.model';
-import { Name } from '../../shared/domain/name.model';
+import { Name } from '../../shared/domain/name.vo';
 import { ContactInformation } from './contact-information.model';
 
 export class Employer {

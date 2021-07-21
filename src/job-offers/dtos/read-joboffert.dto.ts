@@ -1,4 +1,4 @@
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Type, Transform } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
@@ -8,7 +8,16 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { Employee } from '../../employee/domain/employee.model';
 import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
+import { Title } from '../domain/value-objects/title.vo';
+import { DeadLine } from '../domain/value-objects/dead-line.vo';
+import { Duration } from '../domain/value-objects/duration.vo';
+import { Money } from '../domain/value-objects/money.vo';
+import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
+import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
+import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -18,43 +27,50 @@ export class ReadJobOfferDto {
 
   @Expose()
   @IsString()
-  readonly name: string;
+  @Transform(({ value }) => value.props.value)
+  readonly title: Title;
 
   @Expose()
-  @IsString()
-  readonly description: string;
-
-  @Expose()
-  @IsNumber()
-  readonly availableVacans: number;
-
-  @Expose()
-  @IsDate()
-  readonly dateBegin: Date;
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => ReadAddressDto)
+  readonly location: ReadAddressDto;
 
   @Expose()
   @IsDate()
-  readonly dateEnd: Date;
+  @Transform(({ value }) => value.props.value)
+  readonly dead_line: DeadLine;
 
   @Expose()
-  @IsString()
-  readonly status: string;
+  @ValidateNested({ each: true })
+  @Type(() => ReadJobScheduleDto)
+  readonly schedules: ReadJobScheduleDto[];
 
   @Expose()
-  @IsString()
-  readonly gender: string;
+  @ValidateNested({ each: true })
+  @Type(() => ReadSkillDto)
+  readonly skills: ReadSkillDto[];
+
+  @Expose()
+  @ValidateNested({ each: true })
+  @Type(() => SpecialRequirement)
+  readonly special_requirements: SpecialRequirement[];
 
   @Expose()
   @IsNumber()
-  readonly salary: number;
+  @Transform(({ value }) => value.props.value)
+  readonly duration: Duration;
 
   @Expose()
   @IsNumber()
-  readonly minAge?: number;
+  @Transform(({ value }) => value.props.value)
+  readonly hourly_rate: Money;
 
   @Expose()
   @IsNumber()
-  readonly maxAge?: number;
+  readonly status: number;
 
   @Expose()
   @IsDefined()
@@ -62,5 +78,13 @@ export class ReadJobOfferDto {
   @IsObject()
   @ValidateNested()
   @Type(() => ReadEmployerDto)
-  readonly creador: ReadEmployerDto;
+  readonly employer: ReadEmployerDto;
+
+  @Expose()
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => Employee)
+  readonly employe?: Employee;
 }

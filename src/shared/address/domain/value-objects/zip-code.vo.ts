@@ -12,4 +12,8 @@ export class ZipCode extends ValueObject<ZipCodeProps> {
   get value(): string {
     return this.props.value;
   }
+
+  public static create(value: string): ZipCode {
+    return new ZipCode({ value: value });
+  }
 }

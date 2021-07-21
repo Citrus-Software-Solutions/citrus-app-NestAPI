@@ -1,4 +1,4 @@
-import { Name } from '../../domain/name.model';
+import { Name } from '../../domain/name.vo';
 import { ID } from '../../domain/id.vo';
 import { SkillCategory } from './value-objects/skill-category.vo';
 

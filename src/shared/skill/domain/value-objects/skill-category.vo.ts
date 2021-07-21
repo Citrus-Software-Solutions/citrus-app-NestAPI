@@ -1,7 +1,7 @@
 import { ValueObject } from '../../../domain/value-object.abstract';
 
 interface SkillCategoryProps {
-  value: string;
+  value: number;
 }
 
 export class SkillCategory extends ValueObject<SkillCategoryProps> {
@@ -9,7 +9,11 @@ export class SkillCategory extends ValueObject<SkillCategoryProps> {
     super(props);
   }
 
-  get value(): string {
+  get value(): number {
     return this.props.value;
+  }
+
+  public static create(value: number): SkillCategory {
+    return new SkillCategory({ value: value });
   }
 }

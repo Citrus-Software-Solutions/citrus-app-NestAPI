@@ -1,4 +1,4 @@
-import { Name } from '../../shared/domain/name.model';
+import { Name } from '../../shared/domain/name.vo';
 
 export class Employee {
   constructor(

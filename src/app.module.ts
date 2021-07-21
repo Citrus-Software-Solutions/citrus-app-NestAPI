@@ -10,6 +10,7 @@ import databaseConfig from './config/database.config';
 import { EmployeeModule } from './employee/employee.module';
 import { EmployersModule } from './employers/employers.module';
 import { JobOffersModule } from './job-offers/job-offers.module';
+import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { JobOffersModule } from './job-offers/job-offers.module';
       }),
     }),
     JobOffersModule,
+    JobSchedule,
     EmployersModule,
     EmployeeModule,
     ApplicationModule,

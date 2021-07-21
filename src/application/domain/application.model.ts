@@ -6,8 +6,7 @@ export class Application {
     private _id: number,
     private _status: string,
     private _dateApplication: Date,
-    private _employee: Employee,
-    private _jobOffer: JobOffer,
+    private _employee: Employee, //private _jobOffer: JobOffer,
   ) {}
 
   public get id(): number {
@@ -34,10 +33,10 @@ export class Application {
   public set employee(value: Employee) {
     this._employee = value;
   }
-  public get jobOffer(): JobOffer {
-    return this._jobOffer;
-  }
-  public set jobOffer(value: JobOffer) {
-    this._jobOffer = value;
-  }
+  // public get jobOffer(): JobOffer {
+  //   return this._jobOffer;
+  // }
+  // public set jobOffer(value: JobOffer) {
+  //   this._jobOffer = value;
+  // }
 }

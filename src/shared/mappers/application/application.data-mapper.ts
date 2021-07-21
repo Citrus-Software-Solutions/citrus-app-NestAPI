@@ -15,7 +15,7 @@ export class ApplicationDataMapper
       entity.status,
       entity.date_aplication,
       this.employeeMapper.toDomain(entity.employee),
-      this.jobOfferMapper.toDomain(entity.jobOffer),
+      //this.jobOfferMapper.toDomain(entity.jobOffer),
     );
 
     return application;
@@ -29,9 +29,9 @@ export class ApplicationDataMapper
     applicationEntity.employee = this.employeeMapper.toDalEntity(
       application.employee,
     );
-    applicationEntity.jobOffer = this.jobOfferMapper.toDalEntity(
-      application.jobOffer,
-    );
+    // applicationEntity.jobOffer = this.jobOfferMapper.toDalEntity(
+    //   application.jobOffer,
+    // );
     return applicationEntity;
   }
 }

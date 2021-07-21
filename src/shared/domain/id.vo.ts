@@ -12,4 +12,8 @@ export class ID extends ValueObject<IDProps> {
   get value(): number {
     return this.props.value;
   }
+
+  public static create(value: number): ID {
+    return new ID({ value: value });
+  }
 }

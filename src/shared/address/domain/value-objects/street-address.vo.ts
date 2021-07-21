@@ -12,4 +12,8 @@ export class StreetAddress extends ValueObject<StreetAddressProps> {
   get value(): string {
     return this.props.value;
   }
+
+  public static create(value: string): StreetAddress {
+    return new StreetAddress({ value: value });
+  }
 }

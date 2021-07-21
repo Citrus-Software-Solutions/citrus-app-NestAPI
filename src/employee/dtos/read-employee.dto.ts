@@ -1,6 +1,6 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { IsDate, IsNumber, IsString } from 'class-validator';
-import { Name } from '../../shared/domain/name.model';
+import { Name } from '../../shared/domain/name.vo';
 
 @Exclude()
 export class ReadEmployeeDto {
