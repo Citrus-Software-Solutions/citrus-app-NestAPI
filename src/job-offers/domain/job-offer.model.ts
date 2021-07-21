@@ -6,15 +6,17 @@ import { Duration } from './value-objects/duration.vo';
 import { Money } from './value-objects/money.vo';
 import { SpecialRequirement } from './value-objects/special-requirement.vo';
 import { Title } from './value-objects/title.vo';
+import { Address } from '../../shared/address/domain/address.model';
+import { Skill } from '../../shared/skill/domain/skill.model';
 
 export class JobOffer {
   public id: number;
   public title: Title;
   public employer: Employer;
-  //public location: Location;
+  public location: Address;
   public dead_line: DeadLine;
   public schedules: JobSchedule[];
-  //public skills: Skill[];
+  public skills: Skill[];
   public special_requirements: SpecialRequirement[];
   //public certifications: Certification[]; -- requiere de los cursos
   public duration: Duration;

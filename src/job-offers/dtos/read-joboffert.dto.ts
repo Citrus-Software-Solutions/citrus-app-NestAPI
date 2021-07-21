@@ -12,11 +12,12 @@ import { Employee } from '../../employee/domain/employee.model';
 import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
 import { Title } from '../domain/value-objects/title.vo';
 import { DeadLine } from '../domain/value-objects/dead-line.vo';
-import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
 import { Duration } from '../domain/value-objects/duration.vo';
 import { Money } from '../domain/value-objects/money.vo';
 import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
 import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
+import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -46,6 +47,11 @@ export class ReadJobOfferDto {
   @ValidateNested({ each: true })
   @Type(() => ReadJobScheduleDto)
   readonly schedules: ReadJobScheduleDto[];
+
+  @Expose()
+  @ValidateNested({ each: true })
+  @Type(() => ReadSkillDto)
+  readonly skills: ReadSkillDto[];
 
   @Expose()
   @ValidateNested({ each: true })

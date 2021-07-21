@@ -11,6 +11,8 @@ import {
 } from 'typeorm';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
 import { JobScheduleEntity } from '../../jobs-schedule/entities/jobs-schedule.entity';
+import { AddressEntity } from '../../shared/address/entities/address.entity';
+import { SkillEntity } from '../../shared/skill/entities/skill.entity';
 
 @Entity('job_offer')
 export class JobOfferEntity extends BaseEntity {
@@ -25,6 +27,14 @@ export class JobOfferEntity extends BaseEntity {
   })
   employer: EmployerEntity;
 
+  @OneToOne(() => AddressEntity, {
+    cascade: true,
+    nullable: false,
+    eager: true,
+  })
+  @JoinColumn()
+  location: AddressEntity;
+
   @Column({ type: 'date', nullable: false })
   dead_line: Date;
 
@@ -32,6 +42,11 @@ export class JobOfferEntity extends BaseEntity {
     eager: true,
   })
   schedule: JobScheduleEntity[];
+
+  @OneToMany(() => SkillEntity, (skills) => skills.jobOffer, {
+    eager: true,
+  })
+  skills: SkillEntity[];
 
   @Column({ type: 'text', array: true, nullable: false })
   special_requirements: string[];

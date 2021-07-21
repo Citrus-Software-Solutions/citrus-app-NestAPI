@@ -12,6 +12,9 @@ import { JobScheduleDataMapper } from '../jobs-schedule/jobs-schedule.mapper';
 import { JobSchedule } from '../../../jobs-schedule/domain/jobs-schedule.model';
 import { JobScheduleEntity } from '../../../jobs-schedule/entities/jobs-schedule.entity';
 import { AddressDataMapper } from '../address/address.data-mapper';
+import { SkillDataMapper } from '../skill/skill.data-mapper';
+import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
+import { Skill } from '../../../shared/skill/domain/skill.model';
 
 export class JobOfferDataMapper
   implements DataMapper<JobOffer, JobOfferEntity>
@@ -20,6 +23,7 @@ export class JobOfferDataMapper
   _mapperEmployee = new EmployeeDataMapper();
   _mapperJobSchedule = new JobScheduleDataMapper();
   _mapperAddress = new AddressDataMapper();
+  _mapperSkill = new SkillDataMapper();
   public toDomain(entity: JobOfferEntity): JobOffer {
     const jobOffer = new JobOffer();
     jobOffer.id = entity.id;
@@ -29,6 +33,10 @@ export class JobOfferDataMapper
     jobOffer.dead_line = DeadLine.create(entity.dead_line);
     jobOffer.schedules = entity.schedule.map((schedule: JobScheduleEntity) =>
       this._mapperJobSchedule.toDomain(schedule),
+    );
+
+    jobOffer.skills = entity.skills.map((skill: SkillEntity) =>
+      this._mapperSkill.toDomain(skill),
     );
 
     jobOffer.special_requirements = [];
@@ -72,6 +80,10 @@ export class JobOfferDataMapper
     jobOfferEntity.dead_line = jobOffer.dead_line.value;
     jobOfferEntity.schedule = jobOffer.schedules.map((schedule: JobSchedule) =>
       this._mapperJobSchedule.toDalEntity(schedule),
+    );
+
+    jobOfferEntity.skills = jobOffer.skills.map((skill: Skill) =>
+      this._mapperSkill.toDalEntity(skill),
     );
 
     for (const special_requirement in jobOffer.special_requirements.values) {
