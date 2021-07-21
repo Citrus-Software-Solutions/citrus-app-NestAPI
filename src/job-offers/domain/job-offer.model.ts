@@ -4,7 +4,7 @@ import { Employer } from '../../employers/domain/employer.model';
 import { DeadLine } from './value-objects/dead-line.vo';
 import { Duration } from './value-objects/duration.vo';
 import { Money } from './value-objects/money.vo';
-import { SpecialRequirement } from './value-objects/special-requirement.vo';
+import { SpecialRequirement } from '../../shared/domain/special-requirement.vo';
 import { Title } from './value-objects/title.vo';
 import { Address } from '../../shared/address/domain/address.model';
 import { Skill } from '../../shared/skill/domain/skill.model';

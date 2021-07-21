@@ -1,7 +1,7 @@
 import { DeadLine } from '../../../job-offers/domain/value-objects/dead-line.vo';
 import { Duration } from '../../../job-offers/domain/value-objects/duration.vo';
 import { Money } from '../../../job-offers/domain/value-objects/money.vo';
-import { SpecialRequirement } from '../../../job-offers/domain/value-objects/special-requirement.vo';
+import { SpecialRequirement } from '../../domain/special-requirement.vo';
 import { Title } from '../../../job-offers/domain/value-objects/title.vo';
 import { JobOffer } from '../../../job-offers/domain/job-offer.model';
 import { JobOfferEntity } from '../../../job-offers/entities/job-offers.entity';

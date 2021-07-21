@@ -1,4 +1,4 @@
-import { ValueObject } from '../../../shared/domain/value-object.abstract';
+import { ValueObject } from './value-object.abstract';
 
 interface SpecialRequirementProps {
   value: string;

@@ -17,7 +17,7 @@ import { Money } from '../domain/value-objects/money.vo';
 import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
 import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
-import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
+import { SpecialRequirement } from '../../shared/domain/special-requirement.vo';
 
 @Exclude()
 export class ReadJobOfferDto {
