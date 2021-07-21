@@ -11,6 +11,7 @@ import { EmployerDataMapper } from '../employer/employer.mapper';
 import { JobScheduleDataMapper } from '../jobs-schedule/jobs-schedule.mapper';
 import { JobSchedule } from '../../../jobs-schedule/domain/jobs-schedule.model';
 import { JobScheduleEntity } from '../../../jobs-schedule/entities/jobs-schedule.entity';
+import { AddressDataMapper } from '../address/address.data-mapper';
 
 export class JobOfferDataMapper
   implements DataMapper<JobOffer, JobOfferEntity>
@@ -18,11 +19,13 @@ export class JobOfferDataMapper
   _mapperEmployer = new EmployerDataMapper();
   _mapperEmployee = new EmployeeDataMapper();
   _mapperJobSchedule = new JobScheduleDataMapper();
+  _mapperAddress = new AddressDataMapper();
   public toDomain(entity: JobOfferEntity): JobOffer {
     const jobOffer = new JobOffer();
     jobOffer.id = entity.id;
     jobOffer.title = Title.create(entity.title);
     jobOffer.employer = this._mapperEmployer.toDomain(entity.employer);
+    jobOffer.location = this._mapperAddress.toDomain(entity.location);
     jobOffer.dead_line = DeadLine.create(entity.dead_line);
     jobOffer.schedules = entity.schedule.map((schedule: JobScheduleEntity) =>
       this._mapperJobSchedule.toDomain(schedule),
@@ -61,6 +64,10 @@ export class JobOfferDataMapper
         jobOffer.employer,
       );
     }
+
+    jobOfferEntity.location = this._mapperAddress.toDalEntity(
+      jobOffer.location,
+    );
 
     jobOfferEntity.dead_line = jobOffer.dead_line.value;
     jobOfferEntity.schedule = jobOffer.schedules.map((schedule: JobSchedule) =>

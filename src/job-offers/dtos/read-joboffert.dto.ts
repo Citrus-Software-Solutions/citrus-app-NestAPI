@@ -16,6 +16,7 @@ import { SpecialRequirement } from '../domain/value-objects/special-requirement.
 import { Duration } from '../domain/value-objects/duration.vo';
 import { Money } from '../domain/value-objects/money.vo';
 import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
+import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -27,6 +28,14 @@ export class ReadJobOfferDto {
   @IsString()
   @Transform(({ value }) => value.props.value)
   readonly title: Title;
+
+  @Expose()
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => ReadAddressDto)
+  readonly location: ReadAddressDto;
 
   @Expose()
   @IsDate()
