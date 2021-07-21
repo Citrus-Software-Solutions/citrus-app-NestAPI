@@ -13,10 +13,15 @@ export class EmployersRepository implements IEmployerRepository {
     private readonly _mapper: EmployerDataMapper,
   ) {}
 
-  async getEmployers(): Promise<Employer[]> {
+  async findEmployers(): Promise<Employer[]> {
     const employersEntity = await this._employersPersistence.getEmployers();
     return employersEntity.map((employer: EmployerEntity) =>
       this._mapper.toDomain(employer),
     );
+  }
+
+  async findEmployerById(): Promise<Employer[]> {
+    // TODO: Implement find employer by id number
+    return null;
   }
 }
