@@ -59,16 +59,17 @@ export class JobOfferRepository implements IJobOfferRepository {
   }
   private dtoJobtoReal(dtoJob: DataJobOfferDto) {
     const realJobOffer = new JobOffer();
-    realJobOffer.availableVacans = dtoJob.availableVacans;
-    realJobOffer.dateBegin = new Date(dtoJob.dateBegin);
-    realJobOffer.dateEnd = new Date(dtoJob.dateEnd);
-    realJobOffer.description = dtoJob.description;
-    realJobOffer.gender = dtoJob.gender;
-    realJobOffer.maxAge = dtoJob.maxAge;
-    realJobOffer.minAge = dtoJob.minAge;
-    realJobOffer.name = dtoJob.name;
-    realJobOffer.salary = dtoJob.salary;
-    realJobOffer.status = 'Published';
+    // TODO: Adapt DTO to new domain model
+    // realJobOffer.availableVacans = dtoJob.availableVacans;
+    // realJobOffer.dateBegin = new Date(dtoJob.dateBegin);
+    // realJobOffer.dateEnd = new Date(dtoJob.dateEnd);
+    // realJobOffer.description = dtoJob.description;
+    // realJobOffer.gender = dtoJob.gender;
+    // realJobOffer.maxAge = dtoJob.maxAge;
+    // realJobOffer.minAge = dtoJob.minAge;
+    // realJobOffer.name = dtoJob.name;
+    // realJobOffer.salary = dtoJob.salary;
+    // realJobOffer.status = 'Published';
     return realJobOffer;
   }
 }

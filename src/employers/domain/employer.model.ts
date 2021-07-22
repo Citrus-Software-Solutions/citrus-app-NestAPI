@@ -1,7 +1,9 @@
-import { Skill } from '../../shared/skill/domain/skill.model';
 import { Address } from '../../shared/address/domain/address.model';
 import { Name } from '../../shared/domain/name.vo';
+import { SpecialRequirement } from '../../shared/domain/special-requirement.vo';
+import { Skill } from '../../shared/skill/domain/skill.model';
 import { ContactInformation } from './contact-information.model';
+import { EmployerStatusEnum } from './employer-status.enum';
 
 export class Employer {
   constructor(
@@ -10,7 +12,8 @@ export class Employer {
     private _contacts: ContactInformation[],
     private _logo: string,
     private _skills: Skill[],
-    private _specialRequirements: string,
+    private _specialRequirements: SpecialRequirement[],
+    private _status: EmployerStatusEnum,
   ) {}
 
   public get companyName(): Name {
@@ -43,10 +46,16 @@ export class Employer {
   public set skills(value: Skill[]) {
     this._skills = value;
   }
-  public get specialRequirements(): string {
+  public get specialRequirements(): SpecialRequirement[] {
     return this._specialRequirements;
   }
-  public set specialRequirements(value: string) {
+  public set specialRequirements(value: SpecialRequirement[]) {
     this._specialRequirements = value;
+  }
+  public get status(): EmployerStatusEnum {
+    return this._status;
+  }
+  public set status(value: EmployerStatusEnum) {
+    this._status = value;
   }
 }

@@ -12,4 +12,17 @@ export class JobTitle extends ValueObject<JobTitleProps> {
   get value(): string {
     return this.props.value;
   }
+
+  public static create(name: string): JobTitle {
+    if (name === undefined || name === null) {
+      return new JobTitle({ value: '' });
+    }
+    if (name.length <= 2 || name.length > 100) {
+      throw new Error(
+        'Job title must be greater than 2 chars and less than 100.',
+      );
+    } else {
+      return new JobTitle({ value: name });
+    }
+  }
 }
