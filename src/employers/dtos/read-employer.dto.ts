@@ -12,6 +12,7 @@ import { ReadContactInformationDto } from '../../contact-information/dto/read-co
 import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 import { Name } from '../../shared/domain/name.vo';
 import { ID } from '../../shared/domain/id.vo';
+import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
 
 @Exclude()
 export class ReadEmployerDto {
@@ -37,6 +38,11 @@ export class ReadEmployerDto {
   @ValidateNested({ each: true })
   @Type(() => ReadContactInformationDto)
   readonly contacts: ReadContactInformationDto[];
+
+  @Expose()
+  @ValidateNested({ each: true })
+  @Type(() => ReadSkillDto)
+  readonly skills: ReadSkillDto[];
 
   @Expose()
   @IsString()

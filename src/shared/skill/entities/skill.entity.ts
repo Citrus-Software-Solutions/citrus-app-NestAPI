@@ -3,9 +3,11 @@ import {
   BaseEntity,
   Column,
   Entity,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { EmployerEntity } from '../../../employers/entities/employers.entity';
 
 @Entity('skill')
 export class SkillEntity extends BaseEntity {
@@ -18,6 +20,11 @@ export class SkillEntity extends BaseEntity {
   @Column({ type: 'integer', nullable: false })
   category: number;
 
-  @ManyToOne(() => JobOfferEntity, (jobOffer) => jobOffer.schedule)
-  jobOffer: JobOfferEntity;
+  @ManyToMany(() => JobOfferEntity, (jobOffer) => jobOffer.skills)
+  @JoinTable({ name: 'skill_jobOffer' })
+  jobOffer: JobOfferEntity[];
+
+  @ManyToMany(() => EmployerEntity, (employer) => employer.skills)
+  @JoinTable({ name: 'skill_employer' })
+  employer: EmployerEntity[];
 }

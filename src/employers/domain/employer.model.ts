@@ -4,6 +4,7 @@ import { Name } from '../../shared/domain/name.vo';
 import { SpecialRequirement } from '../../job-offers/domain/value-objects/special-requirement.vo';
 import { ID } from '../../shared/domain/id.vo';
 import { ContactInformation } from '../../contact-information/domain/contact-information.model';
+import { Skill } from '../../shared/skill/domain/skill.model';
 
 export class Employer {
   public id: ID;
@@ -11,7 +12,7 @@ export class Employer {
   public address: Address;
   public contacts: ContactInformation[];
   //public logo: Logo;
-  //public skills: Skill[];
+  public skills: Skill[];
   public special_requirements: SpecialRequirement;
   public status: number;
   public jobOffers?: JobOffer[];

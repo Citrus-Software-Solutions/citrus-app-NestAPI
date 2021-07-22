@@ -8,11 +8,15 @@ import { ContactInformationEntity } from '../../../contact-information/entities/
 import { ContactInformationDataMapper } from '../contact-information/contact-information.mapper';
 import { ContactInformation } from '../../../contact-information/domain/contact-information.model';
 import { SpecialRequirement } from '../../../job-offers/domain/value-objects/special-requirement.vo';
+import { Skill } from '../../../shared/skill/domain/skill.model';
+import { SkillDataMapper } from '../skill/skill.data-mapper';
+import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
 
 export class EmployerDataMapper
   implements DataMapper<Employer, EmployerEntity>
 {
   _mapperAddress = new AddressDataMapper();
+  _mapperSkill = new SkillDataMapper();
   _mapperContactInformation = new ContactInformationDataMapper();
   public toDomain(entity: EmployerEntity): Employer {
     const employer = new Employer();
@@ -22,6 +26,9 @@ export class EmployerDataMapper
     employer.contacts = entity.contacts.map(
       (contact: ContactInformationEntity) =>
         this._mapperContactInformation.toDomain(contact),
+    );
+    employer.skills = entity.skills.map((skill: SkillEntity) =>
+      this._mapperSkill.toDomain(skill),
     );
     employer.special_requirements = SpecialRequirement.create(
       entity.special_requirements,
@@ -39,6 +46,9 @@ export class EmployerDataMapper
     employerEntity.contacts = employer.contacts.map(
       (contact: ContactInformation) =>
         this._mapperContactInformation.toDalEntity(contact),
+    );
+    employerEntity.skills = employer.skills.map((skill: Skill) =>
+      this._mapperSkill.toDalEntity(skill),
     );
     employerEntity.special_requirements = employer.special_requirements.value;
     employerEntity.status = employer.status;

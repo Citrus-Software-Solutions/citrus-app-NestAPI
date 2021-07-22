@@ -4,12 +4,14 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AddressEntity } from '../../shared/address/entities/address.entity';
 import { ContactInformationEntity } from '../../contact-information/entities/contact-information.entity';
+import { SkillEntity } from '../../shared/skill/entities/skill.entity';
 
 @Entity('employer')
 export class EmployerEntity extends BaseEntity {
@@ -35,6 +37,12 @@ export class EmployerEntity extends BaseEntity {
     },
   )
   contacts: ContactInformationEntity[];
+
+  @ManyToMany((type) => SkillEntity, (skill) => skill.employer, {
+    eager: true,
+  })
+  @JoinColumn()
+  skills: SkillEntity[];
 
   @Column({ type: 'varchar', length: 700, nullable: false })
   special_requirements: string;
