@@ -1,8 +1,8 @@
-import { ContactInformationEntity } from 'src/employers/entities/contact-information.entity';
-import { SpecialRequirement } from 'src/shared/domain/special-requirement.vo';
-import { Skill } from 'src/shared/skill/domain/skill.model';
 import { Employer } from '../../../employers/domain/employer.model';
+import { ContactInformationEntity } from '../../../employers/entities/contact-information.entity';
 import { EmployerEntity } from '../../../employers/entities/employers.entity';
+import { SpecialRequirement } from '../../../shared/domain/special-requirement.vo';
+import { Skill } from '../../../shared/skill/domain/skill.model';
 import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
 import { Name } from '../../domain/name.vo';
 import { AddressDataMapper } from '../address/address.data-mapper';
