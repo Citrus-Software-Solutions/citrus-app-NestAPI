@@ -48,8 +48,8 @@ export class JobOfferEntity extends BaseEntity {
   })
   skills: SkillEntity[];
 
-  @Column({ type: 'text', array: true, nullable: false })
-  special_requirements: string[];
+  @Column({ type: 'varchar', length: 700, nullable: false })
+  special_requirements: string;
 
   @Column({ type: 'float', nullable: false })
   duration: number;
@@ -65,7 +65,7 @@ export class JobOfferEntity extends BaseEntity {
   @JoinColumn({ name: 'employee_id' })
   employee: EmployeeEntity;
 
-  @Column({ type: 'integer', nullable: true })
+  @Column({ type: 'integer', nullable: false })
   status: number;
 
   // @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)

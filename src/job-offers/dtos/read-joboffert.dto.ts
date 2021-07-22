@@ -8,8 +8,6 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Employee } from '../../employee/domain/employee.model';
-import { ReadEmployerDto } from '../../employers/dtos/read-employer.dto';
 import { Title } from '../domain/value-objects/title.vo';
 import { DeadLine } from '../domain/value-objects/dead-line.vo';
 import { Duration } from '../domain/value-objects/duration.vo';
@@ -18,6 +16,8 @@ import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dt
 import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
 import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
+import { ReadEmployerInJobOfferDto } from '../../employers/dtos/read-employer-in-joboffer.dto';
+import { ReadEmployeeDto } from '../../employee/dtos/read-employee.dto';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -54,9 +54,9 @@ export class ReadJobOfferDto {
   readonly skills: ReadSkillDto[];
 
   @Expose()
-  @ValidateNested({ each: true })
-  @Type(() => SpecialRequirement)
-  readonly special_requirements: SpecialRequirement[];
+  @IsString()
+  @Transform(({ value }) => value.props.value)
+  readonly special_requirements: SpecialRequirement;
 
   @Expose()
   @IsNumber()
@@ -77,14 +77,11 @@ export class ReadJobOfferDto {
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
-  @Type(() => ReadEmployerDto)
-  readonly employer: ReadEmployerDto;
+  @Type(() => ReadEmployerInJobOfferDto)
+  readonly employer: ReadEmployerInJobOfferDto;
 
   @Expose()
-  @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
   @ValidateNested()
-  @Type(() => Employee)
-  readonly employe?: Employee;
+  @Type(() => ReadEmployeeDto)
+  readonly employe: ReadEmployeeDto;
 }

@@ -39,14 +39,9 @@ export class JobOfferDataMapper
       this._mapperSkill.toDomain(skill),
     );
 
-    jobOffer.special_requirements = [];
-    for (const special_requirement in entity.special_requirements) {
-      jobOffer.special_requirements.push(
-        SpecialRequirement.create(
-          entity.special_requirements[special_requirement],
-        ),
-      );
-    }
+    jobOffer.special_requirements = SpecialRequirement.create(
+      entity.special_requirements,
+    );
 
     jobOffer.duration = Duration.create(entity.duration);
     jobOffer.hourly_rate = Money.create(entity.hourly_rate);
@@ -86,10 +81,7 @@ export class JobOfferDataMapper
       this._mapperSkill.toDalEntity(skill),
     );
 
-    for (const special_requirement in jobOffer.special_requirements.values) {
-      jobOfferEntity.special_requirements.push(special_requirement);
-    }
-
+    jobOfferEntity.special_requirements = jobOffer.special_requirements.value;
     jobOfferEntity.duration = jobOffer.duration.value;
     jobOfferEntity.hourly_rate = jobOffer.hourly_rate.value;
     jobOfferEntity.employee = this._mapperEmployee.toDalEntity(
