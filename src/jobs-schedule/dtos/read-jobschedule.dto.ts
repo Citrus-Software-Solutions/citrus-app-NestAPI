@@ -6,6 +6,11 @@ import { Schedule } from '../domain/value-objects/schedule.vo';
 export class ReadJobScheduleDto {
   @Expose()
   @IsDate()
-  @Transform(({ value }) => value.props)
-  readonly dates: Schedule;
+  @Transform(({ value }) => value.props.value)
+  readonly init_date: Schedule;
+
+  @Expose()
+  @IsDate()
+  @Transform(({ value }) => value.props.value)
+  readonly end_date: Schedule;
 }

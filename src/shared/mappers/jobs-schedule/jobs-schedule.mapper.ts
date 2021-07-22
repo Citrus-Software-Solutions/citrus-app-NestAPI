@@ -8,15 +8,16 @@ export class JobScheduleDataMapper
 {
   toDomain(entity: JobScheduleEntity): JobSchedule {
     const jobSchedule = new JobSchedule();
-    jobSchedule.dates = Schedule.create(entity.date_ini, entity.date_end);
+    jobSchedule.init_date = Schedule.create(entity.date_ini);
+    jobSchedule.end_date = Schedule.create(entity.date_end);
 
     return jobSchedule;
   }
 
   toDalEntity(domain: JobSchedule): JobScheduleEntity {
     const jobScheduleEntity = new JobScheduleEntity();
-    jobScheduleEntity.date_ini = domain.dates.fecha_ini;
-    jobScheduleEntity.date_end = domain.dates.fecha_fin;
+    jobScheduleEntity.date_ini = domain.init_date.value;
+    jobScheduleEntity.date_end = domain.end_date.value;
 
     return jobScheduleEntity;
   }
