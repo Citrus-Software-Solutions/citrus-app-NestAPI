@@ -4,6 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -43,9 +44,10 @@ export class JobOfferEntity extends BaseEntity {
   })
   schedule: JobScheduleEntity[];
 
-  @OneToMany(() => SkillEntity, (skills) => skills.jobOffer, {
+  @ManyToMany((type) => SkillEntity, (skill) => skill.jobOffer, {
     eager: true,
   })
+  @JoinColumn()
   skills: SkillEntity[];
 
   @Column({ type: 'varchar', length: 700, nullable: false })
