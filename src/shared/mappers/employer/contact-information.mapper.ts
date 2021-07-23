@@ -1,3 +1,4 @@
+import { ReadContactInformationDto } from 'src/employers/dtos/read-contact-information.dto';
 import { ContactInformation } from '../../../employers/domain/contact-information.model';
 import { EmailAddress } from '../../../employers/domain/value-objects/email-address.vo';
 import { FullName } from '../../../employers/domain/value-objects/full-name.vo';
@@ -28,5 +29,17 @@ export class ContactInformationDataMapper
     contactInformationEntity.email = contact.email.value;
 
     return contactInformationEntity;
+  }
+
+  public ReadDTOtoDomain(
+    contactInformationDTO: ReadContactInformationDto,
+  ): ContactInformation {
+    const contactInformation = new ContactInformation(
+      FullName.create(contactInformationDTO.full_name.value),
+      JobTitle.create(contactInformationDTO.job_title.value),
+      PhoneNumber.create(contactInformationDTO.phone.value),
+      EmailAddress.create(contactInformationDTO.email.value),
+    );
+    return contactInformation;
   }
 }

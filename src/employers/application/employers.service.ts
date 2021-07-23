@@ -1,11 +1,9 @@
 // import { NotFoundException } from '@nestjs/common';
-// import { Name } from 'src/shared/domain/name.model';
-// import { EmployerStatus } from '../domain/employer-status.model';
-// import { Employer } from '../domain/employer.model';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { Employer } from '../domain/employer.model';
+import { CreateEmployerDto } from '../dtos/create-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 import { IEmployerRepository } from './employers.repository.interface';
 import { IEmployersService } from './employers.service.interface';
@@ -33,5 +31,15 @@ export class EmployersService implements IEmployersService {
       ReadEmployerDto,
       this._employerRepository.findEmployerById(employerId),
     );
+  }
+
+  async createEmployer(employerData: CreateEmployerDto): Promise<number> {
+    if (!employerData) {
+      throw new BadRequestException("The employer data can't be empty");
+    }
+    const savedEmployer: ReadEmployerDto =
+      await this._employerRepository.createEmployer(employerData);
+
+    return savedEmployer.id;
   }
 }

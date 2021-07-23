@@ -22,7 +22,7 @@ export class ReadEmployerDto {
   @Expose()
   @IsString()
   @Transform(({ value }) => value.props.value)
-  readonly companyName: Name;
+  readonly company_name: Name;
 
   @Expose()
   @IsDefined()
@@ -50,4 +50,8 @@ export class ReadEmployerDto {
   @ValidateNested({ each: true })
   @Type(() => SpecialRequirement)
   readonly special_requirements: SpecialRequirement[];
+
+  @Expose()
+  @IsString()
+  readonly status: string;
 }
