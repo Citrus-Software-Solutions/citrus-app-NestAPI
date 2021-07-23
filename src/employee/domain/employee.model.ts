@@ -1,55 +1,113 @@
+import { Skill } from '../../shared/skill/domain/skill.model';
+import { Address } from '../../shared/address/domain/address.model';
 import { Name } from '../../shared/domain/name.vo';
+import { ID } from '../../shared/domain/id.vo';
+import { WorkExperience } from '../../work-experience/domain/work-experience.model';
+import { Reference } from '../../reference/domain/reference.model';
 
 export class Employee {
   constructor(
-    private _id: number,
-    private _name: Name,
-    private _lastName: Name,
-    private _secondLastName: Name,
-    private _gender: string,
-    private _birthDate: Date,
-    private _secondName?: Name,
+    private _id: ID,
+    private _first_name: Name,
+    private _middle_name: Name,
+    private _last_name: Name,
+    private _phone_number: string,
+    private _birth_date: Date,
+    private _address: Address,
+    private _ssn: string,
+    private _education_level: number,
+    private _work_experiences: WorkExperience[],
+    private _skills: Skill[],
+    // private _trainings: Trainings[],
+    private _references: Reference[],
+    private _rating: number,
+    private _status: number,
   ) {}
-  public get id(): number {
+
+  public get references(): Reference[] {
+    return this._references;
+  }
+  public set references(value: Reference[]) {
+    this._references = value;
+  }
+
+  public get work_experiences(): WorkExperience[] {
+    return this._work_experiences;
+  }
+  public set work_experiences(value: WorkExperience[]) {
+    this._work_experiences = value;
+  }
+
+  public get status(): number {
+    return this._status;
+  }
+  public set status(value: number) {
+    this._status = value;
+  }
+  public get rating(): number {
+    return this._rating;
+  }
+  public set rating(value: number) {
+    this._rating = value;
+  }
+  public get skills(): Skill[] {
+    return this._skills;
+  }
+  public set skills(value: Skill[]) {
+    this._skills = value;
+  }
+  public get education_level(): number {
+    return this._education_level;
+  }
+  public set education_level(value: number) {
+    this._education_level = value;
+  }
+  public get ssn(): string {
+    return this._ssn;
+  }
+  public set ssn(value: string) {
+    this._ssn = value;
+  }
+  public get address(): Address {
+    return this._address;
+  }
+  public set address(value: Address) {
+    this._address = value;
+  }
+  public get birth_date(): Date {
+    return this._birth_date;
+  }
+  public set birth_date(value: Date) {
+    this._birth_date = value;
+  }
+  public get phone_number(): string {
+    return this._phone_number;
+  }
+  public set phone_number(value: string) {
+    this._phone_number = value;
+  }
+  public get last_name(): Name {
+    return this._last_name;
+  }
+  public set last_name(value: Name) {
+    this._last_name = value;
+  }
+  public get middle_name(): Name {
+    return this._middle_name;
+  }
+  public set middle_name(value: Name) {
+    this._middle_name = value;
+  }
+  public get first_name(): Name {
+    return this._first_name;
+  }
+  public set first_name(value: Name) {
+    this._first_name = value;
+  }
+  public get id(): ID {
     return this._id;
   }
-  public set id(value: number) {
+  public set id(value: ID) {
     this._id = value;
-  }
-  public get name(): Name {
-    return this._name;
-  }
-  public set name(value: Name) {
-    this._name = value;
-  }
-  public get lastName(): Name {
-    return this._lastName;
-  }
-  public set lastName(value: Name) {
-    this._lastName = value;
-  }
-  public get secondLastName(): Name {
-    return this._secondLastName;
-  }
-  public set secondLastName(value: Name) {
-    this._secondLastName = value;
-  }
-  public get gender(): string {
-    return this._gender;
-  }
-  public set gender(value: string) {
-    this._gender = value;
-  }
-  public get birthDate(): Date {
-    return this._birthDate;
-  }
-  public set birthDate(value: Date) {
-    this._birthDate = value;
-  }
-  public get secondName(): Name {
-    return this._secondName;
-  }
-  public set secondName(value: Name) {
-    this._secondName = value;
   }
 }

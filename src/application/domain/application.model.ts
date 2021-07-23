@@ -5,8 +5,7 @@ export class Application {
   constructor(
     private _id: number,
     private _status: string,
-    private _dateApplication: Date,
-    private _employee: Employee, //private _jobOffer: JobOffer,
+    private _dateApplication: Date, //private _employee: Employee, //private _jobOffer: JobOffer,
   ) {}
 
   public get id(): number {
@@ -27,12 +26,12 @@ export class Application {
   public set dateApplication(value: Date) {
     this._dateApplication = value;
   }
-  public get employee(): Employee {
-    return this._employee;
-  }
-  public set employee(value: Employee) {
-    this._employee = value;
-  }
+  // public get employee(): Employee {
+  //   return this._employee;
+  // }
+  // public set employee(value: Employee) {
+  //   this._employee = value;
+  // }
   // public get jobOffer(): JobOffer {
   //   return this._jobOffer;
   // }

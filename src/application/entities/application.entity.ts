@@ -27,8 +27,8 @@ export class ApplicationEntity extends BaseEntity {
   // })
   // jobOffer: JobOfferEntity;
 
-  @ManyToOne(() => EmployeeEntity, (employee) => employee.applications, {
-    primary: true,
-  })
-  employee: EmployeeEntity;
+  // @ManyToOne(() => EmployeeEntity, (employee) => employee.applications, {
+  //   primary: true,
+  // })
+  // employee: EmployeeEntity;
 }

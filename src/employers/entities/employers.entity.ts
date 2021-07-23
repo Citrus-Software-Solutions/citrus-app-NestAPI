@@ -9,9 +9,10 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { AddressEntity } from '../../shared/address/entities/address.entity';
+
 import { ContactInformationEntity } from '../../contact-information/entities/contact-information.entity';
 import { SkillEntity } from '../../shared/skill/entities/skill.entity';
+import { AddressEntity } from '../../shared/address/entities/address.entity';
 
 @Entity('employer')
 export class EmployerEntity extends BaseEntity {

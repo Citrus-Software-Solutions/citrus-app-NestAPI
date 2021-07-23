@@ -1,10 +1,11 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { IsNumber, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 import { Name } from '../../shared/domain/name.vo';
-import { JobTitle } from '../domain/value-objects/job-title.vo';
+import { CompanyName } from '../../work-experience/domain/value-objects/company-name.vo';
+import { JobTitle } from '../../contact-information/domain/value-objects/job-title.vo';
 
 @Exclude()
-export class ReadContactInformationDto {
+export class ReadReferenceDto {
   @Expose()
   @IsString()
   @Transform(({ value }) => value.props.value)
@@ -14,6 +15,11 @@ export class ReadContactInformationDto {
   @IsString()
   @Transform(({ value }) => value.props.value)
   readonly job_title: JobTitle;
+
+  @Expose()
+  @IsString()
+  @Transform(({ value }) => value.props.value)
+  readonly company_name: CompanyName;
 
   @Expose()
   @IsString()

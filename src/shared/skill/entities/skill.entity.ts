@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EmployerEntity } from '../../../employers/entities/employers.entity';
+import { EmployeeEntity } from '../../../employee/entities/employee.entity';
 
 @Entity('skill')
 export class SkillEntity extends BaseEntity {
@@ -27,4 +28,8 @@ export class SkillEntity extends BaseEntity {
   @ManyToMany(() => EmployerEntity, (employer) => employer.skills)
   @JoinTable({ name: 'skill_employer' })
   employer: EmployerEntity[];
+
+  @ManyToMany(() => EmployeeEntity, (employee) => employee.skills)
+  @JoinTable({ name: 'skill_employee' })
+  employee: EmployeeEntity[];
 }
