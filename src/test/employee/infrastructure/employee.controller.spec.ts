@@ -28,9 +28,9 @@ describe('EmployeeController', () => {
         plainToClass(ReadEmployeeDto, emp),
       );
 
-      jest
+      /*jest
         .spyOn(employeeService, 'getEmployee')
-        .mockImplementation(() => result);
+        .mockImplementation(() => result);*/
 
       expect(await employeeController.getAllEmployee()).toBe(result);
     });
