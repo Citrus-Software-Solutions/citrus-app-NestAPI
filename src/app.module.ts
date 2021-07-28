@@ -10,6 +10,8 @@ import databaseConfig from './config/database.config';
 import { EmployeeModule } from './employee/employee.module';
 import { EmployersModule } from './employers/employers.module';
 import { JobOffersModule } from './job-offers/job-offers.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { JobOffersModule } from './job-offers/job-offers.module';
     EmployersModule,
     EmployeeModule,
     ApplicationModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
