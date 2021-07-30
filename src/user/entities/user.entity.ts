@@ -5,8 +5,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   OneToOne,
+  ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { RoleEntity } from 'src/role/entities/role.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -32,9 +34,22 @@ export class UserEntity extends BaseEntity {
     nullable: false,
   })
   password: string;
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    length: 8,
+    default: 'ACTIVE',
+  })
+  status: string;
   @OneToOne(() => EmployerEntity, (employer) => employer.user, {
     nullable: true,
     eager: true,
   })
   employer: EmployerEntity;
+
+  @ManyToOne(() => RoleEntity, (role) => role.users, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'fk_role' })
+  role: RoleEntity;
 }
