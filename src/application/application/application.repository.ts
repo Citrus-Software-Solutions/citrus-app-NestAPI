@@ -42,8 +42,8 @@ export class ApplicationRepository implements IApplicationRepository {
     } else {
       const applicationEntity: ApplicationEntity = new ApplicationEntity();
       applicationEntity.date_aplication = fecha;
-      applicationEntity.employee = employee;
-      applicationEntity.jobOffer = offer;
+      //applicationEntity.employee = employee;
+      //applicationEntity.jobOffer = offer;
 
       const createdApplication: ApplicationEntity =
         await this.applicationPersistence.persistApplication(applicationEntity);
