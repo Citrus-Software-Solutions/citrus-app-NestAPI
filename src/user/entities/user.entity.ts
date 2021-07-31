@@ -8,7 +8,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { RoleEntity } from 'src/role/entities/role.entity';
+import { RoleEntity } from '../../role/entities/role.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
