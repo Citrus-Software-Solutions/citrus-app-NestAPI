@@ -28,7 +28,9 @@ export class JobOfferEntity extends BaseEntity {
   })
   employer: EmployerEntity;
 
-  @ManyToOne(() => AddressEntity, (address) => address.employee)
+  @ManyToOne(() => AddressEntity, (address) => address.employee, {
+    eager: true,
+  })
   location: AddressEntity;
 
   @Column({ type: 'date', nullable: false })

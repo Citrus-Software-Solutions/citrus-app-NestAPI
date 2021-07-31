@@ -22,7 +22,9 @@ export class EmployerEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 25, nullable: false })
   company_name: string;
 
-  @ManyToOne(() => AddressEntity, (address) => address.employee)
+  @ManyToOne(() => AddressEntity, (address) => address.employee, {
+    eager: true,
+  })
   address: AddressEntity;
 
   @OneToMany(

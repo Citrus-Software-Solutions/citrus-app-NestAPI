@@ -32,18 +32,12 @@ export class AddressEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 10, nullable: false })
   zip: string;
 
-  @OneToMany(() => EmployeeEntity, (employee) => employee.address, {
-    eager: true,
-  })
+  @OneToMany(() => EmployeeEntity, (employee) => employee.address)
   employee: Employee[];
 
-  @OneToMany(() => EmployerEntity, (employer) => employer.address, {
-    eager: true,
-  })
+  @OneToMany(() => EmployerEntity, (employer) => employer.address)
   employer: Employer[];
 
-  @OneToMany(() => JobOfferEntity, (jobOffer) => jobOffer.location, {
-    eager: true,
-  })
+  @OneToMany(() => JobOfferEntity, (jobOffer) => jobOffer.location)
   job_offer: JobOffer[];
 }
