@@ -14,4 +14,8 @@ export class ReadUserDto {
   @Expose()
   @IsString()
   readonly email: string;
+
+  @Expose()
+  @IsString()
+  readonly status: string;
 }

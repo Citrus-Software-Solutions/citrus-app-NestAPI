@@ -1,6 +1,7 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { IUserPersistence } from '../application/user.persistence.interface';
+import { User } from '../domain/user.model';
 import { UserEntity } from '../entities/user.entity';
 
 @EntityRepository(UserEntity)
@@ -12,12 +13,14 @@ export class UserPersistenceAdapter
   async getById(userId: number): Promise<UserEntity> {
     const userRepository = getRepository(UserEntity);
 
-    const existOffer = await userRepository.findOne(userId);
+    const existUser: UserEntity = await userRepository.findOne(userId, {
+      where: { status: 'ACTIVE' },
+    });
 
-    if (!existOffer) {
+    if (!existUser) {
       throw new NotFoundException('This offer does not exist');
     }
 
-    return existOffer;
+    return existUser;
   }
 }
