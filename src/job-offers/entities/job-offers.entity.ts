@@ -28,12 +28,7 @@ export class JobOfferEntity extends BaseEntity {
   })
   employer: EmployerEntity;
 
-  @OneToOne(() => AddressEntity, {
-    cascade: true,
-    nullable: false,
-    eager: true,
-  })
-  @JoinColumn()
+  @ManyToOne(() => AddressEntity, (address) => address.employee)
   location: AddressEntity;
 
   @Column({ type: 'date', nullable: false })
@@ -44,7 +39,7 @@ export class JobOfferEntity extends BaseEntity {
   })
   schedule: JobScheduleEntity[];
 
-  @ManyToMany((type) => SkillEntity, (skill) => skill.jobOffer, {
+  @ManyToMany(() => SkillEntity, (skill) => skill.jobOffer, {
     eager: true,
   })
   @JoinColumn()

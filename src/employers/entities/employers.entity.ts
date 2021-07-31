@@ -5,8 +5,8 @@ import {
   Entity,
   JoinColumn,
   ManyToMany,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,12 +22,7 @@ export class EmployerEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 25, nullable: false })
   company_name: string;
 
-  @OneToOne(() => AddressEntity, {
-    cascade: true,
-    nullable: false,
-    eager: true,
-  })
-  @JoinColumn()
+  @ManyToOne(() => AddressEntity, (address) => address.employee)
   address: AddressEntity;
 
   @OneToMany(
@@ -39,7 +34,7 @@ export class EmployerEntity extends BaseEntity {
   )
   contacts: ContactInformationEntity[];
 
-  @ManyToMany((type) => SkillEntity, (skill) => skill.employer, {
+  @ManyToMany(() => SkillEntity, (skill) => skill.employer, {
     eager: true,
   })
   @JoinColumn()
