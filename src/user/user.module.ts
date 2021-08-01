@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RolePersistenceAdapter } from 'src/role/infrastructure/role.persistence.adapter';
 import { SharedModule } from '../shared/shared.module';
 import { UserRepository } from './application/user.repository';
 import { UserService } from './application/user.service';
@@ -11,6 +12,9 @@ import { UserPersistenceAdapter } from './infrastructure/user.persistence.adapte
 
   providers: [UserPersistenceAdapter, UserRepository, UserService],
 
-  imports: [TypeOrmModule.forFeature([UserPersistenceAdapter]), SharedModule],
+  imports: [
+    TypeOrmModule.forFeature([UserPersistenceAdapter, RolePersistenceAdapter]),
+    SharedModule,
+  ],
 })
 export class UserModule {}
