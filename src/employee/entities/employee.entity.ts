@@ -33,7 +33,9 @@ export class EmployeeEntity extends BaseEntity {
   @Column({ type: 'date', nullable: false })
   birth_date: Date;
 
-  @ManyToOne(() => AddressEntity, (address) => address.employee)
+  @ManyToOne(() => AddressEntity, (address) => address.employee, {
+    eager: true,
+  })
   address: AddressEntity;
 
   @Column({ type: 'varchar', length: 30, nullable: false })

@@ -1,6 +1,6 @@
 import { EmployeeEntity } from '../entities/employee.entity';
 
 export interface IEmployeePersistence {
-  getById(offerId: number): Promise<EmployeeEntity>;
-  getAll(): Promise<EmployeeEntity[]>;
+  getEmployees(): Promise<EmployeeEntity[]>;
+  getEmployeeById(employeeId: number): Promise<EmployeeEntity>;
 }

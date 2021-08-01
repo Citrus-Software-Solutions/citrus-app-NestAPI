@@ -29,9 +29,8 @@ export class ApplicationRepository implements IApplicationRepository {
     const offer: JobOfferEntity = await this._jobOfferPersistence.getById(
       offerId,
     );
-    const employee: EmployeeEntity = await this.employeePersistence.getById(
-      employeeId,
-    );
+    const employee: EmployeeEntity =
+      await this.employeePersistence.getEmployeeById(employeeId);
     const applied: boolean = await this.applicationPersistence.alreadyApplied(
       employee,
       offer,
@@ -59,9 +58,8 @@ export class ApplicationRepository implements IApplicationRepository {
     const offer: JobOfferEntity = await this._jobOfferPersistence.getById(
       offerId,
     );
-    const employee: EmployeeEntity = await this.employeePersistence.getById(
-      employeeId,
-    );
+    const employee: EmployeeEntity =
+      await this.employeePersistence.getEmployeeById(employeeId);
 
     return this.applicationPersistence.alreadyApplied(employee, offer);
   }
