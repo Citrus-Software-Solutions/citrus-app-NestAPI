@@ -1,9 +1,3 @@
-import { Employee } from 'src/employee/domain/employee.model';
-import { EmployeeEntity } from 'src/employee/entities/employee.entity';
-import { Employer } from 'src/employers/domain/employer.model';
-import { EmployerEntity } from 'src/employers/entities/employers.entity';
-import { JobOffer } from 'src/job-offers/domain/job-offer.model';
-import { JobOfferEntity } from 'src/job-offers/entities/job-offers.entity';
 import {
   BaseEntity,
   Column,
@@ -11,6 +5,12 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Employee } from '../../../employee/domain/employee.model';
+import { EmployeeEntity } from '../../../employee/entities/employee.entity';
+import { Employer } from '../../../employers/domain/employer.model';
+import { EmployerEntity } from '../../../employers/entities/employers.entity';
+import { JobOffer } from '../../../job-offers/domain/job-offer.model';
+import { JobOfferEntity } from '../../../job-offers/entities/job-offers.entity';
 
 @Entity('address')
 export class AddressEntity extends BaseEntity {

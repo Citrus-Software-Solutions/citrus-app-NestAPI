@@ -1,4 +1,4 @@
-import { JobTitle } from '../../../contact-information/domain/value-objects/job-title.vo';
+import { JobTitle } from '../../domain/job-title.vo';
 import { CompanyName } from '../../../work-experience/domain/value-objects/company-name.vo';
 import { Reference } from '../../../reference/domain/reference.model';
 import { ReferenceEntity } from '../../../reference/entities/reference.entity';

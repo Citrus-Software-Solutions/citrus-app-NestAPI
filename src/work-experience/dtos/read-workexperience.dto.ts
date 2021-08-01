@@ -1,6 +1,6 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { IsNumber, IsString } from 'class-validator';
-import { JobTitle } from '../../contact-information/domain/value-objects/job-title.vo';
+import { JobTitle } from '../../shared/domain/job-title.vo';
 import { CompanyName } from '../domain/value-objects/company-name.vo';
 
 @Exclude()

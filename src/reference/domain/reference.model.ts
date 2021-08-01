@@ -1,5 +1,5 @@
-import { Name } from 'src/shared/domain/name.vo';
-import { JobTitle } from '../../contact-information/domain/value-objects/job-title.vo';
+import { Name } from '../../shared/domain/name.vo';
+import { JobTitle } from '../../shared/domain/job-title.vo';
 import { CompanyName } from '../../work-experience/domain/value-objects/company-name.vo';
 
 export class Reference {
