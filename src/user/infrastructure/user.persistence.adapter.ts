@@ -18,9 +18,14 @@ export class UserPersistenceAdapter
     });
 
     if (!existUser) {
-      throw new NotFoundException('This offer does not exist');
+      throw new NotFoundException('This user does not exist');
     }
 
     return existUser;
+  }
+  async createUser(user: UserEntity): Promise<UserEntity> {
+    const userRepository = getRepository(UserEntity);
+    const savedUser: UserEntity = await userRepository.save(user);
+    return savedUser;
   }
 }

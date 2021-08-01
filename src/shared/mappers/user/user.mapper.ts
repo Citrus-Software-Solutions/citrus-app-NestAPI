@@ -13,7 +13,6 @@ export class UserDataMapper implements DataMapper<User, UserEntity> {
     user.username = entity.username;
     user.password = entity.password;
     user.status = entity.status;
-    user.role = this._mapperRole.toDomain(entity.role);
 
     return user;
   }
@@ -25,7 +24,6 @@ export class UserDataMapper implements DataMapper<User, UserEntity> {
     userEntity.username = user.username;
     userEntity.password = user.password;
     userEntity.status = user.status;
-    userEntity.role = this._mapperRole.toDalEntity(user.role);
 
     return userEntity;
   }
