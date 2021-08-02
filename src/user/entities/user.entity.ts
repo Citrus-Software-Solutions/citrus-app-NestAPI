@@ -43,7 +43,6 @@ export class UserEntity extends BaseEntity {
   status: string;
   @OneToOne(() => EmployerEntity, (employer) => employer.user, {
     nullable: true,
-    eager: true,
   })
   employer: EmployerEntity;
 

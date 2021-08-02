@@ -1,11 +1,8 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { IRolePersistence } from 'src/role/application/role.persistence.interface';
-import { Role } from 'src/role/domain/role.model';
 import { RoleEntity } from 'src/role/entities/role.entity';
 import { RolePersistenceAdapter } from 'src/role/infrastructure/role.persistence.adapter';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { IUserPersistence } from '../application/user.persistence.interface';
-import { User } from '../domain/user.model';
 import { UserEntity } from '../entities/user.entity';
 
 @EntityRepository(UserEntity)
@@ -33,10 +30,18 @@ export class UserPersistenceAdapter
 
     return existUser;
   }
-  async createUser(user: UserEntity): Promise<UserEntity> {
-    const roleEntity: RoleEntity = await this._rolePersistence.findOne({
-      where: { role: 'EMPLOYER' },
-    });
+  async createUser(user: UserEntity, userRole: string): Promise<UserEntity> {
+    let roleEntity: RoleEntity;
+    if (userRole == 'EMPLOYER') {
+      roleEntity = await this._rolePersistence.findOne({
+        where: { role: 'EMPLOYER' },
+      });
+    } else if (userRole == 'EMPLOYEE') {
+      roleEntity = await this._rolePersistence.findOne({
+        where: { role: 'EMPLOYEE' },
+      });
+    }
+
     if (!roleEntity) {
       throw new NotFoundException();
     }

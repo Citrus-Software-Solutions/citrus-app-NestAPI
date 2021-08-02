@@ -3,7 +3,7 @@
 // import { EmployerStatus } from '../domain/employer-status.model';
 // import { Employer } from '../domain/employer.model';
 
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { Employer } from '../domain/employer.model';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
@@ -21,6 +21,17 @@ export class EmployersService implements IEmployersService {
 
     return employer.map((empl: Employer) =>
       plainToClass(ReadEmployerDto, empl),
+    );
+  }
+
+  async getEmployerById(employerId: number): Promise<ReadEmployerDto> {
+    if (!employerId) {
+      throw new BadRequestException('id must be sent');
+    }
+
+    return plainToClass(
+      ReadEmployerDto,
+      this._employerRepository.getEmployerById(employerId),
     );
   }
 }

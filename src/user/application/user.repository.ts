@@ -19,11 +19,12 @@ export class UserRepository implements IUserRepository {
 
     return this._mapper.toDomain(userEntity);
   }
-  async createUser(user: DataUserDto): Promise<User> {
+  async createUser(user: DataUserDto, userRole: string): Promise<User> {
     const realUser = this.dtoUserToReal(user);
     const userEntity: UserEntity = await this._mapper.toDalEntity(realUser);
     const createdUser: UserEntity = await this._userPersistence.createUser(
       userEntity,
+      userRole,
     );
     if (!createdUser) {
       throw new BadRequestException('User could not be created');

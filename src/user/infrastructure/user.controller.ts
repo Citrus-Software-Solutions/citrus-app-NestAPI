@@ -6,7 +6,6 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IUserService } from '../application/user.service.interface';
@@ -27,9 +26,12 @@ export class UserController {
   getById(@Param('userId', ParseIntPipe) userId: number): Promise<ReadUserDto> {
     return this._userService.getById(userId);
   }
-  @Post('')
+  @Post('/:userRole')
   @ApiOperation({ summary: 'Create a user' })
-  createUserEmployer(@Body() user: DataUserDto): Promise<User> {
-    return this._userService.createUser(user);
+  createUser(
+    @Param('userRole') userRole: string,
+    @Body() user: DataUserDto,
+  ): Promise<User> {
+    return this._userService.createUser(user, userRole);
   }
 }

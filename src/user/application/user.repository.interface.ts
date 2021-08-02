@@ -4,5 +4,5 @@ import { ReadUserDto } from '../dtos/read-user.dto';
 
 export interface IUserRepository {
   getById(userId: number): Promise<User>;
-  createUser(user: DataUserDto): Promise<User>;
+  createUser(user: DataUserDto, userRole: string): Promise<User>;
 }

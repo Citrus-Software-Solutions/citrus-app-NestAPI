@@ -13,6 +13,7 @@ import { JobOffersModule } from './job-offers/job-offers.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
+import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { RoleModule } from './role/role.module';
       }),
     }),
     JobOffersModule,
+    JobSchedule,
     EmployersModule,
     EmployeeModule,
     ApplicationModule,

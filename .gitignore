@@ -37,4 +37,3 @@ lerna-debug.log*
 !.env.sample
 ormconfig.json
 env.production
-/src/migration

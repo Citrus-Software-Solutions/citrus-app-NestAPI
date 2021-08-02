@@ -20,11 +20,14 @@ export class UserService implements IUserService {
 
     return plainToClass(ReadUserDto, this._userRepository.getById(userId));
   }
-  async createUser(user: DataUserDto): Promise<User> {
+  async createUser(user: DataUserDto, userRole: string): Promise<User> {
     if (!user) {
       throw new BadRequestException('user data must be sent');
     }
-    const savedUser: User = await this._userRepository.createUser(user);
+    const savedUser: User = await this._userRepository.createUser(
+      user,
+      userRole,
+    );
     return savedUser;
   }
 }

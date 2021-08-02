@@ -7,6 +7,7 @@ export class RoleDataMapper implements DataMapper<Role, RoleEntity> {
   public toDomain(entity: RoleEntity): Role {
     const role = new Role();
     role.id = entity.id;
+    role.role = entity.role;
     role.permission = entity.permission;
 
     return role;
@@ -15,6 +16,7 @@ export class RoleDataMapper implements DataMapper<Role, RoleEntity> {
   public toDalEntity(role: Role): RoleEntity {
     const roleEntity = new RoleEntity();
     roleEntity.id = role.id;
+    roleEntity.role = role.role;
     roleEntity.permission = role.permission;
 
     return roleEntity;
