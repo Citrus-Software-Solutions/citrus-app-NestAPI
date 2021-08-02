@@ -29,10 +29,15 @@ export class JobOffersController {
     required: false,
     type: Number,
   })
+  @ApiQuery({
+    name: 'id',
+    description: 'The id of a job offer',
+    required: false,
+    type: Number,
+  })
   @Get()
   @ApiOperation({ summary: 'Get all job offers' })
   getAllJobOffers(@Query() query: JSON): Promise<ReadJobOfferDto[]> {
-    console.log(query);
     return this._jobOfferService.getAll(query);
   }
 
