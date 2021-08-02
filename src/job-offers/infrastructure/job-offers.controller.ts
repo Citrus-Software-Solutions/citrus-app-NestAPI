@@ -7,8 +7,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
@@ -22,10 +23,17 @@ export class JobOffersController {
     private readonly _jobOfferService: IJobOffersService,
   ) {}
 
+  @ApiQuery({
+    name: 'status',
+    description: 'The status of the job offers (0-6)',
+    required: false,
+    type: Number,
+  })
   @Get()
   @ApiOperation({ summary: 'Get all job offers' })
-  getAllJobOffers(): Promise<ReadJobOfferDto[]> {
-    return this._jobOfferService.getAll();
+  getAllJobOffers(@Query() query: JSON): Promise<ReadJobOfferDto[]> {
+    console.log(query);
+    return this._jobOfferService.getAll(query);
   }
 
   @Get('employers/:employerId')
