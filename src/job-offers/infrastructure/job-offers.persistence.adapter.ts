@@ -18,10 +18,10 @@ export class JobOfferPersistenceAdapter
     super();
   }
 
-  async getJobOffers(): Promise<JobOfferEntity[]> {
+  async getJobOffers(query: JSON): Promise<JobOfferEntity[]> {
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
-      where: { status: 0 },
+      where: query,
     });
 
     return jobOffers;

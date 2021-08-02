@@ -14,8 +14,8 @@ export class JobOfferRepository implements IJobOfferRepository {
     private readonly _mapper: JobOfferDataMapper,
   ) {}
 
-  async getAll(): Promise<JobOffer[]> {
-    const jobOfferEntity = await this._jobOfferPersistence.getJobOffers();
+  async getAll(query: JSON): Promise<JobOffer[]> {
+    const jobOfferEntity = await this._jobOfferPersistence.getJobOffers(query);
     return jobOfferEntity.map((jobOffer: JobOfferEntity) =>
       this._mapper.toDomain(jobOffer),
     );
