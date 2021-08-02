@@ -37,3 +37,7 @@ INSERT INTO public.work_experience VALUES (1, 'Janitor', 'UCV Informatic School'
 INSERT INTO public.work_experience VALUES (2, 'Plumber', 'General Plumbers CA', 1, 1);
 INSERT INTO public.work_experience VALUES (3, 'Cook at an african restaurant', 'Oompa Resort CA', 2, 2);
 INSERT INTO public.work_experience VALUES (4, 'Mainframe Supervisor', 'Some Software CA', 1, 3);
+INSERT INTO public.staff_member VALUES (1, 'Jhonny', 'James', 'Bravo', 'Users Administrator');
+INSERT INTO public.staff_member VALUES (2, 'William', 'Arthur', 'Wallace', 'Jobs Interviewer');
+INSERT INTO public.staff_member VALUES (3, 'Benjamin', 'Dorian', 'Franklin', 'Applications Reviewer');
+INSERT INTO public.staff_member VALUES (4, 'Lucas', 'John', 'Green', 'System Administrator');
