@@ -1,7 +1,17 @@
-import { Controller, Get, Inject, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { IEmployersService } from '../application/employers.service.interface';
+import { Employer } from '../domain/employer.model';
+import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 
 @ApiTags('employers')
@@ -24,5 +34,14 @@ export class EmployersController {
     @Param('employerId', ParseIntPipe) employerId: number,
   ): Promise<ReadEmployerDto> {
     return this._employersService.getEmployerById(employerId);
+  }
+  @Post('/:userId')
+  @ApiOperation({ summary: 'Create a employer' })
+  createEmployer(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Body() employer: DataEmployerDto,
+  ): Promise<Employer> {
+    console.log(employer);
+    return this._employersService.createEmployer(employer, userId);
   }
 }

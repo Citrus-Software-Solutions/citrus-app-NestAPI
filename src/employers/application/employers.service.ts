@@ -6,6 +6,7 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { Employer } from '../domain/employer.model';
+import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 import { IEmployerRepository } from './employers.repository.interface';
 import { IEmployersService } from './employers.service.interface';
@@ -33,5 +34,16 @@ export class EmployersService implements IEmployersService {
       ReadEmployerDto,
       this._employerRepository.getEmployerById(employerId),
     );
+  }
+  async createEmployer(
+    employer: DataEmployerDto,
+    userId: number,
+  ): Promise<Employer> {
+    if (!employer) {
+      throw new BadRequestException('employer data must be sent');
+    }
+    const savedEmployer: Employer =
+      await this._employerRepository.createEmployer(employer, userId);
+    return savedEmployer;
   }
 }
