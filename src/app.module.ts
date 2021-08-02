@@ -11,6 +11,7 @@ import { EmployeeModule } from './employee/employee.module';
 import { EmployersModule } from './employers/employers.module';
 import { JobOffersModule } from './job-offers/job-offers.module';
 import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
+import { RabbitMqModule } from './rabbit-mq/rabbit-mq.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
     EmployersModule,
     EmployeeModule,
     ApplicationModule,
+    RabbitMqModule,
   ],
   controllers: [AppController],
   providers: [AppService],
