@@ -60,7 +60,9 @@ export class UserPersistenceAdapter
 
     const userRepository = getRepository(UserEntity);
 
-    const userExist = await userRepository.find({ username: user.username });
+    const userExist = await userRepository.findOne({
+      where: { username: user.username },
+    });
 
     if (!userExist) {
       throw new InternalServerErrorException('This username already exist');
