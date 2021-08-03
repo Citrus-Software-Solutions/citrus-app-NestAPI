@@ -20,8 +20,8 @@ export class Employee {
     private _skills: Skill[],
     // private _trainings: Trainings[],
     private _references: Reference[],
-    private _rating: number,
     private _status: number,
+    private _rating?: number,
   ) {}
 
   public get references(): Reference[] {
