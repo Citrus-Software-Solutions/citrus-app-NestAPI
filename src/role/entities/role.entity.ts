@@ -17,7 +17,8 @@ export class RoleEntity extends BaseEntity {
     nullable: false,
     length: 20,
   })
-  role: string;
+  name: string;
+
   @Column({
     type: 'text',
     nullable: false,
