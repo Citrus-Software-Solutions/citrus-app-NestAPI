@@ -36,7 +36,7 @@ describe('EmployeeController', () => {
   describe('getEmployee', () => {
     it('should return an array of Employee', async () => {
       let employeePersistenceAdapter: EmployeePersistenceAdapter;
-      const _employeeRepository: EmployeeRepository = new EmployeeRepository(
+      const _employeeRepository: EmployeeRepository = new giEmployeeRepository(
         employeePersistenceAdapter,
       );
       const employee: Employee[] = await _employeeRepository.getEmployee();
