@@ -44,6 +44,7 @@ export class EmployersService implements IEmployersService {
     }
     const savedEmployer: Employer =
       await this._employerRepository.createEmployer(employer, userId);
+
     return savedEmployer;
   }
 }

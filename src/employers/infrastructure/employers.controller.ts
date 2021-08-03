@@ -41,7 +41,6 @@ export class EmployersController {
     @Param('userId', ParseIntPipe) userId: number,
     @Body() employer: DataEmployerDto,
   ): Promise<Employer> {
-    console.log(employer);
     return this._employersService.createEmployer(employer, userId);
   }
 }

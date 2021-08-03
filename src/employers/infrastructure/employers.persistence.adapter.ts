@@ -44,9 +44,7 @@ export class EmployersPersisteceAdapter
     employer: EmployerEntity,
     userId: number,
   ): Promise<EmployerEntity> {
-    const userEntity: UserEntity = await this._userPersistence.findOne(userId, {
-      where: { role: 'EMPLOYER' },
-    });
+    const userEntity: UserEntity = await this._userPersistence.findOne(userId);
 
     if (!userEntity) {
       throw new NotFoundException();
