@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Inject,
-  Param,
-  ParseIntPipe,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IAuthService } from '../application/auth.service.interface';
 import { SigninDto } from '../dtos/signin.dto';
@@ -21,7 +13,7 @@ export class AuthController {
 
   @Post('/signin')
   @ApiOperation({ summary: 'Create a user' })
-  createUser(@Body() signinDto: SigninDto) {
+  login(@Body() signinDto: SigninDto) {
     return this._authService.signin(signinDto);
   }
 }

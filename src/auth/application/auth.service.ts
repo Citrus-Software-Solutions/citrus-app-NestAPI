@@ -1,28 +1,17 @@
-import {
-  Inject,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { compare } from 'bcryptjs';
-import { UserEntity } from '../../user/entities/user.entity';
+import { Inject, Injectable } from '@nestjs/common';
 import { SigninDto } from '../dtos/signin.dto';
-import { AuthPersistenceAdapter } from '../infrastructure/auth.persistence.adapter';
-import { IAuthPersistence } from './auth.persistence.interface';
+import { IAuthRepository } from './auth.repository.interface';
 import { IAuthService } from './auth.service.interface';
-import { IJwtPayload } from './jwt-payload.interface';
 
 @Injectable()
 export class AuthService implements IAuthService {
   constructor(
-    @Inject('AuthPersistenceAdapter')
-    private readonly _authPersistence: IAuthPersistence,
-    private readonly _jwtService: JwtService,
+    @Inject('AuthRepository')
+    private readonly _userRepository: IAuthRepository,
   ) {}
 
   async signin(signinDto: SigninDto): Promise<{ token: string }> {
-    const user = await this._authPersistence.signin(signinDto);
+    const user = await this._userRepository.signin(signinDto);
     return user;
   }
 }

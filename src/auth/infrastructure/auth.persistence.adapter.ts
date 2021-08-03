@@ -26,6 +26,7 @@ export class AuthPersistenceAdapter
     const user: UserEntity = await userRepository.findOne({
       where: { username },
     });
+
     if (!user) {
       throw new NotFoundException('user does not exist');
     }
