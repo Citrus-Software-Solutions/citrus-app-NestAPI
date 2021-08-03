@@ -4,7 +4,8 @@ import { IUserService } from '../application/user.service.interface';
 import { IUserRepository } from '../application/user.repository.interface';
 import { ReadUserDto } from '../dtos/read-user.dto';
 import { plainToClass } from 'class-transformer';
-import { DataUserDto } from '../dtos/data-user.dto';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { CreatedUserDto } from '../dtos/created-user.dto';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -20,14 +21,22 @@ export class UserService implements IUserService {
 
     return plainToClass(ReadUserDto, this._userRepository.getById(userId));
   }
-  async createUser(user: DataUserDto, userRole: string): Promise<User> {
+
+  async createUser(
+    user: CreateUserDto,
+    userRole: string,
+  ): Promise<CreatedUserDto> {
     if (!user) {
       throw new BadRequestException('user data must be sent');
     }
+    if (!userRole) {
+      throw new BadRequestException('role must be sent');
+    }
+
     const savedUser: User = await this._userRepository.createUser(
       user,
       userRole,
     );
-    return savedUser;
+    return plainToClass(CreatedUserDto, savedUser);
   }
 }

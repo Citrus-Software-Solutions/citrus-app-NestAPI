@@ -35,6 +35,7 @@ export class EmployersController {
   ): Promise<ReadEmployerDto> {
     return this._employersService.getEmployerById(employerId);
   }
+
   @Post('/:userId')
   @ApiOperation({ summary: 'Create a employer' })
   createEmployer(

@@ -1,4 +1,10 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { genSalt, hash } from 'bcryptjs';
 import { RoleEntity } from 'src/role/entities/role.entity';
 import { RolePersistenceAdapter } from 'src/role/infrastructure/role.persistence.adapter';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
@@ -17,6 +23,7 @@ export class UserPersistenceAdapter
   ) {
     super();
   }
+
   async getById(userId: number): Promise<UserEntity> {
     const userRepository = getRepository(UserEntity);
 
@@ -30,26 +37,40 @@ export class UserPersistenceAdapter
 
     return existUser;
   }
+
   async createUser(user: UserEntity, userRole: string): Promise<UserEntity> {
     let roleEntity: RoleEntity;
     if (userRole == 'EMPLOYER') {
       roleEntity = await this._rolePersistence.findOne({
-        where: { role: 'EMPLOYER' },
+        where: { name: 'EMPLOYER' },
       });
     } else if (userRole == 'EMPLOYEE') {
       roleEntity = await this._rolePersistence.findOne({
-        where: { role: 'EMPLOYEE' },
+        where: { name: 'EMPLOYEE' },
+      });
+    } else if (userRole == 'STAFF MEMBER') {
+      roleEntity = await this._rolePersistence.findOne({
+        where: { name: 'STAFF MEMBER' },
       });
     }
 
     if (!roleEntity) {
-      throw new NotFoundException();
+      throw new NotFoundException('Role not exist');
     }
 
     const userRepository = getRepository(UserEntity);
+
+    const userExist = await userRepository.find({ username: user.username });
+
+    if (!userExist) {
+      throw new InternalServerErrorException('This username already exist');
+    }
+
+    const salt = await genSalt(10);
+
     const savedUser: UserEntity = await userRepository.save({
       username: user.username,
-      password: user.password,
+      password: await hash(user.password, salt),
       email: user.email,
       role: roleEntity,
     });

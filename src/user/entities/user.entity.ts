@@ -22,6 +22,7 @@ export class UserEntity extends BaseEntity {
     length: 25,
   })
   username: string;
+
   @Column({
     type: 'varchar',
     unique: true,
@@ -29,11 +30,13 @@ export class UserEntity extends BaseEntity {
     length: 25,
   })
   email: string;
+
   @Column({
     type: 'varchar',
     nullable: false,
   })
   password: string;
+
   @Column({
     type: 'varchar',
     nullable: false,
@@ -41,6 +44,7 @@ export class UserEntity extends BaseEntity {
     default: 'ACTIVE',
   })
   status: string;
+
   @OneToOne(() => EmployerEntity, (employer) => employer.user, {
     nullable: true,
   })

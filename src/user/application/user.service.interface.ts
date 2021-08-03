@@ -1,7 +1,7 @@
-import { User } from '../domain/user.model';
-import { DataUserDto } from '../dtos/data-user.dto';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { CreatedUserDto } from '../dtos/created-user.dto';
 import { ReadUserDto } from '../dtos/read-user.dto';
 export interface IUserService {
   getById(userId: number): Promise<ReadUserDto>;
-  createUser(user: DataUserDto, userRole: string): Promise<User>;
+  createUser(user: CreateUserDto, userRole: string): Promise<CreatedUserDto>;
 }

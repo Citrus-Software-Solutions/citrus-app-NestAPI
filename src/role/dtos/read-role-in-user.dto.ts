@@ -5,5 +5,5 @@ import { IsString } from 'class-validator';
 export class ReadRoleInUserDto {
   @Expose()
   @IsString()
-  readonly role: string;
+  readonly name: string;
 }

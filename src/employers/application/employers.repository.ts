@@ -47,6 +47,7 @@ export class EmployersRepository implements IEmployerRepository {
 
     return this._mapper.toDomain(createdEmployer);
   }
+
   private dtoEmployerToReal(dtoEmployer: DataEmployerDto) {
     const realEmployer = new Employer();
     realEmployer.company_name = Name.create(dtoEmployer.company_name);
