@@ -6,7 +6,9 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IUserService } from '../application/user.service.interface';
 import { CreateUserDto } from '../dtos/create-user.dto';
@@ -21,6 +23,7 @@ export class UserController {
     private readonly _userService: IUserService,
   ) {}
 
+  @UseGuards(AuthGuard())
   @Get('/:userId')
   @ApiOperation({ summary: 'Get user data by its id' })
   getById(@Param('userId', ParseIntPipe) userId: number): Promise<ReadUserDto> {

@@ -30,7 +30,6 @@ export class AuthPersistenceAdapter
     if (!user) {
       throw new NotFoundException('user does not exist');
     }
-    console.log(password, user.password);
     const isMatch = await compare(password, user.password);
     if (!isMatch) {
       throw new UnauthorizedException('invalid credentials');
