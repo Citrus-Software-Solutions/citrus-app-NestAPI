@@ -38,7 +38,7 @@ export class JobOfferPersistenceAdapter
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
       relations: ['employer'],
-      where: { employer: employer, status: 'Published' },
+      where: { employer: employer },
     });
 
     if (!jobOffers) {
