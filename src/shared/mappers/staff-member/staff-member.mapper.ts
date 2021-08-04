@@ -1,6 +1,6 @@
-import { JobTitle } from 'src/shared/domain/job-title.vo';
-import { StaffMember } from 'src/staff-member/domain/staff-member.model';
-import { StaffMemberEntity } from 'src/staff-member/entities/staff-member.entity';
+import { JobTitle } from '../../../shared/domain/job-title.vo';
+import { StaffMember } from '../../../staff-member/domain/staff-member.model';
+import { StaffMemberEntity } from '../../../staff-member/entities/staff-member.entity';
 import { ID } from '../../../shared/domain/id.vo';
 import { Name } from '../../domain/name.vo';
 import { DataMapper } from '../data-mapper.interface';

@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { StaffMemberDataMapper } from 'src/shared/mappers/staff-member/staff-member.mapper';
+import { StaffMemberDataMapper } from '../../shared/mappers/staff-member/staff-member.mapper';
 import { StaffMember } from '../domain/staff-member.model';
 import { StaffMemberEntity } from '../entities/staff-member.entity';
 import { IStaffMemberPersistence } from './staff-member.persistence.interface';
