@@ -12,7 +12,7 @@ export class DataEmployerDto {
   readonly company_name: Name;
 
   @Expose()
-  @ValidateNested()
+  @ValidateNested({ each: true })
   @Type(() => ReadAddressDto)
   readonly address: ReadAddressDto;
 
