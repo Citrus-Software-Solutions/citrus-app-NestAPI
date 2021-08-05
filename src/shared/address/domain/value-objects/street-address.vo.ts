@@ -14,6 +14,10 @@ export class StreetAddress extends ValueObject<StreetAddressProps> {
   }
 
   public static create(value: string): StreetAddress {
-    return new StreetAddress({ value: value });
+    if (value) {
+      return new StreetAddress({ value: value });
+    } else {
+      return new StreetAddress({ value: ' ' });
+    }
   }
 }

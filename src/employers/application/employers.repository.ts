@@ -27,4 +27,14 @@ export class EmployersRepository implements IEmployerRepository {
 
     return this._mapper.toDomain(employerEntity);
   }
+
+  async createEmployer(employer: Employer, userId: number): Promise<Employer> {
+    const createdEmployer: EmployerEntity =
+      await this._employersPersistence.createEmployer(
+        this._mapper.toDalEntity(employer),
+        userId,
+      );
+
+    return this._mapper.toDomain(createdEmployer);
+  }
 }

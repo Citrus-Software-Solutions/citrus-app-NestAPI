@@ -1,19 +1,21 @@
-// import { NotFoundException } from '@nestjs/common';
-// import { Name } from 'src/shared/domain/name.model';
-// import { EmployerStatus } from '../domain/employer-status.model';
-// import { Employer } from '../domain/employer.model';
-
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
+import { Address } from '../../shared/address/domain/address.model';
 import { Employer } from '../domain/employer.model';
+import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 import { IEmployerRepository } from './employers.repository.interface';
 import { IEmployersService } from './employers.service.interface';
+import { SpecialRequirement } from '../../job-offers/domain/value-objects/special-requirement.vo';
+import { Name } from '../../shared/domain/name.vo';
+import { CreatedEmployerDto } from '../dtos/created-employer.dto';
+import { AddressDataMapper } from '../../shared/mappers/address/address.data-mapper';
 @Injectable()
 export class EmployersService implements IEmployersService {
   constructor(
     @Inject('EmployersRepository')
     private readonly _employerRepository: IEmployerRepository,
+    private readonly _mapperAddress: AddressDataMapper,
   ) {}
 
   async getEmployers(): Promise<ReadEmployerDto[]> {
@@ -33,5 +35,35 @@ export class EmployersService implements IEmployersService {
       ReadEmployerDto,
       this._employerRepository.getEmployerById(employerId),
     );
+  }
+
+  async createEmployer(
+    employerDto: Partial<DataEmployerDto>,
+    userId: number,
+  ): Promise<CreatedEmployerDto> {
+    if (!employerDto) {
+      throw new BadRequestException('employer data must be sent');
+    }
+
+    if (!userId) {
+      throw new BadRequestException('employer data must be sent');
+    }
+
+    const employer: Employer = new Employer();
+
+    const address: Address = this._mapperAddress.toDomainFromReadDto(
+      employerDto.address,
+    );
+
+    employer.company_name = Name.create(employerDto.company_name.toString());
+    employer.address = address;
+    employer.special_requirements = SpecialRequirement.create(
+      employerDto.special_requirements.toString(),
+    );
+
+    const savedEmployer: Employer =
+      await this._employerRepository.createEmployer(employer, userId);
+
+    return plainToClass(CreatedEmployerDto, savedEmployer);
   }
 }

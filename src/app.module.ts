@@ -10,6 +10,9 @@ import databaseConfig from './config/database.config';
 import { EmployeeModule } from './employee/employee.module';
 import { EmployersModule } from './employers/employers.module';
 import { JobOffersModule } from './job-offers/job-offers.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { RoleModule } from './role/role.module';
 import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
 import { StaffMemberModule } from './staff-member/staff-member.module';
 
@@ -36,6 +39,9 @@ import { StaffMemberModule } from './staff-member/staff-member.module';
     EmployeeModule,
     ApplicationModule,
     StaffMemberModule,
+    AuthModule,
+    UserModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

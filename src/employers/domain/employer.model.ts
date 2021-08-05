@@ -1,3 +1,4 @@
+import { User } from '../../user/domain/user.model';
 import { Address } from '../../shared/address/domain/address.model';
 import { JobOffer } from '../../job-offers/domain/job-offer.model';
 import { Name } from '../../shared/domain/name.vo';
@@ -16,4 +17,5 @@ export class Employer {
   public special_requirements: SpecialRequirement;
   public status: number;
   public jobOffers?: JobOffer[];
+  public user: User;
 }

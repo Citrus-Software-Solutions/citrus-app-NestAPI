@@ -30,5 +30,5 @@ export class ReadAddressDto {
   @Expose()
   @IsString()
   @Transform(({ value }) => value.props.value)
-  readonly _zip: ZipCode;
+  readonly zip: ZipCode;
 }

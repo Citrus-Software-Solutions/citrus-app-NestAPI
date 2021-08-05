@@ -1,4 +1,5 @@
 import { JobOfferEntity } from '../../job-offers/entities/job-offers.entity';
+import { UserEntity } from '../../user/entities/user.entity';
 import {
   BaseEntity,
   Column,
@@ -7,6 +8,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -45,9 +47,16 @@ export class EmployerEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 700, nullable: false })
   special_requirements: string;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', default: 0, nullable: false })
   status: number;
 
   @OneToMany(() => JobOfferEntity, (jobOffer) => jobOffer.employer)
   jobOffers: JobOfferEntity[];
+
+  @OneToOne(() => UserEntity, (user) => user.employer, {
+    nullable: true,
+    eager: true,
+  })
+  @JoinColumn({ name: 'fk_user' })
+  user: UserEntity;
 }
