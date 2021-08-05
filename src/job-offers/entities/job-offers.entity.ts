@@ -1,54 +1,72 @@
-import { ApplicationEntity } from '../../application/entities/application.entity';
+import { EmployeeEntity } from '../../employee/entities/employee.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
+import { JobScheduleEntity } from '../../jobs-schedule/entities/jobs-schedule.entity';
+import { AddressEntity } from '../../shared/address/entities/address.entity';
+import { SkillEntity } from '../../shared/skill/entities/skill.entity';
 
 @Entity('job_offer')
 export class JobOfferEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 25, nullable: false })
-  name: string;
-
-  @Column({ type: 'varchar', length: 700, nullable: false })
-  description: string;
-
-  @Column({ type: 'integer', nullable: false })
-  available_vacans: number;
-
-  @Column({ type: 'date', nullable: false })
-  date_begin: Date;
-
-  @Column({ type: 'date', nullable: false })
-  date_end: Date;
-
-  @Column({ type: 'varchar' })
-  status: string;
-
-  @Column({ type: 'varchar' })
-  gender: string;
-
-  @Column({ type: 'float', nullable: false })
-  salary: number;
-
-  @Column({ type: 'integer', nullable: true })
-  min_age: number;
-
-  @Column({ type: 'integer', nullable: true })
-  max_age: number;
+  @Column({ type: 'varchar', length: 100, nullable: false })
+  title: string;
 
   @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers, {
     eager: true,
   })
   employer: EmployerEntity;
 
-  @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)
-  applicants?: ApplicationEntity[];
+  @ManyToOne(() => AddressEntity, (address) => address.employee, {
+    eager: true,
+  })
+  location: AddressEntity;
+
+  @Column({ type: 'date', nullable: false })
+  dead_line: Date;
+
+  @OneToMany(() => JobScheduleEntity, (jobSchedule) => jobSchedule.jobOffer, {
+    eager: true,
+  })
+  schedule: JobScheduleEntity[];
+
+  @ManyToMany(() => SkillEntity, (skill) => skill.jobOffer, {
+    eager: true,
+  })
+  @JoinColumn()
+  skills: SkillEntity[];
+
+  @Column({ type: 'varchar', length: 700, nullable: true })
+  special_requirements: string;
+
+  @Column({ type: 'float', nullable: false })
+  duration: number;
+
+  @Column({ type: 'float', nullable: false })
+  hourly_rate: number;
+
+  @OneToOne(() => EmployeeEntity, {
+    cascade: true,
+    nullable: true,
+    eager: true,
+  })
+  @JoinColumn({ name: 'employee_id' })
+  employee: EmployeeEntity;
+
+  @Column({ type: 'integer', nullable: false })
+  status: number;
+
+  // @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)
+  // applicants?: ApplicationEntity[];
 }

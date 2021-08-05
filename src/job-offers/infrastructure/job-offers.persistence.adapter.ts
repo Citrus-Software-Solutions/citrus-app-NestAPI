@@ -18,10 +18,10 @@ export class JobOfferPersistenceAdapter
     super();
   }
 
-  async getJobOffers(): Promise<JobOfferEntity[]> {
+  async getJobOffers(query: JSON): Promise<JobOfferEntity[]> {
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
-      where: { status: 'Published' },
+      where: query,
     });
 
     return jobOffers;
@@ -38,7 +38,7 @@ export class JobOfferPersistenceAdapter
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
       relations: ['employer'],
-      where: { employer: employer, status: 'Published' },
+      where: { employer: employer },
     });
 
     if (!jobOffers) {
@@ -63,16 +63,12 @@ export class JobOfferPersistenceAdapter
 
     const jobOfferRepository = getRepository(JobOfferEntity);
     const savedOffer: JobOfferEntity = await jobOfferRepository.save({
-      name: offer.name,
-      description: offer.description,
-      available_vacans: offer.available_vacans,
-      date_begin: offer.date_begin,
-      date_end: offer.date_end,
+      title: offer.title,
+      dead_line: offer.dead_line,
+      special_requirements: offer.special_requirements,
+      duration: offer.duration,
+      hourly_rate: offer.hourly_rate,
       status: offer.status,
-      gender: offer.gender,
-      salary: offer.salary,
-      min_age: offer.min_age,
-      max_age: offer.max_age,
       employer: employer,
     });
 
@@ -83,7 +79,7 @@ export class JobOfferPersistenceAdapter
     const jobOfferRepository = getRepository(JobOfferEntity);
 
     const existOffer = await jobOfferRepository.findOne(offerId, {
-      where: { status: 'Published' },
+      where: { status: 0 },
     });
 
     if (!existOffer) {
@@ -106,14 +102,10 @@ export class JobOfferPersistenceAdapter
 
     let response: string;
 
-    if (jobOffer.status == 'Hidden') {
+    //Mejorar cambio de status
+    if (jobOffer.status == 0) {
       await jobOfferRepository.update(jobOfferId, {
-        status: 'Published',
-      });
-      response = 'Status changed successfully';
-    } else if (jobOffer.status == 'Published') {
-      await jobOfferRepository.update(jobOfferId, {
-        status: 'Hidden',
+        status: 1,
       });
       response = 'Status changed successfully';
     } else {

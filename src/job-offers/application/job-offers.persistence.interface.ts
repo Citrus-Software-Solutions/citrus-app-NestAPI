@@ -1,7 +1,7 @@
 import { JobOfferEntity } from '../entities/job-offers.entity';
 
 export interface IJobOffersPersistence {
-  getJobOffers(): Promise<JobOfferEntity[]>;
+  getJobOffers(query: JSON): Promise<JobOfferEntity[]>;
   getByEmployerId(employerId: number): Promise<JobOfferEntity[]>;
   createJobOffer(
     offer: JobOfferEntity,

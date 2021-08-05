@@ -14,8 +14,8 @@ export class JobOfferRepository implements IJobOfferRepository {
     private readonly _mapper: JobOfferDataMapper,
   ) {}
 
-  async getAll(): Promise<JobOffer[]> {
-    const jobOfferEntity = await this._jobOfferPersistence.getJobOffers();
+  async getAll(query: JSON): Promise<JobOffer[]> {
+    const jobOfferEntity = await this._jobOfferPersistence.getJobOffers(query);
     return jobOfferEntity.map((jobOffer: JobOfferEntity) =>
       this._mapper.toDomain(jobOffer),
     );
@@ -59,16 +59,17 @@ export class JobOfferRepository implements IJobOfferRepository {
   }
   private dtoJobtoReal(dtoJob: DataJobOfferDto) {
     const realJobOffer = new JobOffer();
-    realJobOffer.availableVacans = dtoJob.availableVacans;
-    realJobOffer.dateBegin = new Date(dtoJob.dateBegin);
-    realJobOffer.dateEnd = new Date(dtoJob.dateEnd);
-    realJobOffer.description = dtoJob.description;
-    realJobOffer.gender = dtoJob.gender;
-    realJobOffer.maxAge = dtoJob.maxAge;
-    realJobOffer.minAge = dtoJob.minAge;
-    realJobOffer.name = dtoJob.name;
-    realJobOffer.salary = dtoJob.salary;
-    realJobOffer.status = 'Published';
+    //   realJobOffer.availableVacans = dtoJob.availableVacans;
+    //   realJobOffer.dateBegin = new Date(dtoJob.dateBegin);
+    //   realJobOffer.dateEnd = new Date(dtoJob.dateEnd);
+    //   realJobOffer.description = dtoJob.description;
+    //   realJobOffer.gender = dtoJob.gender;
+    //   realJobOffer.maxAge = dtoJob.maxAge;
+    //   realJobOffer.minAge = dtoJob.minAge;
+    //   realJobOffer.name = dtoJob.name;
+    //   realJobOffer.salary = dtoJob.salary;
+    //   realJobOffer.status = 'Published';
     return realJobOffer;
+    // }
   }
 }

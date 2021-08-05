@@ -14,9 +14,17 @@ export class EmployeeRepository implements IEmployeeRepository {
   ) {}
 
   async getEmployee(): Promise<Employee[]> {
-    const employersEntity = await this._employeePersistence.getAll();
+    const employersEntity = await this._employeePersistence.getEmployees();
     return employersEntity.map((employer: EmployeeEntity) =>
       this._mapper.toDomain(employer),
     );
+  }
+
+  async getEmployeeById(employeeId: number): Promise<Employee> {
+    const employeeEntity = await this._employeePersistence.getEmployeeById(
+      employeeId,
+    );
+
+    return this._mapper.toDomain(employeeEntity);
   }
 }

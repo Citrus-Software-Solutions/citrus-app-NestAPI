@@ -19,4 +19,12 @@ export class EmployersRepository implements IEmployerRepository {
       this._mapper.toDomain(employer),
     );
   }
+
+  async getEmployerById(employerId: number): Promise<Employer> {
+    const employerEntity = await this._employersPersistence.getEmployerById(
+      employerId,
+    );
+
+    return this._mapper.toDomain(employerEntity);
+  }
 }

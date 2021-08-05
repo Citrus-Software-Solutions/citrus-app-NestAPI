@@ -18,8 +18,8 @@ export class JobOfferService implements IJobOffersService {
     private readonly _jobOfferRepository: IJobOfferRepository,
   ) {}
 
-  async getAll(): Promise<ReadJobOfferDto[]> {
-    const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll();
+  async getAll(query: JSON): Promise<ReadJobOfferDto[]> {
+    const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll(query);
     return jobOffers.map((offer: JobOffer) =>
       plainToClass(ReadJobOfferDto, offer),
     );
