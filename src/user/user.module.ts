@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolePersistenceAdapter } from 'src/role/infrastructure/role.persistence.adapter';
+import { RolePersistenceAdapter } from '../role/infrastructure/role.persistence.adapter';
 import { SharedModule } from '../shared/shared.module';
 import { UserRepository } from './application/user.repository';
 import { UserService } from './application/user.service';

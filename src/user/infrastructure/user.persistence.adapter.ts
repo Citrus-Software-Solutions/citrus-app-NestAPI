@@ -1,12 +1,7 @@
-import {
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { genSalt, hash } from 'bcryptjs';
-import { RoleEntity } from 'src/role/entities/role.entity';
-import { RolePersistenceAdapter } from 'src/role/infrastructure/role.persistence.adapter';
+import { RoleEntity } from '../../role/entities/role.entity';
+import { RolePersistenceAdapter } from '../../role/infrastructure/role.persistence.adapter';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { IUserPersistence } from '../application/user.persistence.interface';
 import { UserEntity } from '../entities/user.entity';
@@ -59,14 +54,6 @@ export class UserPersistenceAdapter
     }
 
     const userRepository = getRepository(UserEntity);
-
-    const userExist = await userRepository.findOne({
-      where: { username: user.username },
-    });
-
-    if (!userExist) {
-      throw new InternalServerErrorException('This username already exist');
-    }
 
     const salt = await genSalt(10);
 

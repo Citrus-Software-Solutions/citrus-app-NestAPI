@@ -7,7 +7,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { ReadRoleInUserDto } from 'src/role/dtos/read-role-in-user.dto';
+import { ReadRoleInUserDto } from '../../role/dtos/read-role-in-user.dto';
 
 @Exclude()
 export class CreatedUserDto {
