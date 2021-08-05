@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsString } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
 @Exclude()
 export class CreateUserDto {
@@ -12,6 +12,6 @@ export class CreateUserDto {
   readonly password: string;
 
   @Expose()
-  @IsString()
+  @IsEmail()
   readonly email: string;
 }

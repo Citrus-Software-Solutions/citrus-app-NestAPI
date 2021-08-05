@@ -1,4 +1,4 @@
-import { Exclude, Expose, Type, Transform } from 'class-transformer';
+import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
@@ -8,17 +8,17 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Title } from '../domain/value-objects/title.vo';
+import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
+import { ReadEmployeeDto } from '../../employee/dtos/read-employee.dto';
+import { ReadEmployerInJobOfferDto } from '../../employers/dtos/read-employer-in-joboffer.dto';
+import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
+import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
+import { JobOfferStatus } from '../domain/job-offer-status.enum';
 import { DeadLine } from '../domain/value-objects/dead-line.vo';
 import { Duration } from '../domain/value-objects/duration.vo';
 import { Money } from '../domain/value-objects/money.vo';
-import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
-import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
-import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
 import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
-import { ReadEmployerInJobOfferDto } from '../../employers/dtos/read-employer-in-joboffer.dto';
-import { ReadEmployeeDto } from '../../employee/dtos/read-employee.dto';
-import { JobOfferStatus } from '../domain/job-offer-status.enum';
+import { Title } from '../domain/value-objects/title.vo';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -36,8 +36,8 @@ export class ReadJobOfferDto {
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
-  @Type(() => ReadAddressDto)
-  readonly location: ReadAddressDto;
+  @Type(() => WriteAddressDto)
+  readonly location: WriteAddressDto;
 
   @Expose()
   @IsDate()
