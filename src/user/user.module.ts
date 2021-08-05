@@ -9,12 +9,11 @@ import { UserPersistenceAdapter } from './infrastructure/user.persistence.adapte
 
 @Module({
   controllers: [UserController],
-
   providers: [UserPersistenceAdapter, UserRepository, UserService],
-
   imports: [
     TypeOrmModule.forFeature([UserPersistenceAdapter, RolePersistenceAdapter]),
     SharedModule,
   ],
+  exports: [UserService],
 })
 export class UserModule {}
