@@ -14,6 +14,6 @@ import { UserPersistenceAdapter } from './infrastructure/user.persistence.adapte
     TypeOrmModule.forFeature([UserPersistenceAdapter, RolePersistenceAdapter]),
     SharedModule,
   ],
-  exports: [UserService],
+  exports: [UserService, UserPersistenceAdapter],
 })
 export class UserModule {}
