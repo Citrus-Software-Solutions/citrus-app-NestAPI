@@ -5,7 +5,7 @@ import { StreetAddress } from '../../../shared/address/domain/value-objects/stre
 import { CityAddress } from '../../../shared/address/domain/value-objects/city-address.vo';
 import { StateAddress } from '../../../shared/address/domain/value-objects/state-address.vo';
 import { ZipCode } from '../../../shared/address/domain/value-objects/zip-code.vo';
-import { ReadAddressDto } from 'src/shared/address/dtos/read-address.dto';
+import { ReadAddressDto } from '../../../shared/address/dtos/read-address.dto';
 
 export class AddressDataMapper implements DataMapper<Address, AddressEntity> {
   public toDomain(entity: AddressEntity): Address {
