@@ -67,7 +67,7 @@ export class EmployeeEntity extends BaseEntity {
   @Column({ type: 'float', nullable: false })
   rating: number;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', default: 0, nullable: false })
   status: number;
 
   // @OneToMany(() => ApplicationEntity, (application) => application.employee)

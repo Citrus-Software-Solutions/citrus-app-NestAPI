@@ -27,4 +27,14 @@ export class EmployeeRepository implements IEmployeeRepository {
 
     return this._mapper.toDomain(employeeEntity);
   }
+
+  async createEmployee(employee: Employee, userId: number): Promise<Employee> {
+    const createdEmployee: EmployeeEntity =
+      await this._employeePersistence.createEmployee(
+        this._mapper.toDalEntity(employee),
+        userId,
+      );
+
+    return this._mapper.toDomain(createdEmployee);
+  }
 }
