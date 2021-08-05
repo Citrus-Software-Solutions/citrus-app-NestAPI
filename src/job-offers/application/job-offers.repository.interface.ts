@@ -6,5 +6,8 @@ export interface IJobOfferRepository {
   getByEmployer(employerId: number): Promise<JobOffer[]>;
   getById(jobOfferId: number): Promise<JobOffer>;
   create(offer: DataJobOfferDto, employerId: number): Promise<JobOffer>;
-  updateStatus(jobOfferId: number): Promise<{ message: string }>;
+  updateStatus(
+    jobOfferId: number,
+    jobOfferStatus: number,
+  ): Promise<{ message: string }>;
 }

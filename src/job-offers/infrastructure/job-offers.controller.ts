@@ -13,6 +13,7 @@ import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOffer } from '../domain/job-offer.model';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { JobOfferStatusDTO } from '../dtos/job-offer-status.dto';
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 
 @ApiTags('job-offers')
@@ -59,11 +60,15 @@ export class JobOffersController {
 
   //podría retornar la oferta con el estatus cambiado
   @Put(':jobOfferId')
-  @ApiOperation({ summary: 'Update job offer status' })
+  @ApiOperation({ summary: 'Update job offer status (0-6)' })
   updateJobOfferStatus(
-    @Param('jobOfferId', ParseIntPipe) employerId: number,
+    @Body() jobOfferStatusObject: JobOfferStatusDTO,
+    @Param('jobOfferId', ParseIntPipe) jobOfferId: number,
   ): Promise<{ message: string }> {
-    return this._jobOfferService.updateJobOfferStatus(employerId);
+    return this._jobOfferService.updateJobOfferStatus(
+      jobOfferId,
+      jobOfferStatusObject.status,
+    );
   }
 
   @Post(':employerId')

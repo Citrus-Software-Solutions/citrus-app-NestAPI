@@ -5,6 +5,9 @@ export interface IJobOffersService {
   getAll(query: JSON): Promise<ReadJobOfferDto[]>;
   getByEmployerId(id: number): Promise<ReadJobOfferDto[]>;
   getById(jobOfferId: number): Promise<ReadJobOfferDto>;
-  updateJobOfferStatus(id: number): Promise<{ message: string }>;
+  updateJobOfferStatus(
+    id: number,
+    status: number,
+  ): Promise<{ message: string }>;
   createOffer(offer: DataJobOfferDto, employerId: number): Promise<JobOffer>;
 }
