@@ -14,6 +14,7 @@ import { ApplicationPersistenceAdapter } from './infrastructure/application.pers
     TypeOrmModule.forFeature([
       ApplicationEntityRepository,
       JobOfferPersistenceAdapter,
+      EmployeePersistenceAdapter,
     ]),
     SharedModule,
   ],
@@ -21,7 +22,6 @@ import { ApplicationPersistenceAdapter } from './infrastructure/application.pers
     ApplicationService,
     ApplicationRepository,
     ApplicationPersistenceAdapter,
-    EmployeePersistenceAdapter,
   ],
   controllers: [ApplicationController],
 })
