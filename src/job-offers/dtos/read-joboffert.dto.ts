@@ -18,6 +18,7 @@ import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
 import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
 import { ReadEmployerInJobOfferDto } from '../../employers/dtos/read-employer-in-joboffer.dto';
 import { ReadEmployeeDto } from '../../employee/dtos/read-employee.dto';
+import { JobOfferStatus } from '../domain/job-offer-status.enum';
 
 @Exclude()
 export class ReadJobOfferDto {
@@ -70,7 +71,7 @@ export class ReadJobOfferDto {
 
   @Expose()
   @IsNumber()
-  readonly status: number;
+  readonly status: JobOfferStatus;
 
   @Expose()
   @IsDefined()

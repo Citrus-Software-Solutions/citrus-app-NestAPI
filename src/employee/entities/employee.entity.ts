@@ -64,7 +64,7 @@ export class EmployeeEntity extends BaseEntity {
   })
   references: ReferenceEntity[];
 
-  @Column({ type: 'float', nullable: false })
+  @Column({ type: 'float', nullable: true })
   rating: number;
 
   @Column({ type: 'integer', default: 0, nullable: false })

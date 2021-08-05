@@ -14,13 +14,14 @@ import { EmployerEntity } from '../../employers/entities/employers.entity';
 import { JobScheduleEntity } from '../../jobs-schedule/entities/jobs-schedule.entity';
 import { AddressEntity } from '../../shared/address/entities/address.entity';
 import { SkillEntity } from '../../shared/skill/entities/skill.entity';
+import { JobOfferStatus } from '../domain/job-offer-status.enum';
 
 @Entity('job_offer')
 export class JobOfferEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 25, nullable: false })
+  @Column({ type: 'varchar', length: 100, nullable: false })
   title: string;
 
   @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers, {
@@ -47,7 +48,7 @@ export class JobOfferEntity extends BaseEntity {
   @JoinColumn()
   skills: SkillEntity[];
 
-  @Column({ type: 'varchar', length: 700, nullable: false })
+  @Column({ type: 'varchar', length: 700, nullable: true })
   special_requirements: string;
 
   @Column({ type: 'float', nullable: false })
@@ -64,8 +65,13 @@ export class JobOfferEntity extends BaseEntity {
   @JoinColumn({ name: 'employee_id' })
   employee: EmployeeEntity;
 
-  @Column({ type: 'integer', nullable: false })
-  status: number;
+  @Column({
+    type: 'enum',
+    nullable: false,
+    enum: JobOfferStatus,
+    default: JobOfferStatus.Posted,
+  })
+  status: JobOfferStatus;
 
   // @OneToMany(() => ApplicationEntity, (application) => application.jobOffer)
   // applicants?: ApplicationEntity[];

@@ -10,6 +10,7 @@ import { IJobOfferRepository } from '../application/job-offers.repository.interf
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 import { plainToClass } from 'class-transformer';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { JobOfferStatus } from '../domain/job-offer-status.enum';
 
 @Injectable()
 export class JobOfferService implements IJobOffersService {
@@ -18,8 +19,8 @@ export class JobOfferService implements IJobOffersService {
     private readonly _jobOfferRepository: IJobOfferRepository,
   ) {}
 
-  async getAll(): Promise<ReadJobOfferDto[]> {
-    const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll();
+  async getAll(query: JSON): Promise<ReadJobOfferDto[]> {
+    const jobOffers: JobOffer[] = await this._jobOfferRepository.getAll(query);
     return jobOffers.map((offer: JobOffer) =>
       plainToClass(ReadJobOfferDto, offer),
     );
@@ -50,12 +51,17 @@ export class JobOfferService implements IJobOffersService {
     );
   }
 
-  async updateJobOfferStatus(jobOfferId: number): Promise<{ message: string }> {
+  async updateJobOfferStatus(
+    jobOfferId: number,
+    jobOfferStatus: number,
+  ): Promise<{ message: string }> {
     if (!jobOfferId) {
       throw new BadRequestException('id must be sent');
     }
-
-    return this._jobOfferRepository.updateStatus(jobOfferId);
+    if (!(jobOfferStatus in JobOfferStatus)) {
+      throw new BadRequestException('id should be between 0 and 6');
+    }
+    return this._jobOfferRepository.updateStatus(jobOfferId, jobOfferStatus);
   }
 
   async createOffer(

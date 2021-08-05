@@ -1,4 +1,4 @@
-import { JobTitle } from '../../../contact-information/domain/value-objects/job-title.vo';
+import { JobTitle } from '../../domain/job-title.vo';
 import { CompanyName } from '../../../work-experience/domain/value-objects/company-name.vo';
 import { WorkExperience } from '../../../work-experience/domain/work-experience.model';
 import { WorkExperienceEntity } from '../../../work-experience/entities/work-experience.entity';
