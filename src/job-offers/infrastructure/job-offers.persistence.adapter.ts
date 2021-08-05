@@ -4,6 +4,7 @@ import { EmployerEntity } from '../../employers/entities/employers.entity';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { IJobOffersPersistence } from '../application/job-offers.persistence.interface';
 import { JobOfferEntity } from '../entities/job-offers.entity';
+import { JobOfferStatus } from '../domain/job-offer-status.enum';
 
 @EntityRepository(JobOfferEntity)
 @Injectable()
@@ -18,10 +19,10 @@ export class JobOfferPersistenceAdapter
     super();
   }
 
-  async getJobOffers(): Promise<JobOfferEntity[]> {
+  async getJobOffers(query: JSON): Promise<JobOfferEntity[]> {
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
-      where: { status: 0 },
+      where: query,
     });
 
     return jobOffers;
@@ -38,7 +39,7 @@ export class JobOfferPersistenceAdapter
     const jobOfferRepository = getRepository(JobOfferEntity);
     const jobOffers: JobOfferEntity[] = await jobOfferRepository.find({
       relations: ['employer'],
-      where: { employer: employer, status: 'Published' },
+      where: { employer: employer },
     });
 
     if (!jobOffers) {
@@ -78,9 +79,7 @@ export class JobOfferPersistenceAdapter
   async getById(offerId: number): Promise<JobOfferEntity> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 
-    const existOffer = await jobOfferRepository.findOne(offerId, {
-      where: { status: 0 },
-    });
+    const existOffer = await jobOfferRepository.findOne(offerId);
 
     if (!existOffer) {
       throw new NotFoundException('This offer does not exist');
@@ -89,7 +88,10 @@ export class JobOfferPersistenceAdapter
     return existOffer;
   }
 
-  async updateJobOfferStatus(jobOfferId: number): Promise<{ message: string }> {
+  async updateJobOfferStatus(
+    jobOfferId: number,
+    jobOfferStatus: number,
+  ): Promise<{ message: string }> {
     const jobOfferRepository = getRepository(JobOfferEntity);
 
     const jobOffer: JobOfferEntity = await jobOfferRepository.findOne(
@@ -100,16 +102,13 @@ export class JobOfferPersistenceAdapter
       throw new NotFoundException();
     }
 
-    let response: string;
+    let response = 'Status could not be changed';
 
-    //Mejorar cambio de status
-    if (jobOffer.status == 0) {
+    if (jobOffer.status in JobOfferStatus) {
       await jobOfferRepository.update(jobOfferId, {
-        status: 1,
+        status: jobOfferStatus,
       });
-      response = 'Status changed successfully';
-    } else {
-      response = 'Status could not be changed';
+      response = `Status changed to ${JobOfferStatus[jobOfferStatus]}`;
     }
 
     return { message: response };

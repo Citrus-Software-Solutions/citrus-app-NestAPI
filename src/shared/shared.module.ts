@@ -4,6 +4,7 @@ import { ApplicationDataMapper } from './mappers/application/application.data-ma
 import { EmployeeDataMapper } from './mappers/employee/employee.data-mapper';
 import { EmployerDataMapper } from './mappers/employer/employer.mapper';
 import { JobOfferDataMapper } from './mappers/job-offers/job-offers.mapper';
+import { StaffMemberDataMapper } from './mappers/staff-member/staff-member.mapper';
 import { RoleDataMapper } from './mappers/role/role.mapper';
 import { UserDataMapper } from './mappers/user/user.mapper';
 
@@ -13,6 +14,7 @@ import { UserDataMapper } from './mappers/user/user.mapper';
     JobOfferDataMapper,
     EmployeeDataMapper,
     ApplicationDataMapper,
+    StaffMemberDataMapper,
     UserDataMapper,
     RoleDataMapper,
     AddressDataMapper,
@@ -22,6 +24,7 @@ import { UserDataMapper } from './mappers/user/user.mapper';
     JobOfferDataMapper,
     EmployeeDataMapper,
     ApplicationDataMapper,
+    StaffMemberDataMapper,
     UserDataMapper,
     RoleDataMapper,
     AddressDataMapper,

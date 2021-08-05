@@ -44,7 +44,7 @@ $ NOD_ENV=development npm run start:dev
 $ NOD_ENV=production npm run start:prod
 ```
 
-## Test (Isn't Implemented)
+## Test 
 
 ```bash
 # unit tests

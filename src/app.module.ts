@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
+import { StaffMemberModule } from './staff-member/staff-member.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { JobSchedule } from './jobs-schedule/domain/jobs-schedule.model';
     EmployersModule,
     EmployeeModule,
     ApplicationModule,
+    StaffMemberModule,
     AuthModule,
     UserModule,
     RoleModule,
