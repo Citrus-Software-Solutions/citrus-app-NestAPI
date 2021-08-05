@@ -6,6 +6,7 @@ import { EmployersRepository } from './application/employers.repository';
 import { EmployersService } from './application/employers.service';
 import { EmployersController } from './infrastructure/employers.controller';
 import { EmployersPersisteceAdapter } from './infrastructure/employers.persistence.adapter';
+import { AddressPersistenceAdapter } from '../shared/address/infraestructure/address.persistence.adapter';
 
 @Module({
   controllers: [EmployersController],
@@ -18,6 +19,7 @@ import { EmployersPersisteceAdapter } from './infrastructure/employers.persisten
     TypeOrmModule.forFeature([
       EmployersPersisteceAdapter,
       UserPersistenceAdapter,
+      AddressPersistenceAdapter,
     ]),
     SharedModule,
   ],

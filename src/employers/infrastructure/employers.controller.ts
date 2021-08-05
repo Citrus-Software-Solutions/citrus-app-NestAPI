@@ -10,7 +10,7 @@ import {
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { IEmployersService } from '../application/employers.service.interface';
-import { Employer } from '../domain/employer.model';
+import { CreatedEmployerDto } from '../dtos/created-employer.dto';
 import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 
@@ -40,8 +40,8 @@ export class EmployersController {
   @ApiOperation({ summary: 'Create a employer' })
   createEmployer(
     @Param('userId', ParseIntPipe) userId: number,
-    @Body() employer: DataEmployerDto,
-  ): Promise<Employer> {
+    @Body() employer: Partial<DataEmployerDto>,
+  ): Promise<CreatedEmployerDto> {
     return this._employersService.createEmployer(employer, userId);
   }
 }

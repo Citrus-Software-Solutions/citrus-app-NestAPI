@@ -47,7 +47,7 @@ export class EmployerEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 700, nullable: false })
   special_requirements: string;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', default: 0, nullable: false })
   status: number;
 
   @OneToMany(() => JobOfferEntity, (jobOffer) => jobOffer.employer)

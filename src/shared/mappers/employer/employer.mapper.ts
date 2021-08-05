@@ -11,6 +11,7 @@ import { SpecialRequirement } from '../../../job-offers/domain/value-objects/spe
 import { Skill } from '../../../shared/skill/domain/skill.model';
 import { SkillDataMapper } from '../skill/skill.data-mapper';
 import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
+import { UserDataMapper } from '../user/user.mapper';
 
 export class EmployerDataMapper
   implements DataMapper<Employer, EmployerEntity>
@@ -18,22 +19,19 @@ export class EmployerDataMapper
   _mapperAddress = new AddressDataMapper();
   _mapperSkill = new SkillDataMapper();
   _mapperContactInformation = new ContactInformationDataMapper();
+  _mapperUser = new UserDataMapper();
   public toDomain(entity: EmployerEntity): Employer {
     const employer = new Employer();
-    if (employer.id) {
-      employer.id = ID.create(entity.id);
-    }
+    employer.id = ID.create(entity.id);
     employer.company_name = Name.create(entity.company_name);
-    if (employer.address) {
-      employer.address = this._mapperAddress.toDomain(entity.address);
-    }
-    if (employer.contacts) {
+    employer.address = this._mapperAddress.toDomain(entity.address);
+    if (entity.contacts) {
       employer.contacts = entity.contacts.map(
         (contact: ContactInformationEntity) =>
           this._mapperContactInformation.toDomain(contact),
       );
     }
-    if (employer.skills) {
+    if (entity.skills) {
       employer.skills = entity.skills.map((skill: SkillEntity) =>
         this._mapperSkill.toDomain(skill),
       );
@@ -43,27 +41,33 @@ export class EmployerDataMapper
     );
     employer.status = entity.status;
 
+    employer.user = this._mapperUser.toDomain(entity.user);
+
     return employer;
   }
 
   public toDalEntity(employer: Employer): EmployerEntity {
     const employerEntity = new EmployerEntity();
-    if (employerEntity.id) {
+    if (employer.id) {
       employerEntity.id = employer.id.value;
     }
+
     employerEntity.company_name = employer.company_name.value;
-    if (employerEntity.address) {
+
+    if (employer.address) {
       employerEntity.address = this._mapperAddress.toDalEntity(
         employer.address,
       );
     }
-    if (employerEntity.contacts) {
+
+    if (employer.contacts) {
       employerEntity.contacts = employer.contacts.map(
         (contact: ContactInformation) =>
           this._mapperContactInformation.toDalEntity(contact),
       );
     }
-    if (employerEntity.skills) {
+
+    if (employer.skills) {
       employerEntity.skills = employer.skills.map((skill: Skill) =>
         this._mapperSkill.toDalEntity(skill),
       );
