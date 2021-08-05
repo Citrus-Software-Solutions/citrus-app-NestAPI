@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from '../user/user.module';
+import { EmployersModule } from '../employers/employers.module';
 import { SharedModule } from '../shared/shared.module';
 import { AuthRepository } from './application/auth.repository';
 import { AuthService } from './application/auth.service';
@@ -30,6 +32,8 @@ import { AuthPersistenceAdapter } from './infrastructure/auth.persistence.adapte
       },
     }),
     SharedModule,
+    EmployersModule,
+    UserModule,
   ],
   exports: [JwtStrategy, PassportModule],
 })
