@@ -20,7 +20,7 @@ export class JobOfferEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 25, nullable: false })
+  @Column({ type: 'varchar', length: 100, nullable: false })
   title: string;
 
   @ManyToOne(() => EmployerEntity, (employer) => employer.jobOffers, {
@@ -47,7 +47,7 @@ export class JobOfferEntity extends BaseEntity {
   @JoinColumn()
   skills: SkillEntity[];
 
-  @Column({ type: 'varchar', length: 700, nullable: false })
+  @Column({ type: 'varchar', length: 700, nullable: true })
   special_requirements: string;
 
   @Column({ type: 'float', nullable: false })
