@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AddressDataMapper } from './mappers/address/address.data-mapper';
 import { ApplicationDataMapper } from './mappers/application/application.data-mapper';
 import { EmployeeDataMapper } from './mappers/employee/employee.data-mapper';
 import { EmployerDataMapper } from './mappers/employer/employer.mapper';
@@ -14,6 +15,7 @@ import { UserDataMapper } from './mappers/user/user.mapper';
     ApplicationDataMapper,
     UserDataMapper,
     RoleDataMapper,
+    AddressDataMapper,
   ],
   providers: [
     EmployerDataMapper,
@@ -22,6 +24,7 @@ import { UserDataMapper } from './mappers/user/user.mapper';
     ApplicationDataMapper,
     UserDataMapper,
     RoleDataMapper,
+    AddressDataMapper,
   ],
 })
 export class SharedModule {}
