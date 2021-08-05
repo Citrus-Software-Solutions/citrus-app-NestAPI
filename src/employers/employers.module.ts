@@ -23,6 +23,6 @@ import { AddressPersistenceAdapter } from '../shared/address/infraestructure/add
     ]),
     SharedModule,
   ],
-  exports: [EmployersPersisteceAdapter],
+  exports: [EmployersPersisteceAdapter, EmployersService],
 })
 export class EmployersModule {}
