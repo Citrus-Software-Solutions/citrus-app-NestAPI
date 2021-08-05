@@ -1,4 +1,3 @@
-import { User } from '../domain/user.model';
 import { UserEntity } from '../entities/user.entity';
 
 export interface IUserPersistence {
