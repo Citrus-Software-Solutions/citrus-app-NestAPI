@@ -1,10 +1,10 @@
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { EmployeeModule } from '../employee.module';
-import { EmployeeService } from './employee.service';
+import { EmployeeModule } from '../src/employee/employee.module';
+import { EmployeeService } from '../src/employee/application/employee.service';
 
-describe('Get all employees', () => {
+describe('Get all employees ', () => {
   let app: INestApplication;
   const employeeService = { getEmployee: () => ['test'] };
 
