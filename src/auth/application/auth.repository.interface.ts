@@ -1,5 +1,5 @@
-import { SigninDto } from '../dtos/signin.dto';
+import { User } from '../../user/domain/user.model';
 
 export interface IAuthRepository {
-  signin(signinDto: SigninDto): Promise<{ token: string }>;
+  signin(user: User): Promise<{ token: string }>;
 }

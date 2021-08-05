@@ -1,5 +1,5 @@
-import { SigninDto } from '../dtos/signin.dto';
+import { UserEntity } from '../../user/entities/user.entity';
 
 export interface IAuthPersistence {
-  signin(signinDto: SigninDto): Promise<{ token: string }>;
+  signin(userEntity: UserEntity): Promise<{ token: string }>;
 }

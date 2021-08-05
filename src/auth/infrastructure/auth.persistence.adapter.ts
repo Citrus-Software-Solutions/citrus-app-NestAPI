@@ -9,7 +9,6 @@ import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 import { IAuthPersistence } from '../application/auth.persistence.interface';
 import { IJwtPayload } from '../application/jwt-payload.interface';
-import { SigninDto } from '../dtos/signin.dto';
 
 @EntityRepository(UserEntity)
 @Injectable()
@@ -20,28 +19,29 @@ export class AuthPersistenceAdapter
   constructor(private readonly _jwtService: JwtService) {
     super();
   }
-  async signin(signinDto: SigninDto): Promise<{ token: string }> {
-    const { username, password } = signinDto;
+  async signin(userEntity: UserEntity): Promise<{ token: string }> {
     const userRepository = getRepository(UserEntity);
-    const user: UserEntity = await userRepository.findOne({
-      where: { username },
-    });
 
+    const user: UserEntity = await userRepository.findOne({
+      where: { username: userEntity.username },
+    });
     if (!user) {
-      throw new NotFoundException('user does not exist');
+      throw new NotFoundException('User does not exist');
     }
-    console.log(password, user.password);
-    const isMatch = await compare(password, user.password);
+
+    const isMatch = await compare(userEntity.password, user.password);
     if (!isMatch) {
-      throw new UnauthorizedException('invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
+
     const payload: IJwtPayload = {
       id: user.id,
       email: user.email,
       username: user.username,
       role: user.role,
     };
-    const token = await this._jwtService.sign(payload);
+    const token = this._jwtService.sign(payload);
+
     return { token };
   }
 }
