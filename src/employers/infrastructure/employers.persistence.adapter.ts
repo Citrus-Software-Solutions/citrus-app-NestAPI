@@ -49,7 +49,7 @@ export class EmployersPersisteceAdapter
     employer: EmployerEntity,
     userId: number,
   ): Promise<EmployerEntity> {
-    const userEntity: UserEntity = await this._userPersistence.findOne(userId);
+    const userEntity: UserEntity = await this._userPersistence.getById(userId);
 
     if (!userEntity) {
       throw new NotFoundException('User for this employer does not exist');
