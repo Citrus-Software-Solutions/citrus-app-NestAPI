@@ -36,12 +36,12 @@ export class EmployersController {
     return this._employersService.getEmployerById(employerId);
   }
 
-  @Post('/:userId')
-  @ApiOperation({ summary: 'Create a employer' })
-  createEmployer(
-    @Param('userId', ParseIntPipe) userId: number,
-    @Body() employer: Partial<DataEmployerDto>,
-  ): Promise<CreatedEmployerDto> {
-    return this._employersService.createEmployer(employer, userId);
-  }
+  // @Post('/:userId')
+  // @ApiOperation({ summary: 'Create an employer' })
+  // createEmployer(
+  //   @Param('userId', ParseIntPipe) userId: number,
+  //   @Body() employer: Partial<DataEmployerDto>,
+  // ): Promise<CreatedEmployerDto> {
+  //   return this._employersService.createEmployer(employer, userId);
+  // }
 }
