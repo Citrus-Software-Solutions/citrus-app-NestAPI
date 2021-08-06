@@ -13,4 +13,5 @@ export interface IJobOffersService {
     offer: DataJobOfferDto,
     employerId: number,
   ): Promise<CreatedJobOfferDto>;
+  registerWorker(employeeId: number, jobOfferId: number);
 }

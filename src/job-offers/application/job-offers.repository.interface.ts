@@ -9,4 +9,8 @@ export interface IJobOfferRepository {
     jobOfferId: number,
     jobOfferStatus: number,
   ): Promise<{ message: string }>;
+  setEmployeeToJobOffer(
+    employerId: number,
+    jobOfferId: number,
+  ): Promise<boolean>;
 }
