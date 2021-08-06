@@ -1,5 +1,5 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { CityAddress } from '../domain/value-objects/city-address.vo';
 import { StateAddress } from '../domain/value-objects/state-address.vo';
 import { StreetAddress } from '../domain/value-objects/street-address.vo';
@@ -14,6 +14,7 @@ export class ReadAddressDto {
 
   @Expose()
   @IsString()
+  @IsOptional()
   @Transform(({ value }) => value.props.value)
   readonly street2: StreetAddress;
 

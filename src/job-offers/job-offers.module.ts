@@ -6,12 +6,14 @@ import { JobOfferPersistenceAdapter } from './infrastructure/job-offers.persiste
 import { JobOfferRepository } from './application/job-offers.repository';
 import { EmployersPersisteceAdapter } from '../employers/infrastructure/employers.persistence.adapter';
 import { JobOfferService } from './application/job-offers.service';
+import { AddressPersistenceAdapter } from 'src/shared/address/infraestructure/address.persistence.adapter';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       JobOfferPersistenceAdapter,
       EmployersPersisteceAdapter,
+      AddressPersistenceAdapter,
     ]),
     SharedModule,
   ],

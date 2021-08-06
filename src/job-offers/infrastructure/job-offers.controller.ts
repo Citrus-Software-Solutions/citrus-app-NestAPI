@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IJobOffersService } from '../application/job-offers.service.interface';
-import { JobOffer } from '../domain/job-offer.model';
+import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
 import { JobOfferStatusDTO } from '../dtos/job-offer-status.dto';
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
@@ -71,12 +71,12 @@ export class JobOffersController {
     );
   }
 
-  @Post(':employerId')
+  @Post('/:employerId')
   @ApiOperation({ summary: 'Create a job offer' })
-  createJobOffer(
-    @Body() offer: DataJobOfferDto,
+  createEmployer(
     @Param('employerId', ParseIntPipe) employerId: number,
-  ): Promise<JobOffer> {
-    return this._jobOfferService.createOffer(offer, employerId);
+    @Body() jobOffer: DataJobOfferDto,
+  ): Promise<CreatedJobOfferDto> {
+    return this._jobOfferService.createJobOffer(jobOffer, employerId);
   }
 }

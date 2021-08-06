@@ -8,9 +8,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { SpecialRequirement } from '../../job-offers/domain/value-objects/special-requirement.vo';
-import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
-import { Name } from '../../shared/domain/name.vo';
+import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 import { ID } from '../../shared/domain/id.vo';
+import { Name } from '../../shared/domain/name.vo';
 import { CreatedUserDto } from '../../user/dtos/created-user.dto';
 
 @Exclude()
@@ -30,8 +30,8 @@ export class CreatedEmployerDto {
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
-  @Type(() => ReadAddressDto)
-  readonly address: ReadAddressDto;
+  @Type(() => WriteAddressDto)
+  readonly address: WriteAddressDto;
 
   @Expose()
   @IsString()

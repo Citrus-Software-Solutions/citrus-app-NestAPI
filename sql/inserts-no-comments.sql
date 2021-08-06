@@ -70,23 +70,23 @@ INSERT INTO public.staff_member VALUES (DEFAULT, 'William', 'Arthur', 'Wallace',
 INSERT INTO public.staff_member VALUES (DEFAULT, 'Benjamin', 'Dorian', 'Franklin', 'Applications Reviewer');
 INSERT INTO public.staff_member VALUES (DEFAULT, 'Lucas', 'John', 'Green', 'System Administrator');
 
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Clean PC labs', '2021-08-15', 'You need to be good at cleaning', 3600, 9.5, 0, 1, 13, NULL);
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Repair lounge computers', '2021-09-15', 'Have prior experience fixing electronic equipment', 7200, 10, 0, 2, 14, NULL);
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Serve plates for an anniversary dinner', '2021-08-09', NULL, 10800, 5, 0, 4, 15, NULL);
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Repair broken water pipes', '2021-08-28', NULL, 14400, 7, 0, 3, 5, NULL);
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Wash basket team uniforms', '2021-10-24', 'Have worked with sports team before', 2100, 4, 0, 1, 13, NULL);
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Make a cake for a meeting', '2021-09-15', 'Use only vegan ingredients and gluten free', 5000, 8, 0, 2, 14, NULL);
--- INSERT INTO public.job_offer VALUES (DEFAULT, 'Clean restaurant after a party', '2021-08-20', 'Close the restaurant after you clean', 10000, 7, 0, 4, 15, NULL);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Clean PC labs', '2021-08-15', 'You need to be good at cleaning', 3600, 9.5, 1, 13, NULL, DEFAULT);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Repair lounge computers', '2021-09-15', 'Have prior experience fixing electronic equipment', 7200, 10, 2, 14, NULL, DEFAULT);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Serve plates for an anniversary dinner', '2021-08-09', NULL, 10800, 5, 4, 15, NULL, DEFAULT);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Repair broken water pipes', '2021-08-28', NULL, 14400, 7, 3, 5, NULL, DEFAULT);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Wash basket team uniforms', '2021-10-24', 'Have worked with sports team before', 2100, 4, 1, 13, NULL, DEFAULT);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Make a cake for a meeting', '2021-09-15', 'Use only vegan ingredients and gluten free', 5000, 8, 2, 14, NULL, DEFAULT);
+INSERT INTO public.job_offer VALUES (DEFAULT, 'Clean restaurant after a party', '2021-08-20', 'Close the restaurant after you clean', 10000, 7, 4, 15, NULL, DEFAULT);
 
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-15 10:00:00', '2021-08-15 11:00:00', 1);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-17 10:00:00', '2021-08-17 11:00:00', 1);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-15 10:00:00', '2021-09-15 12:00:00', 2);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-15 20:00:00', '2021-09-15 23:00:00', 3);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-16 08:00:00', '2021-08-16 12:00:00', 4);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-13 14:00:00', '2021-08-13 18:00:00', 5);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-20 14:00:00', '2021-08-20 18:00:00', 5);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-12 08:00:00', '2021-09-12 16:00:00', 6);
--- INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-15 23:00:00', '2021-09-16 02:00:00', 7);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-15 10:00:00', '2021-08-15 11:00:00', 1);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-17 10:00:00', '2021-08-17 11:00:00', 1);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-15 10:00:00', '2021-09-15 12:00:00', 2);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-15 20:00:00', '2021-09-15 23:00:00', 3);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-16 08:00:00', '2021-08-16 12:00:00', 4);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-13 14:00:00', '2021-08-13 18:00:00', 5);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-08-20 14:00:00', '2021-08-20 18:00:00', 5);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-12 08:00:00', '2021-09-12 16:00:00', 6);
+INSERT INTO public.jobs_schedule VALUES (DEFAULT, '2021-09-15 23:00:00', '2021-09-16 02:00:00', 7);
 
 INSERT INTO public.skill VALUES (DEFAULT, 'Clean PC laboratories', 0);
 INSERT INTO public.skill VALUES (DEFAULT, 'Install and repair pipes of water', 1);
@@ -125,14 +125,14 @@ INSERT INTO public.skill_employee VALUES (13, 12);
 -- INSERT INTO public.skill_employer VALUES (7, 4);
 -- INSERT INTO public.skill_employer VALUES (8, 4);
 
--- INSERT INTO public."skill_jobOffer" VALUES (1, 1);
--- INSERT INTO public."skill_jobOffer" VALUES (3, 2);
--- INSERT INTO public."skill_jobOffer" VALUES (9, 3);
--- INSERT INTO public."skill_jobOffer" VALUES (2, 4);
--- INSERT INTO public."skill_jobOffer" VALUES (10, 5);
--- INSERT INTO public."skill_jobOffer" VALUES (12, 5);
--- INSERT INTO public."skill_jobOffer" VALUES (4, 6);
--- INSERT INTO public."skill_jobOffer" VALUES (7, 7);
+INSERT INTO public."skill_jobOffer" VALUES (1, 1);
+INSERT INTO public."skill_jobOffer" VALUES (3, 2);
+INSERT INTO public."skill_jobOffer" VALUES (9, 3);
+INSERT INTO public."skill_jobOffer" VALUES (2, 4);
+INSERT INTO public."skill_jobOffer" VALUES (10, 5);
+INSERT INTO public."skill_jobOffer" VALUES (12, 5);
+INSERT INTO public."skill_jobOffer" VALUES (4, 6);
+INSERT INTO public."skill_jobOffer" VALUES (7, 7);
 
 INSERT INTO public.ROLES VALUES (DEFAULT, 'EMPLOYER', 'Login');
 INSERT INTO public.ROLES VALUES (DEFAULT, 'EMPLOYEE', 'Login');

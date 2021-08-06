@@ -70,7 +70,7 @@ export class EmployersService implements IEmployersService {
   }
 
   async createEmployer(
-    employerDto: Partial<DataEmployerDto>,
+    employerDto: DataEmployerDto,
     userId: number,
   ): Promise<CreatedEmployerDto> {
     if (!employerDto) {
@@ -83,16 +83,20 @@ export class EmployersService implements IEmployersService {
 
     const employer: Employer = new Employer();
 
-    const address: Address = this._mapperAddress.toDomainFromReadDto(
+    const address: Address = this._mapperAddress.toDomainFromShowDto(
       employerDto.address,
     );
 
-    employer.company_name = Name.create(employerDto.company_name.toString());
+    employer.company_name = Name.create(employerDto.company_name);
     employer.address = address;
-    employer.special_requirements = SpecialRequirement.create(
-      employerDto.special_requirements.toString(),
-    );
-
+    console.log(employerDto.special_requirements);
+    if (employerDto.special_requirements !== null) {
+      employer.special_requirements = SpecialRequirement.create(
+        employerDto.special_requirements,
+      );
+    } else {
+      employer.special_requirements = SpecialRequirement.create('N/A');
+    }
     const savedEmployer: Employer =
       await this._employerRepository.createEmployer(employer, userId);
 

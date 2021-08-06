@@ -1,4 +1,4 @@
-import { JobOffer } from '../domain/job-offer.model';
+import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 export interface IJobOffersService {
@@ -9,5 +9,8 @@ export interface IJobOffersService {
     id: number,
     status: number,
   ): Promise<{ message: string }>;
-  createOffer(offer: DataJobOfferDto, employerId: number): Promise<JobOffer>;
+  createJobOffer(
+    offer: DataJobOfferDto,
+    employerId: number,
+  ): Promise<CreatedJobOfferDto>;
 }

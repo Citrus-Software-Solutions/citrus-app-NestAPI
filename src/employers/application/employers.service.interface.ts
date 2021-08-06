@@ -12,7 +12,7 @@ export interface IEmployersService {
     employer: UpdateEmployerDto,
   ): Promise<ReadEmployerDto>;
   createEmployer(
-    employer: Partial<DataEmployerDto>,
+    employer: DataEmployerDto,
     userId: number,
   ): Promise<CreatedEmployerDto>;
 }
