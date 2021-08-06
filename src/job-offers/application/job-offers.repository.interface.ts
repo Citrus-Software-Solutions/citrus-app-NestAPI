@@ -9,4 +9,5 @@ export interface IJobOfferRepository {
     jobOfferId: number,
     jobOfferStatus: number,
   ): Promise<{ message: string }>;
+  updateJobOffer(jobOfferId: number, jobOffer: JobOffer): Promise<JobOffer>;
 }

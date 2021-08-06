@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { EmployerDataMapper } from '../../shared/mappers/employer/employer.mapper';
 import { Employer } from '../domain/employer.model';
-import { UpdateEmployerDto } from '../dtos/update-employer.dto';
 import { EmployerEntity } from '../entities/employers.entity';
 import { IEmployersPersistence } from './employers.persistence.interface';
 import { IEmployerRepository } from './employers.repository.interface';

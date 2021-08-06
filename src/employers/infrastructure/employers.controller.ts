@@ -6,13 +6,9 @@ import {
   Param,
   ParseIntPipe,
   Patch,
-  Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-
 import { IEmployersService } from '../application/employers.service.interface';
-import { CreatedEmployerDto } from '../dtos/created-employer.dto';
-import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 import { UpdateEmployerDto } from '../dtos/update-employer.dto';
 

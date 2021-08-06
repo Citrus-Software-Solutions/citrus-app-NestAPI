@@ -12,4 +12,8 @@ export interface IJobOffersPersistence {
     jobOfferId: number,
     jobOfferStatus: number,
   ): Promise<{ message: string }>;
+  updateJobOffer(
+    jobOfferId: number,
+    jobOffer: JobOfferEntity,
+  ): Promise<JobOfferEntity>;
 }

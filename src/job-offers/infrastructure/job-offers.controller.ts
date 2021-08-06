@@ -5,6 +5,7 @@ import {
   Inject,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Put,
   Query,
@@ -15,6 +16,8 @@ import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
 import { JobOfferStatusDTO } from '../dtos/job-offer-status.dto';
 import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
+import { ShowJobOfferDto } from '../dtos/show-job-offer.dto';
+import { UpdateJobOfferDto } from '../dtos/update-job-offer.dto';
 
 @ApiTags('job-offers')
 @Controller('job-offers')
@@ -56,6 +59,15 @@ export class JobOffersController {
     @Param('jobOfferId', ParseIntPipe) jobOfferId: number,
   ): Promise<ReadJobOfferDto> {
     return this._jobOfferService.getById(jobOfferId);
+  }
+
+  @Patch('data/:jobOfferId')
+  @ApiOperation({ summary: 'Update job offer information' })
+  updateJobOfferData(
+    @Param('jobOfferId', ParseIntPipe) jobOfferId: number,
+    @Body() jobOffer: UpdateJobOfferDto,
+  ): Promise<ShowJobOfferDto> {
+    return this._jobOfferService.updateJobOffer(jobOfferId, jobOffer);
   }
 
   //podría retornar la oferta con el estatus cambiado
