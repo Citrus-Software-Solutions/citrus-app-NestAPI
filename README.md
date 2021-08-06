@@ -50,7 +50,7 @@ $ NOD_ENV=production npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
+# e2e and integrations tests
 $ npm run test:e2e
 
 # test coverage
