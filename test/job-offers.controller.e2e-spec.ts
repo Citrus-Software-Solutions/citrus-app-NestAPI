@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { JobOffersModule } from '../src/job-offers/job-offers.module';
 import * as request from 'supertest';
 import { EmployersPersisteceAdapter } from '../src/employers/infrastructure/employers.persistence.adapter';
 import { JobOfferService } from '../src/job-offers/application/job-offers.service';
@@ -54,14 +55,15 @@ describe('JobOfferController (e2e) ', () => {
     find: jest.fn().mockResolvedValue(mockJobOffer),
   };
   const jobOfferService = {
-    getByEmployerId: jest
+    createJobOffer: jest
       .fn()
-      .mockImplementation((id: number) => jobOfferPesistence.find),
+      .mockImplementation((id: number, jobOffer) => jobOfferPesistence.find),
+    getByid: jest.fn(),
   };
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [AddressPersistenceAdapter],
+      imports: [JobOffersModule],
     })
       .overrideProvider(JobOfferService)
       .useValue(jobOfferService)
@@ -69,16 +71,19 @@ describe('JobOfferController (e2e) ', () => {
       .useValue(employerPersistence)
       .overrideProvider(JobOfferPersistenceAdapter)
       .useValue(jobOfferPesistence)
+      .overrideProvider(AddressPersistenceAdapter)
+      .useValue(employerPersistence)
+
       .compile();
 
     app = moduleRef.createNestApplication();
     await app.init();
   });
 
-  it(`/GET job-offers`, () => {
+  it(`/POST create job-offers`, () => {
     return request(app.getHttpServer())
-      .get('/job-offers/employers/1')
-      .expect(200)
-      .expect(jobOfferService.getByEmployerId(1));
+      .post('/job-offers/1')
+      .expect(201)
+      .expect(jobOfferService.createJobOffer(1, mockJobOffer));
   });
 });
