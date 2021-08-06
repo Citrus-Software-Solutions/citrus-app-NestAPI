@@ -68,7 +68,6 @@ export class EmployersService implements IEmployersService {
 
     employer.company_name = Name.create(employerDto.company_name);
     employer.address = address;
-    console.log(employerDto.special_requirements);
     if (employerDto.special_requirements !== null) {
       employer.special_requirements = SpecialRequirement.create(
         employerDto.special_requirements,
