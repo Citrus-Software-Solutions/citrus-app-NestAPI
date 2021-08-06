@@ -1,5 +1,4 @@
 import { JobOffer } from '../domain/job-offer.model';
-import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
 
 export interface IJobOfferRepository {
   getAll(query: JSON): Promise<JobOffer[]>;

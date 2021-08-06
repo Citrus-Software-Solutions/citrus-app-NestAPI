@@ -8,10 +8,10 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
 import { ReadEmployeeDto } from '../../employee/dtos/read-employee.dto';
 import { ReadEmployerInJobOfferDto } from '../../employers/dtos/read-employer-in-joboffer.dto';
 import { ReadJobScheduleDto } from '../../jobs-schedule/dtos/read-jobschedule.dto';
+import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 import { ReadSkillDto } from '../../shared/skill/dtos/read-skill.dto';
 import { JobOfferStatus } from '../domain/job-offer-status.enum';
 import { DeadLine } from '../domain/value-objects/dead-line.vo';
@@ -36,8 +36,8 @@ export class ReadJobOfferDto {
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
-  @Type(() => WriteAddressDto)
-  readonly location: WriteAddressDto;
+  @Type(() => ReadAddressDto)
+  readonly location: ReadAddressDto;
 
   @Expose()
   @IsDate()

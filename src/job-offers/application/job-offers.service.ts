@@ -88,7 +88,7 @@ export class JobOfferService implements IJobOffersService {
 
     const jobOffer: JobOffer = new JobOffer();
 
-    const address: Address = this._mapperAddress.toDomainFromReadDto(
+    const address: Address = this._mapperAddress.toDomainFromShowDto(
       jobOfferDto.location,
     );
 

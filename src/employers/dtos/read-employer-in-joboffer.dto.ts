@@ -6,7 +6,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
+import { ReadAddressDto } from 'src/shared/address/dtos/read-address.dto';
 import { Name } from '../../shared/domain/name.vo';
 
 @Exclude()
@@ -21,6 +21,6 @@ export class ReadEmployerInJobOfferDto {
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested()
-  @Type(() => WriteAddressDto)
-  readonly address: WriteAddressDto;
+  @Type(() => ReadAddressDto)
+  readonly address: ReadAddressDto;
 }

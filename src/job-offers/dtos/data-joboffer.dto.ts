@@ -1,7 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import {
   IsArray,
-  IsDate,
   IsDateString,
   IsDefined,
   IsNotEmptyObject,

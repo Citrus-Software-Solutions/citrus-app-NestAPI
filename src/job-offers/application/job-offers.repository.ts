@@ -1,7 +1,6 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { JobOfferDataMapper } from '../../shared/mappers/job-offers/job-offers.mapper';
 import { JobOffer } from '../domain/job-offer.model';
-import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
 import { JobOfferEntity } from '../entities/job-offers.entity';
 import { IJobOffersPersistence } from './job-offers.persistence.interface';
 import { IJobOfferRepository } from './job-offers.repository.interface';
