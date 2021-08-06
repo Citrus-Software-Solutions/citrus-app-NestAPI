@@ -48,7 +48,7 @@ export class EmployersPersisteceAdapter
   async getEmployerByUserId(userId: number): Promise<EmployerEntity> {
     const employerRepository = getRepository(EmployerEntity);
     const employer: EmployerEntity = await employerRepository.findOne({
-      where: { fk_user: userId },
+      where: { userId },
     });
 
     return employer;
