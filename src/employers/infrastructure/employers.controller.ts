@@ -36,12 +36,20 @@ export class EmployersController {
     return this._employersService.getEmployerById(employerId);
   }
 
-  @Post('/:userId')
-  @ApiOperation({ summary: 'Create a employer' })
-  createEmployer(
+  @Get('byuser/:userId')
+  @ApiOperation({ summary: 'Get employer data by user id' })
+  getByUserId(
     @Param('userId', ParseIntPipe) userId: number,
-    @Body() employer: DataEmployerDto,
-  ): Promise<CreatedEmployerDto> {
-    return this._employersService.createEmployer(employer, userId);
+  ): Promise<ReadEmployerDto> {
+    return this._employersService.getEmployerByUserId(userId);
   }
+
+  // @Post('/:userId')
+  // @ApiOperation({ summary: 'Create an employer' })
+  // createEmployer(
+  //   @Param('userId', ParseIntPipe) userId: number,
+  //   @Body() employer: DataEmployerDto,
+  // ): Promise<CreatedEmployerDto> {
+  //   return this._employersService.createEmployer(employer, userId);
+  // }
 }

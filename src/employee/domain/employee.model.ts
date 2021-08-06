@@ -4,25 +4,33 @@ import { Name } from '../../shared/domain/name.vo';
 import { ID } from '../../shared/domain/id.vo';
 import { WorkExperience } from '../../work-experience/domain/work-experience.model';
 import { Reference } from '../../reference/domain/reference.model';
+import { User } from '../../user/domain/user.model';
 
 export class Employee {
-  constructor(
-    private _id: ID,
-    private _first_name: Name,
-    private _middle_name: Name,
-    private _last_name: Name,
-    private _phone_number: string,
-    private _birth_date: Date,
-    private _address: Address,
-    private _ssn: string,
-    private _education_level: number,
-    private _work_experiences: WorkExperience[],
-    private _skills: Skill[],
-    // private _trainings: Trainings[],
-    private _references: Reference[],
-    private _status: number,
-    private _rating?: number,
-  ) {}
+  private _id: ID;
+  private _first_name: Name;
+  private _middle_name: Name;
+  private _last_name: Name;
+  private _phone_number: string;
+  private _birth_date: Date;
+  private _address: Address;
+  private _ssn: string;
+  private _education_level: number;
+  private _work_experiences: WorkExperience[];
+  private _skills: Skill[];
+  // private _trainings: Trainings[];
+  private _references: Reference[];
+  private _rating: number;
+  private _status: number;
+  private _user: User;
+
+  public get user(): User {
+    return this._user;
+  }
+
+  public set user(value: User) {
+    this._user = value;
+  }
 
   public get references(): Reference[] {
     return this._references;

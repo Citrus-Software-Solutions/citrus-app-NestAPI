@@ -27,12 +27,12 @@ export class UserController {
     return this._userService.getById(userId);
   }
 
-  @Post('/:userRole')
-  @ApiOperation({ summary: 'Create a user' })
-  createUser(
-    @Param('userRole') userRole: string,
-    @Body() user: CreateUserDto,
-  ): Promise<CreatedUserDto> {
-    return this._userService.createUser(user, userRole);
-  }
+  // @Post('/:userRole')
+  // @ApiOperation({ summary: 'Create a user' })
+  // createUser(
+  //   @Param('userRole') userRole: string,
+  //   @Body() user: CreateUserDto,
+  // ): Promise<CreatedUserDto> {
+  //   return this._userService.createUser(user, userRole);
+  // }
 }

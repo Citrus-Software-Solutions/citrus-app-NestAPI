@@ -8,6 +8,11 @@ import { IAuthRepository } from './auth.repository.interface';
 import { IAuthService } from './auth.service.interface';
 import { SignupDto } from '../dtos';
 import { CreatedEmployerDto } from '../../employers/dtos/created-employer.dto';
+import { SignupEmployeeDto } from '../dtos/signup-employee.dto';
+import { CreatedEmployeeDto } from '../../employee/dtos/created-employee.dto';
+import { IEmployeeService } from '../../employee/application/employee.service.interface';
+import { plainToClass } from 'class-transformer';
+import { LoggedInDto } from '../dtos/loggedin.dto';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -18,9 +23,11 @@ export class AuthService implements IAuthService {
     private readonly _employersService: IEmployersService,
     @Inject('UserService')
     private readonly _userService: IUserService,
+    @Inject('EmployeeService')
+    private readonly _employeesService: IEmployeeService,
   ) {}
 
-  async signin(signinDto: SigninDto): Promise<{ token: string }> {
+  async signin(signinDto: SigninDto): Promise<LoggedInDto> {
     if (!signinDto) {
       throw new BadRequestException('Information must be sent');
     }
@@ -31,7 +38,7 @@ export class AuthService implements IAuthService {
 
     const token = await this._userRepository.signin(user);
 
-    return token;
+    return plainToClass(LoggedInDto, token);
   }
 
   async signUpEmployer(signupDto: SignupDto): Promise<CreatedEmployerDto> {
@@ -42,6 +49,20 @@ export class AuthService implements IAuthService {
 
     return await this._employersService.createEmployer(
       signupDto.data_employer,
+      user.id,
+    );
+  }
+
+  async signUpEmployee(
+    signupDto: Partial<SignupEmployeeDto>,
+  ): Promise<CreatedEmployeeDto> {
+    const user: CreatedUserDto = await this._userService.createUser(
+      signupDto.data_user,
+      'EMPLOYEE',
+    );
+
+    return await this._employeesService.createEmployee(
+      signupDto.data_employee,
       user.id,
     );
   }

@@ -13,6 +13,7 @@ import { WorkExperience } from '../../../work-experience/domain/work-experience.
 import { ReferenceEntity } from '../../../reference/entities/reference.entity';
 import { ReferenceDataMapper } from '../references/reference.mapper';
 import { Reference } from '../../../reference/domain/reference.model';
+import { UserDataMapper } from '../user/user.mapper';
 
 export class EmployeeDataMapper
   implements DataMapper<Employee, EmployeeEntity>
@@ -21,36 +22,53 @@ export class EmployeeDataMapper
   _mapperSkill = new SkillDataMapper();
   _mapperWorkExperience = new WorkExperienceDataMapper();
   _mapperReference = new ReferenceDataMapper();
+  _mapperUser = new UserDataMapper();
   public toDomain(entity: EmployeeEntity): Employee {
-    const employee = new Employee(
-      ID.create(entity.id),
-      Name.create(entity.first_name),
-      Name.create(entity.middle_name),
-      Name.create(entity.last_name),
-      entity.phone_number,
-      entity.birth_date,
-      this._mapperAddress.toDomain(entity.address),
-      entity.ssn,
-      entity.education_level,
-      entity.work_experiences.map((workExperience: WorkExperienceEntity) =>
-        this._mapperWorkExperience.toDomain(workExperience),
-      ),
-      entity.skills.map((skill: SkillEntity) =>
+    const employee = new Employee();
+
+    employee.id = ID.create(entity.id);
+    employee.first_name = Name.create(entity.first_name);
+    employee.middle_name = Name.create(entity.middle_name);
+    employee.last_name = Name.create(entity.last_name);
+    employee.phone_number = entity.phone_number;
+    employee.birth_date = entity.birth_date;
+    employee.address = this._mapperAddress.toDomain(entity.address);
+    employee.ssn = entity.ssn;
+    employee.education_level = entity.education_level;
+
+    if (entity.work_experiences) {
+      employee.work_experiences = entity.work_experiences.map(
+        (workExperience: WorkExperienceEntity) =>
+          this._mapperWorkExperience.toDomain(workExperience),
+      );
+    }
+
+    if (entity.skills) {
+      employee.skills = entity.skills.map((skill: SkillEntity) =>
         this._mapperSkill.toDomain(skill),
-      ),
-      entity.references.map((reference: ReferenceEntity) =>
-        this._mapperReference.toDomain(reference),
-      ),
-      entity.rating,
-      entity.status,
-    );
+      );
+    }
+
+    if (entity.references) {
+      employee.references = entity.references.map(
+        (reference: ReferenceEntity) =>
+          this._mapperReference.toDomain(reference),
+      );
+    }
+
+    employee.rating = entity.rating;
+    employee.status = entity.status;
+    employee.user = this._mapperUser.toDomain(entity.user);
 
     return employee;
   }
 
   public toDalEntity(employee: Employee): EmployeeEntity {
     const employeeEntity = new EmployeeEntity();
-    employeeEntity.id = employee.id.value;
+    if (employee.id) {
+      employeeEntity.id = employee.id.value;
+    }
+
     employeeEntity.first_name = employee.first_name.value;
     employeeEntity.middle_name = employee.middle_name.value;
     employeeEntity.last_name = employee.last_name.props.value;
@@ -59,16 +77,26 @@ export class EmployeeDataMapper
     employeeEntity.address = this._mapperAddress.toDalEntity(employee.address);
     employeeEntity.ssn = employee.ssn;
     employeeEntity.education_level = employee.education_level;
-    employeeEntity.work_experiences = employee.work_experiences.map(
-      (workExperience: WorkExperience) =>
-        this._mapperWorkExperience.toDalEntity(workExperience),
-    );
-    employeeEntity.skills = employee.skills.map((skill: Skill) =>
-      this._mapperSkill.toDalEntity(skill),
-    );
-    employeeEntity.references = employee.references.map(
-      (reference: Reference) => this._mapperReference.toDalEntity(reference),
-    );
+
+    if (employee.work_experiences) {
+      employeeEntity.work_experiences = employee.work_experiences.map(
+        (workExperience: WorkExperience) =>
+          this._mapperWorkExperience.toDalEntity(workExperience),
+      );
+    }
+
+    if (employee.skills) {
+      employeeEntity.skills = employee.skills.map((skill: Skill) =>
+        this._mapperSkill.toDalEntity(skill),
+      );
+    }
+
+    if (employee.references) {
+      employeeEntity.references = employee.references.map(
+        (reference: Reference) => this._mapperReference.toDalEntity(reference),
+      );
+    }
+
     employeeEntity.rating = employee.rating;
     employeeEntity.status = employee.status;
 

@@ -37,6 +37,17 @@ export class EmployersService implements IEmployersService {
     );
   }
 
+  async getEmployerByUserId(userId: number): Promise<ReadEmployerDto> {
+    if (!userId) {
+      throw new BadRequestException('id must be sent');
+    }
+
+    return plainToClass(
+      ReadEmployerDto,
+      this._employerRepository.getEmployerByUserId(userId),
+    );
+  }
+
   async createEmployer(
     employerDto: DataEmployerDto,
     userId: number,

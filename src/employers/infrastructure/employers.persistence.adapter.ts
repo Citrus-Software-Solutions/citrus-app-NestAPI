@@ -45,11 +45,18 @@ export class EmployersPersisteceAdapter
     return employer;
   }
 
+  async getEmployerByUserId(userId: number): Promise<EmployerEntity> {
+    const employerRepository = getRepository(EmployerEntity);
+    const employer: EmployerEntity = await employerRepository.findOne(userId);
+
+    return employer;
+  }
+
   async createEmployer(
     employer: EmployerEntity,
     userId: number,
   ): Promise<EmployerEntity> {
-    const userEntity: UserEntity = await this._userPersistence.findOne(userId);
+    const userEntity: UserEntity = await this._userPersistence.getById(userId);
 
     if (!userEntity) {
       throw new NotFoundException('User for this employer does not exist');

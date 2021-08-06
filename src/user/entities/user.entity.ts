@@ -9,6 +9,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { RoleEntity } from '../../role/entities/role.entity';
+import { EmployeeEntity } from '../../employee/entities/employee.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -49,6 +50,11 @@ export class UserEntity extends BaseEntity {
     nullable: true,
   })
   employer: EmployerEntity;
+
+  @OneToOne(() => EmployeeEntity, (employee) => employee.user, {
+    nullable: true,
+  })
+  employee: EmployeeEntity;
 
   @ManyToOne(() => RoleEntity, (role) => role.users, {
     eager: true,
