@@ -11,6 +11,7 @@ import { Name } from '../../shared/domain/name.vo';
 import { CreatedEmployerDto } from '../dtos/created-employer.dto';
 import { AddressDataMapper } from '../../shared/mappers/address/address.data-mapper';
 import { UpdateEmployerDto } from '../dtos/update-employer.dto';
+import { UpdatedEmployerDto } from '../dtos/updated-employer.dto';
 @Injectable()
 export class EmployersService implements IEmployersService {
   constructor(
@@ -52,7 +53,7 @@ export class EmployersService implements IEmployersService {
   async updateEmployer(
     employerId: number,
     employerDto: UpdateEmployerDto,
-  ): Promise<ReadEmployerDto> {
+  ): Promise<UpdatedEmployerDto> {
     if (!employerId) {
       throw new BadRequestException('id must be sent');
     }
@@ -61,11 +62,21 @@ export class EmployersService implements IEmployersService {
       throw new BadRequestException('Data to update must be sent');
     }
 
-    console.log(employerDto);
+    const employer: Employer = new Employer();
+
+    const address: Address = this._mapperAddress.toDomainFromShowDto(
+      employerDto.address,
+    );
+
+    employer.company_name = Name.create(employerDto.company_name);
+    employer.address = address;
+    employer.special_requirements = SpecialRequirement.create(
+      employerDto.special_requirements,
+    );
 
     return plainToClass(
-      ReadEmployerDto,
-      this._employerRepository.updateEmployer(employerId, employerDto),
+      UpdatedEmployerDto,
+      this._employerRepository.updateEmployer(employerId, employer),
     );
   }
 
@@ -89,7 +100,7 @@ export class EmployersService implements IEmployersService {
 
     employer.company_name = Name.create(employerDto.company_name);
     employer.address = address;
-    console.log(employerDto.special_requirements);
+
     if (employerDto.special_requirements !== null) {
       employer.special_requirements = SpecialRequirement.create(
         employerDto.special_requirements,

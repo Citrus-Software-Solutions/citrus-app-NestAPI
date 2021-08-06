@@ -56,6 +56,7 @@ export class EmployersPersisteceAdapter
     employerId: number,
     employer: EmployerEntity,
   ): Promise<EmployerEntity> {
+    console.log(employer);
     const employerRepository = getRepository(EmployerEntity);
     const foundUser = await employerRepository.findOne(employerId, {
       where: { status: 0 },
@@ -68,7 +69,11 @@ export class EmployersPersisteceAdapter
     }
 
     foundUser.company_name = employer.company_name;
-    foundUser.address = employer.address;
+    foundUser.address.street_one = employer.address.street_one;
+    foundUser.address.street_two = employer.address.street_two;
+    foundUser.address.city = employer.address.city;
+    foundUser.address.state = employer.address.state;
+    foundUser.address.zip = employer.address.zip;
     foundUser.special_requirements = employer.special_requirements;
 
     console.log(foundUser);

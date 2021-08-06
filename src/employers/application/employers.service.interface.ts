@@ -2,6 +2,7 @@ import { CreatedEmployerDto } from '../dtos/created-employer.dto';
 import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
 import { UpdateEmployerDto } from '../dtos/update-employer.dto';
+import { UpdatedEmployerDto } from '../dtos/updated-employer.dto';
 
 export interface IEmployersService {
   getEmployers(): Promise<ReadEmployerDto[]>;
@@ -10,7 +11,7 @@ export interface IEmployersService {
   updateEmployer(
     employerId: number,
     employer: UpdateEmployerDto,
-  ): Promise<ReadEmployerDto>;
+  ): Promise<UpdatedEmployerDto>;
   createEmployer(
     employer: DataEmployerDto,
     userId: number,
