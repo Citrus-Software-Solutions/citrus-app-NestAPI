@@ -74,3 +74,45 @@
     "email": "team@quikfoods.com"
   }
 }
+
+// REGISTER EMPLOYEES
+{
+  "data_employee": {
+    "education_level": 0,
+    "first_name": "Alba",
+    "middle_name": "Lucia",
+    "last_name": "Arias",
+    "phone_number": "04166609508",
+    "birth_date": "1984-01-12",
+    "address": {
+      "street1": "Calle 97",
+      "street2": "No. 5-68",
+      "city": "Maracaibo",
+      "state": "Zulia",
+      "zip": "4001"
+    },
+    "ssn": "33909141"
+  },
+  "data_user": {
+    "username": "alarias",
+    "password": "employee123",
+    "email": "alarias@example.com"
+  }
+}
+
+// CREATE JOB OFFER
+{
+  "title": "Clean PC labs",
+  "location": {
+    "street1": "Calle 28",
+    "city": "Barquisimeto",
+    "state": "Lara",
+    "zip": "3001"
+  },
+  "dead_line": "2021-08-15",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": "You need to be good at cleaning",
+  "duration": 3600,
+  "hourly_rate": 9.5
+}
