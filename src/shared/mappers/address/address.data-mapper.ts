@@ -9,13 +9,12 @@ import { DataMapper } from '../data-mapper.interface';
 
 export class AddressDataMapper implements DataMapper<Address, AddressEntity> {
   public toDomain(entity: AddressEntity): Address {
-    const address = new Address(
-      StreetAddress.create(entity.street_one),
-      StreetAddress.create(entity.street_two),
-      CityAddress.create(entity.city),
-      StateAddress.create(entity.state),
-      ZipCode.create(entity.zip),
-    );
+    const street_one = StreetAddress.create(entity.street_one);
+    const street_two = StreetAddress.create(entity.street_two);
+    const city = CityAddress.create(entity.city);
+    const state = StateAddress.create(entity.state);
+    const zip = ZipCode.create(entity.zip);
+    const address = new Address(street_one, street_two, city, state, zip);
 
     return address;
   }
@@ -23,11 +22,21 @@ export class AddressDataMapper implements DataMapper<Address, AddressEntity> {
   public toDalEntity(address: Address): AddressEntity {
     const addressEntity: AddressEntity = new AddressEntity();
 
-    addressEntity.street_one = address.street1.value;
-    addressEntity.street_two = address.street2.value;
-    addressEntity.city = address.city.value;
-    addressEntity.state = address.state.value;
-    addressEntity.zip = address.zip.value;
+    if (addressEntity.street_one) {
+      addressEntity.street_one = address.street1.value;
+    }
+    if (addressEntity.street_two) {
+      addressEntity.street_two = address.street2.value;
+    }
+    if (addressEntity.city) {
+      addressEntity.city = address.city.value;
+    }
+    if (addressEntity.state) {
+      addressEntity.state = address.state.value;
+    }
+    if (addressEntity.zip) {
+      addressEntity.zip = address.zip.value;
+    }
 
     return addressEntity;
   }

@@ -20,7 +20,7 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     unique: true,
     nullable: false,
-    length: 25,
+    length: 100,
   })
   username: string;
 
@@ -28,7 +28,7 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     unique: true,
     nullable: false,
-    length: 25,
+    length: 100,
   })
   email: string;
 
