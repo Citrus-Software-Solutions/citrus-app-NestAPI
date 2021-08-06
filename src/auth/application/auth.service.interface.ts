@@ -4,5 +4,5 @@ import { SigninDto } from '../dtos/signin.dto';
 
 export interface IAuthService {
   signin(signinDto: SigninDto): Promise<{ token: string }>;
-  signUpEmployer(signupDto: Partial<SignupDto>): Promise<CreatedEmployerDto>;
+  signUpEmployer(signupDto: SignupDto): Promise<CreatedEmployerDto>;
 }

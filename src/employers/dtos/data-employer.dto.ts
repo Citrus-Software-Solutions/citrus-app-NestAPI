@@ -1,5 +1,5 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import { IsString, ValidateNested } from 'class-validator';
+import { IsOptional, IsString, ValidateNested } from 'class-validator';
 import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 
 @Exclude()
@@ -15,5 +15,6 @@ export class DataEmployerDto {
 
   @Expose()
   @IsString()
+  @IsOptional()
   readonly special_requirements: string;
 }

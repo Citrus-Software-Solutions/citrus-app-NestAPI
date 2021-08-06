@@ -40,7 +40,7 @@ export class EmployersController {
   @ApiOperation({ summary: 'Create a employer' })
   createEmployer(
     @Param('userId', ParseIntPipe) userId: number,
-    @Body() employer: Partial<DataEmployerDto>,
+    @Body() employer: DataEmployerDto,
   ): Promise<CreatedEmployerDto> {
     return this._employersService.createEmployer(employer, userId);
   }

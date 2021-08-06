@@ -1,0 +1,76 @@
+// REGISTER EMPLOYERS
+{
+  "data_employer": {
+    "company_name": "Scholics University",
+    "address": {
+      "street1": "Calle 28",
+      "street2": null,
+      "city": "Barquisimeto",
+      "state": "Lara",
+      "zip": "3001"
+    },
+    "special_requirements": "Have approved high school"
+  },
+  "data_user": {
+    "username": "uscholics",
+    "password": "employer123",
+    "email": "team@uscholics.com"
+  }
+}
+
+{
+  "data_employer": {
+    "company_name": "Jetroom",
+    "address": {
+      "street1": "Calle Cedeño",
+      "street2": null,
+      "city": "Barinas",
+      "state": "Barinas",
+      "zip": "5201"
+    },
+    "special_requirements": "Have verified hotel-related skills"
+  },
+  "data_user": {
+    "username": "jetroom",
+    "password": "employer123",
+    "email": "team@jetrooms.com"
+  }
+}
+
+{
+  "data_employer": {
+    "company_name": "Fixetics",
+    "address": {
+      "street1": "Calle Real",
+      "street2": null,
+      "city": "Caracas",
+      "state": "Dtto Capital",
+      "zip": "1010"
+    },
+    "special_requirements": "Be 16 years old or more"
+  },
+  "data_user": {
+    "username": "fixetics",
+    "password": "employer123",
+    "email": "team@fixetics.com"
+  }
+}
+
+{
+  "data_employer": {
+    "company_name": "QuikFoods",
+    "address": {
+      "street1": "Av. Los Mangos",
+      "street2": null,
+      "city": "Caracas",
+      "state": "Dtto Capital",
+      "zip": "1050"
+    },
+    "special_requirements": "Must have prior experience cooking"
+  },
+  "data_user": {
+    "username": "quikfoods",
+    "password": "employer123",
+    "email": "team@quikfoods.com"
+  }
+}
