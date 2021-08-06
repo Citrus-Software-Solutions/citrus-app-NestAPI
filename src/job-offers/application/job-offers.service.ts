@@ -1,22 +1,32 @@
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { JobOffer } from '../domain/job-offer.model';
-import { IJobOffersService } from '../application/job-offers.service.interface';
-import { IJobOfferRepository } from '../application/job-offers.repository.interface';
-import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
-import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { ShowJobScheduleDto } from '../../jobs-schedule/dtos/show-job-schedule.dto';
+import { Address } from '../../shared/address/domain/address.model';
+import { AddressDataMapper } from '../../shared/mappers/address/address.data-mapper';
+import { JobScheduleDataMapper } from '../../shared/mappers/jobs-schedule/jobs-schedule.mapper';
+import { SkillDataMapper } from '../../shared/mappers/skill/skill.data-mapper';
+import { ShowSkillDto } from '../../shared/skill/dtos/show-skill.dto';
+import { IJobOfferRepository } from '../application/job-offers.repository.interface';
+import { IJobOffersService } from '../application/job-offers.service.interface';
 import { JobOfferStatus } from '../domain/job-offer-status.enum';
+import { JobOffer } from '../domain/job-offer.model';
+import { DeadLine } from '../domain/value-objects/dead-line.vo';
+import { Duration } from '../domain/value-objects/duration.vo';
+import { Money } from '../domain/value-objects/money.vo';
+import { SpecialRequirement } from '../domain/value-objects/special-requirement.vo';
+import { Title } from '../domain/value-objects/title.vo';
+import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
+import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { ReadJobOfferDto } from '../dtos/read-joboffert.dto';
 
 @Injectable()
 export class JobOfferService implements IJobOffersService {
   constructor(
     @Inject('JobOfferRepository')
     private readonly _jobOfferRepository: IJobOfferRepository,
+    private readonly _mapperAddress: AddressDataMapper,
+    private readonly _mapperJobSchedule: JobScheduleDataMapper,
+    private readonly _mapperSkill: SkillDataMapper,
   ) {}
 
   async getAll(query: JSON): Promise<ReadJobOfferDto[]> {
@@ -64,21 +74,54 @@ export class JobOfferService implements IJobOffersService {
     return this._jobOfferRepository.updateStatus(jobOfferId, jobOfferStatus);
   }
 
-  async createOffer(
-    offer: DataJobOfferDto,
+  async createJobOffer(
+    jobOfferDto: DataJobOfferDto,
     employerId: number,
-  ): Promise<JobOffer> {
-    if (!offer) {
-      throw new BadRequestException('Offer can not be empty');
+  ): Promise<CreatedJobOfferDto> {
+    if (!jobOfferDto) {
+      throw new BadRequestException('job offer data must be sent');
     }
+
     if (!employerId) {
-      throw new NotFoundException('Id can not be empty');
+      throw new BadRequestException('employer id must be sent');
     }
-    const savedOffer: JobOffer = await this._jobOfferRepository.create(
-      offer,
-      employerId,
+
+    const jobOffer: JobOffer = new JobOffer();
+
+    const address: Address = this._mapperAddress.toDomainFromReadDto(
+      jobOfferDto.location,
     );
 
-    return savedOffer;
+    jobOffer.title = Title.create(jobOfferDto.title);
+    jobOffer.location = address;
+    jobOffer.dead_line = DeadLine.create(new Date(jobOfferDto.dead_line));
+    if (jobOfferDto.schedules) {
+      jobOffer.schedules = jobOfferDto.schedules.map(
+        (scheduleDto: ShowJobScheduleDto) =>
+          this._mapperJobSchedule.toDomainFromShowDto(scheduleDto),
+      );
+    }
+
+    if (jobOfferDto.skills) {
+      jobOffer.skills = jobOfferDto.skills.map((skillDto: ShowSkillDto) =>
+        this._mapperSkill.toDomainFromShowDto(skillDto),
+      );
+    }
+
+    if (jobOfferDto.special_requirements) {
+      jobOffer.special_requirements = SpecialRequirement.create(
+        jobOfferDto.special_requirements,
+      );
+    } else {
+      jobOffer.special_requirements = SpecialRequirement.create('N/A');
+    }
+
+    jobOffer.duration = Duration.create(jobOfferDto.duration);
+    jobOffer.hourly_rate = Money.create(jobOfferDto.hourly_rate);
+
+    const savedJobOffer: JobOffer =
+      await this._jobOfferRepository.createJobOffer(jobOffer, employerId);
+
+    return plainToClass(CreatedJobOfferDto, savedJobOffer);
   }
 }

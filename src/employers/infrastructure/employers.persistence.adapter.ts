@@ -4,13 +4,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserPersistenceAdapter } from '../../user/infrastructure/user.persistence.adapter';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { IAddressPersistence } from '../../shared/address/application/adress.persistence.interface';
+import { AddressEntity } from '../../shared/address/entities/address.entity';
+import { UserEntity } from '../../user/entities/user.entity';
+import { UserPersistenceAdapter } from '../../user/infrastructure/user.persistence.adapter';
 import { IEmployersPersistence } from '../application/employers.persistence.interface';
 import { EmployerEntity } from '../entities/employers.entity';
-import { UserEntity } from '../../user/entities/user.entity';
-import { AddressEntity } from '../../shared/address/entities/address.entity';
-import { IAddressPersistence } from '../../shared/address/application/adress.persistence.interface';
 
 @EntityRepository(EmployerEntity)
 @Injectable()

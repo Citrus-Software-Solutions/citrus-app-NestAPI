@@ -46,36 +46,16 @@ export class JobOfferRepository implements IJobOfferRepository {
     );
   }
 
-  async create(offer: DataJobOfferDto, employerId: number): Promise<JobOffer> {
-    const realJobOffer = this.dtoJobtoReal(offer);
-    const jobOfferEntity: JobOfferEntity =
-      this._mapper.toDalEntity(realJobOffer);
-
-    const createdOffer: JobOfferEntity =
+  async createJobOffer(
+    jobOffer: JobOffer,
+    employerId: number,
+  ): Promise<JobOffer> {
+    const createdJobOffer: JobOfferEntity =
       await this._jobOfferPersistence.createJobOffer(
-        jobOfferEntity,
+        this._mapper.toDalEntity(jobOffer),
         employerId,
       );
 
-    if (!createdOffer) {
-      throw new BadRequestException('Offer could not be created');
-    }
-
-    return this._mapper.toDomain(createdOffer);
-  }
-  private dtoJobtoReal(dtoJob: DataJobOfferDto) {
-    const realJobOffer = new JobOffer();
-    //   realJobOffer.availableVacans = dtoJob.availableVacans;
-    //   realJobOffer.dateBegin = new Date(dtoJob.dateBegin);
-    //   realJobOffer.dateEnd = new Date(dtoJob.dateEnd);
-    //   realJobOffer.description = dtoJob.description;
-    //   realJobOffer.gender = dtoJob.gender;
-    //   realJobOffer.maxAge = dtoJob.maxAge;
-    //   realJobOffer.minAge = dtoJob.minAge;
-    //   realJobOffer.name = dtoJob.name;
-    //   realJobOffer.salary = dtoJob.salary;
-    //   realJobOffer.status = 'Published';
-    return realJobOffer;
-    // }
+    return this._mapper.toDomain(createdJobOffer);
   }
 }

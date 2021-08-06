@@ -7,8 +7,8 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
 import { SpecialRequirement } from '../../job-offers/domain/value-objects/special-requirement.vo';
+import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 import { ID } from '../../shared/domain/id.vo';
 import { Name } from '../../shared/domain/name.vo';
 import { CreatedUserDto } from '../../user/dtos/created-user.dto';

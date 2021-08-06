@@ -1,11 +1,11 @@
 import { JobOffer } from '../domain/job-offer.model';
-import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
 
 export interface IJobOfferRepository {
   getAll(query: JSON): Promise<JobOffer[]>;
   getByEmployer(employerId: number): Promise<JobOffer[]>;
   getById(jobOfferId: number): Promise<JobOffer>;
-  create(offer: DataJobOfferDto, employerId: number): Promise<JobOffer>;
+  createJobOffer(offer: JobOffer, employerId: number): Promise<JobOffer>;
   updateStatus(
     jobOfferId: number,
     jobOfferStatus: number,

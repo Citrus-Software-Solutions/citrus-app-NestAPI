@@ -1,11 +1,11 @@
-import { AddressEntity } from '../../../shared/address/entities/address.entity';
 import { Address } from '../../../shared/address/domain/address.model';
-import { DataMapper } from '../data-mapper.interface';
-import { StreetAddress } from '../../../shared/address/domain/value-objects/street-address.vo';
 import { CityAddress } from '../../../shared/address/domain/value-objects/city-address.vo';
 import { StateAddress } from '../../../shared/address/domain/value-objects/state-address.vo';
+import { StreetAddress } from '../../../shared/address/domain/value-objects/street-address.vo';
 import { ZipCode } from '../../../shared/address/domain/value-objects/zip-code.vo';
-import { ReadAddressDto } from 'src/shared/address/dtos/read-address.dto';
+import { ReadAddressDto } from '../../../shared/address/dtos/read-address.dto';
+import { AddressEntity } from '../../../shared/address/entities/address.entity';
+import { DataMapper } from '../data-mapper.interface';
 
 export class AddressDataMapper implements DataMapper<Address, AddressEntity> {
   public toDomain(entity: AddressEntity): Address {
