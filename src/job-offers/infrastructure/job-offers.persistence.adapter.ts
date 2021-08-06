@@ -136,7 +136,7 @@ export class JobOfferPersistenceAdapter
 
     return { message: response };
   }
-
+  
   async setEmployeeToJobOffer(
     employeeId: number,
     jobOfferId: number,
@@ -170,5 +170,51 @@ export class JobOfferPersistenceAdapter
     } else {
       return false;
     }
+
+  async updateJobOffer(
+    jobOfferId: number,
+    jobOffer: JobOfferEntity,
+  ): Promise<JobOfferEntity> {
+    const jobOfferRepository = getRepository(JobOfferEntity);
+    const foundOffer = await jobOfferRepository.findOne(jobOfferId);
+
+    if (!foundOffer) {
+      throw new NotFoundException('Job offer does not exists');
+    }
+
+    if (jobOffer.title) {
+      foundOffer.title = jobOffer.title;
+    }
+
+    if (jobOffer.location) {
+      foundOffer.location = jobOffer.location;
+    }
+
+    if (jobOffer.dead_line) {
+      foundOffer.dead_line = jobOffer.dead_line;
+    }
+
+    if (jobOffer.schedule) {
+      foundOffer.schedule = jobOffer.schedule;
+    }
+
+    if (jobOffer.skills) {
+      foundOffer.skills = jobOffer.skills;
+    }
+
+    if (jobOffer.special_requirements) {
+      foundOffer.special_requirements = jobOffer.special_requirements;
+    }
+
+    if (jobOffer.duration) {
+      foundOffer.duration = jobOffer.duration;
+    }
+
+    if (jobOffer.hourly_rate) {
+      foundOffer.hourly_rate = jobOffer.hourly_rate;
+    }
+    const updateOffer = await jobOfferRepository.save(foundOffer);
+
+    return updateOffer;
   }
 }

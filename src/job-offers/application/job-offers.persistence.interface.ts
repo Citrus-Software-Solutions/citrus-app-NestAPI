@@ -16,4 +16,8 @@ export interface IJobOffersPersistence {
     employerId: number,
     jobOfferId: number,
   ): Promise<boolean>;
+  updateJobOffer(
+    jobOfferId: number,
+    jobOffer: JobOfferEntity,
+  ): Promise<JobOfferEntity>;
 }

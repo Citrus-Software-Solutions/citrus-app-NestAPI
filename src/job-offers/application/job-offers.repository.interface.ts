@@ -13,4 +13,5 @@ export interface IJobOfferRepository {
     employerId: number,
     jobOfferId: number,
   ): Promise<boolean>;
+  updateJobOffer(jobOfferId: number, jobOffer: JobOffer): Promise<JobOffer>;
 }

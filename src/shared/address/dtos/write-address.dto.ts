@@ -10,7 +10,7 @@ export class WriteAddressDto {
   @Expose()
   @IsString()
   @IsOptional()
-  readonly street2: string;
+  readonly street2?: string;
 
   @Expose()
   @IsString()

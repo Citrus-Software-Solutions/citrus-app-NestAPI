@@ -4,10 +4,14 @@ import { Duration } from '../../../job-offers/domain/value-objects/duration.vo';
 import { Money } from '../../../job-offers/domain/value-objects/money.vo';
 import { SpecialRequirement } from '../../../job-offers/domain/value-objects/special-requirement.vo';
 import { Title } from '../../../job-offers/domain/value-objects/title.vo';
+import { DataJobOfferDto } from '../../../job-offers/dtos/data-joboffer.dto';
 import { JobOfferEntity } from '../../../job-offers/entities/job-offers.entity';
 import { JobSchedule } from '../../../jobs-schedule/domain/jobs-schedule.model';
+import { ShowJobScheduleDto } from '../../../jobs-schedule/dtos/show-job-schedule.dto';
 import { JobScheduleEntity } from '../../../jobs-schedule/entities/jobs-schedule.entity';
+import { Address } from '../../../shared/address/domain/address.model';
 import { Skill } from '../../../shared/skill/domain/skill.model';
+import { ShowSkillDto } from '../../../shared/skill/dtos/show-skill.dto';
 import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
 import { AddressDataMapper } from '../address/address.data-mapper';
 import { DataMapper } from '../data-mapper.interface';
@@ -44,12 +48,18 @@ export class JobOfferDataMapper
       );
     }
 
-    jobOffer.special_requirements = SpecialRequirement.create(
-      entity.special_requirements,
-    );
+    if (jobOffer.special_requirements) {
+      jobOffer.special_requirements = SpecialRequirement.create(
+        entity.special_requirements,
+      );
+    }
 
-    jobOffer.duration = Duration.create(entity.duration);
-    jobOffer.hourly_rate = Money.create(entity.hourly_rate);
+    if (jobOffer.duration) {
+      jobOffer.duration = Duration.create(entity.duration);
+    }
+    if (jobOffer.hourly_rate) {
+      jobOffer.hourly_rate = Money.create(entity.hourly_rate);
+    }
 
     if (entity.employee) {
       jobOffer.employee = this._mapperEmployee.toDomain(entity.employee);
@@ -58,24 +68,32 @@ export class JobOfferDataMapper
     }
 
     jobOffer.status = entity.status;
-
     return jobOffer;
   }
 
   public toDalEntity(jobOffer: JobOffer): JobOfferEntity {
     const jobOfferEntity = new JobOfferEntity();
-    jobOfferEntity.id = jobOffer.id;
-    jobOfferEntity.title = jobOffer.title.value;
+    if (jobOffer.id) {
+      jobOfferEntity.id = jobOffer.id;
+    }
+    if (jobOffer.title) {
+      jobOfferEntity.title = jobOffer.title.value;
+    }
 
     if (jobOffer.employer) {
       jobOfferEntity.employer = this._mapperEmployer.toDalEntity(
         jobOffer.employer,
       );
     }
-    jobOfferEntity.location = this._mapperAddress.toDalEntity(
-      jobOffer.location,
-    );
-    jobOfferEntity.dead_line = jobOffer.dead_line.value;
+    if (jobOffer.location) {
+      jobOfferEntity.location = this._mapperAddress.toDalEntity(
+        jobOffer.location,
+      );
+    }
+
+    if (jobOffer.dead_line) {
+      jobOfferEntity.dead_line = jobOffer.dead_line.value;
+    }
     if (jobOffer.schedules) {
       jobOfferEntity.schedule = jobOffer.schedules.map(
         (schedule: JobSchedule) =>
@@ -89,17 +107,65 @@ export class JobOfferDataMapper
       );
     }
 
-    jobOfferEntity.special_requirements = jobOffer.special_requirements.value;
-    jobOfferEntity.duration = jobOffer.duration.value;
-    jobOfferEntity.hourly_rate = jobOffer.hourly_rate.value;
-    if (jobOfferEntity.employee) {
+    if (jobOffer.special_requirements) {
+      jobOfferEntity.special_requirements = jobOffer.special_requirements.value;
+    }
+    if (jobOffer.duration) {
+      jobOfferEntity.duration = jobOffer.duration.value;
+    }
+    if (jobOffer.hourly_rate) {
+      jobOfferEntity.hourly_rate = jobOffer.hourly_rate.value;
+    }
+    if (jobOffer.employee) {
       jobOfferEntity.employee = this._mapperEmployee.toDalEntity(
         jobOffer.employee,
       );
     }
-
-    jobOfferEntity.status = jobOffer.status;
+    if (jobOffer.status) {
+      jobOfferEntity.status = jobOffer.status;
+    }
 
     return jobOfferEntity;
+  }
+
+  public toDomainFromShowDto(jobOfferDto: DataJobOfferDto) {
+    const jobOffer: JobOffer = new JobOffer();
+    let address: Address;
+    if (jobOfferDto.location) {
+      address = this._mapperAddress.toDomainFromShowDto(jobOfferDto.location);
+      jobOffer.location = address;
+    }
+    if (jobOfferDto.title) {
+      jobOffer.title = Title.create(jobOfferDto.title);
+    }
+    if (jobOfferDto.dead_line) {
+      jobOffer.dead_line = DeadLine.create(new Date(jobOfferDto.dead_line));
+    }
+    if (jobOfferDto.schedules) {
+      jobOffer.schedules = jobOfferDto.schedules.map(
+        (scheduleDto: ShowJobScheduleDto) =>
+          this._mapperJobSchedule.toDomainFromShowDto(scheduleDto),
+      );
+    }
+
+    if (jobOfferDto.skills) {
+      jobOffer.skills = jobOfferDto.skills.map((skillDto: ShowSkillDto) =>
+        this._mapperSkill.toDomainFromShowDto(skillDto),
+      );
+    }
+
+    if (jobOfferDto.special_requirements) {
+      jobOffer.special_requirements = SpecialRequirement.create(
+        jobOfferDto.special_requirements,
+      );
+    }
+    if (jobOfferDto.duration) {
+      jobOffer.duration = Duration.create(jobOfferDto.duration);
+    }
+
+    if (jobOfferDto.hourly_rate) {
+      jobOffer.hourly_rate = Money.create(jobOfferDto.hourly_rate);
+    }
+    return jobOffer;
   }
 }

@@ -1,11 +1,15 @@
-import * as request from 'supertest';
-import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
+import { Test } from '@nestjs/testing';
 import { EmployeeModule } from '../src/employee/employee.module';
+import * as request from 'supertest';
 import { EmployeeService } from '../src/employee/application/employee.service';
+import { EmployeePersistenceAdapter } from '../src/employee/infrastructure/employee.persistence.adapter';
+import { AddressPersistenceAdapter } from '../src/shared/address/infraestructure/address.persistence.adapter';
+import { UserPersistenceAdapter } from '../src/user/infrastructure/user.persistence.adapter';
 
 describe('EmployeeController  ', () => {
   let app: INestApplication;
+  const addresPersistence = {};
   const employeeService = {
     getEmployee: jest.fn(() => {
       return [
@@ -52,8 +56,8 @@ describe('EmployeeController  ', () => {
         },
       ];
     }),
-    getEmployeeById: jest.fn().mockImplementation((id: number) => ({
-      id,
+    getEmployeeById: jest.fn().mockImplementation((employerId: number) => ({
+      id: employerId,
       first_name: 'Pedro',
       middle_name: 'Antonio',
       last_name: 'Ramirez',
@@ -101,6 +105,12 @@ describe('EmployeeController  ', () => {
     })
       .overrideProvider(EmployeeService)
       .useValue(employeeService)
+      .overrideProvider(AddressPersistenceAdapter)
+      .useValue(addresPersistence)
+      .overrideProvider(EmployeePersistenceAdapter)
+      .useValue(addresPersistence)
+      .overrideProvider(UserPersistenceAdapter)
+      .useValue(addresPersistence)
       .compile();
 
     app = moduleRef.createNestApplication();
@@ -126,12 +136,12 @@ describe('EmployeeController  ', () => {
         .expect(200)
         .expect(employeeService.getEmployeeById(1));
     });
-    it(`/GET employeee if endpoint path does not exist `, () => {
+    it(`/GET employee if endpoint path does not exist `, () => {
       return request(app.getHttpServer())
         .get('/employees/one-employe/1')
         .expect(404);
     });
-    it(`/GET employeee if employeeId is a string `, () => {
+    it(`/GET all employees with a wrong route `, () => {
       return request(app.getHttpServer()).get('/employees/all').expect(400);
     });
   });
