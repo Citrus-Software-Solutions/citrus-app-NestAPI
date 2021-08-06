@@ -11,6 +11,7 @@ import { AuthService } from './application/auth.service';
 import { JwtStrategy } from './application/strategies/jwt.strategy';
 import { AuthController } from './infrastructure/auth.controller';
 import { AuthPersistenceAdapter } from './infrastructure/auth.persistence.adapter';
+import { EmployeeModule } from '../employee/employee.module';
 
 @Module({
   providers: [AuthPersistenceAdapter, AuthRepository, AuthService, JwtStrategy],
@@ -34,6 +35,7 @@ import { AuthPersistenceAdapter } from './infrastructure/auth.persistence.adapte
     SharedModule,
     EmployersModule,
     UserModule,
+    EmployeeModule,
   ],
   exports: [JwtStrategy, PassportModule],
 })

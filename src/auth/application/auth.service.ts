@@ -8,6 +8,9 @@ import { IAuthRepository } from './auth.repository.interface';
 import { IAuthService } from './auth.service.interface';
 import { SignupDto } from '../dtos';
 import { CreatedEmployerDto } from '../../employers/dtos/created-employer.dto';
+import { SignupEmployeeDto } from '../dtos/signup-employee.dto';
+import { CreatedEmployeeDto } from 'src/employee/dtos/created-employee.dto';
+import { IEmployeeService } from 'src/employee/application/employee.service.interface';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -18,6 +21,8 @@ export class AuthService implements IAuthService {
     private readonly _employersService: IEmployersService,
     @Inject('UserService')
     private readonly _userService: IUserService,
+    @Inject('EmployeeService')
+    private readonly _employeesService: IEmployeeService,
   ) {}
 
   async signin(signinDto: SigninDto): Promise<{ token: string }> {
@@ -44,6 +49,20 @@ export class AuthService implements IAuthService {
 
     return await this._employersService.createEmployer(
       signupDto.data_employer,
+      user.id,
+    );
+  }
+
+  async signUpEmployee(
+    signupDto: Partial<SignupEmployeeDto>,
+  ): Promise<CreatedEmployeeDto> {
+    const user: CreatedUserDto = await this._userService.createUser(
+      signupDto.data_user,
+      'EMPLOYEE',
+    );
+
+    return await this._employeesService.createEmployee(
+      signupDto.data_employee,
       user.id,
     );
   }
