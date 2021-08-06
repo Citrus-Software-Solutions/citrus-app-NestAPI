@@ -1,43 +1,54 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
-import { IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
-import { Name } from '../../shared/domain/name.vo';
-import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import {
+  IsDateString,
+  IsEnum,
+  IsNumber,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
+import { EducationLevel } from '../domain/education-level.enum';
+import { EducationLevelDTO } from './education-level.dto';
 
 @Exclude()
 export class DataEmployeeDto {
   @Expose()
   @IsString()
-  @Transform(({ value }) => value.props.value)
-  readonly first_name: Name;
+  readonly first_name: string;
 
   @Expose()
   @IsString()
-  @Transform(({ value }) => value.props.value)
-  readonly middle_name: Name;
+  readonly middle_name: string;
 
   @Expose()
   @IsString()
-  @Transform(({ value }) => value.props.value)
-  readonly last_name: Name;
+  readonly last_name: string;
 
   @Expose()
   @IsString()
   readonly phone_number: string;
 
   @Expose()
-  @IsDate()
-  readonly birth_date: Date;
+  @IsDateString()
+  readonly birth_date: string;
 
   @Expose()
   @ValidateNested({ each: true })
-  @Type(() => ReadAddressDto)
-  readonly address: ReadAddressDto;
+  @Type(() => WriteAddressDto)
+  readonly address: WriteAddressDto;
 
   @Expose()
   @IsString()
   readonly ssn: string;
 
   @Expose()
-  @IsNumber()
+  @IsEnum(EducationLevel)
+  @ApiProperty({
+    description: 'The education level of an employer',
+    minimum: 0,
+    maximum: 10,
+    default: 0,
+  })
   readonly education_level: number;
 }
