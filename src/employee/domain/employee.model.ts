@@ -5,6 +5,7 @@ import { ID } from '../../shared/domain/id.vo';
 import { WorkExperience } from '../../work-experience/domain/work-experience.model';
 import { Reference } from '../../reference/domain/reference.model';
 import { User } from '../../user/domain/user.model';
+import { EducationLevel } from './education-level.enum';
 
 export class Employee {
   private _id: ID;
@@ -15,7 +16,7 @@ export class Employee {
   private _birth_date: Date;
   private _address: Address;
   private _ssn: string;
-  private _education_level: number;
+  private _education_level: EducationLevel;
   private _work_experiences: WorkExperience[];
   private _skills: Skill[];
   // private _trainings: Trainings[];
@@ -64,10 +65,10 @@ export class Employee {
   public set skills(value: Skill[]) {
     this._skills = value;
   }
-  public get education_level(): number {
+  public get education_level(): EducationLevel {
     return this._education_level;
   }
-  public set education_level(value: number) {
+  public set education_level(value: EducationLevel) {
     this._education_level = value;
   }
   public get ssn(): string {

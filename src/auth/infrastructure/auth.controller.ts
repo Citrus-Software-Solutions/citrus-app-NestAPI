@@ -31,7 +31,7 @@ export class AuthController {
   @Post('/signup/employee')
   @ApiOperation({ summary: 'Registrar un employee' })
   signupEmployee(
-    @Body() signupDtoEmployee: Partial<SignupEmployeeDto>,
+    @Body() signupDtoEmployee: SignupEmployeeDto,
   ): Promise<CreatedEmployeeDto> {
     return this._authService.signUpEmployee(signupDtoEmployee);
   }
