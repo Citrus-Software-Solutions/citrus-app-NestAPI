@@ -10,6 +10,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
 import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IJobOffersService } from '../application/job-offers.service.interface';
 import { CreatedJobOfferDto } from '../dtos/created-job-offer.dto';
@@ -90,5 +91,17 @@ export class JobOffersController {
     @Body() jobOffer: DataJobOfferDto,
   ): Promise<CreatedJobOfferDto> {
     return this._jobOfferService.createJobOffer(jobOffer, employerId);
+  }
+
+  @EventPattern('Application')
+  async handleNewWorker(data: any) {
+    console.log(data);
+    console.log(data[0].employee.id);
+    console.log(data[0].jobOffer.id);
+    const message = await this._jobOfferService.registerWorker(
+      data[0].employee.id,
+      data[0].jobOffer.id,
+    );
+    console.log(message);
   }
 }

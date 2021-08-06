@@ -107,4 +107,13 @@ export class JobOfferService implements IJobOffersService {
 
     return plainToClass(CreatedJobOfferDto, savedJobOffer);
   }
+
+  async registerWorker(employeeId: number, jobOfferId: number) {
+    if (employeeId && jobOfferId) {
+      return await this._jobOfferRepository.setEmployeeToJobOffer(
+        employeeId,
+        jobOfferId,
+      );
+    }
+  }
 }

@@ -4,6 +4,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { IEmployeePersistence } from '../../employee/application/employee.persistence.interface';
+import { EmployeeEntity } from '../../employee/entities/employee.entity';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { IEmployersPersistence } from '../../employers/application/employers.persistence.interface';
 import { EmployerEntity } from '../../employers/entities/employers.entity';
@@ -24,6 +26,8 @@ export class JobOfferPersistenceAdapter
     private readonly _employersPersistence: IEmployersPersistence,
     @Inject('AddressPersistenceAdapter')
     private readonly _addressPersistence: IAddressPersistence,
+    @Inject('EmployeePersistenceAdapter')
+    private readonly _employeePersistence: IEmployeePersistence,
   ) {
     super();
   }
@@ -132,6 +136,40 @@ export class JobOfferPersistenceAdapter
 
     return { message: response };
   }
+  
+  async setEmployeeToJobOffer(
+    employeeId: number,
+    jobOfferId: number,
+  ): Promise<boolean> {
+    const jobOfferRepository = getRepository(JobOfferEntity);
+    const jobOffer: JobOfferEntity = await jobOfferRepository.findOne(
+      jobOfferId,
+    );
+
+    if (!jobOffer) {
+      throw new NotFoundException('Job Offer does not exists');
+    }
+
+    const employee: EmployeeEntity =
+      await this._employeePersistence.getEmployeeById(employeeId);
+
+    if (!employee) {
+      throw new NotFoundException('Employee does not exists');
+    }
+
+    console.log(jobOffer);
+
+    jobOffer.employee = employee;
+
+    jobOffer.save();
+
+    const updateJobOffer = jobOffer.save();
+
+    if (updateJobOffer) {
+      return true;
+    } else {
+      return false;
+    }
 
   async updateJobOffer(
     jobOfferId: number,

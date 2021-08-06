@@ -69,4 +69,14 @@ export class JobOfferRepository implements IJobOfferRepository {
 
     return this._mapper.toDomain(createdJobOffer);
   }
+
+  async setEmployeeToJobOffer(
+    employerId: number,
+    jobOfferId: number,
+  ): Promise<boolean> {
+    return this._jobOfferPersistence.setEmployeeToJobOffer(
+      employerId,
+      jobOfferId,
+    );
+  }
 }
