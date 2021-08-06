@@ -6,7 +6,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { ReadAddressDto } from 'src/shared/address/dtos/read-address.dto';
+import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
 import { Name } from '../../shared/domain/name.vo';
 
 @Exclude()

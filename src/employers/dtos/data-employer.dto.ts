@@ -1,6 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
-import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
+import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 
 @Exclude()
 export class DataEmployerDto {

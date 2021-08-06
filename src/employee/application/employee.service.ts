@@ -48,7 +48,7 @@ export class EmployeeService implements IEmployeeService {
 
     const employee: Employee = new Employee();
 
-    const address: Address = this._mapperAddress.toDomainFromReadDto(
+    const address: Address = this._mapperAddress.toDomainFromShowDto(
       employeeDto.address,
     );
 

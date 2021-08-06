@@ -1,7 +1,7 @@
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
 import { Name } from '../../shared/domain/name.vo';
-import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 
 @Exclude()
 export class DataEmployeeDto {
@@ -30,8 +30,8 @@ export class DataEmployeeDto {
 
   @Expose()
   @ValidateNested({ each: true })
-  @Type(() => ReadAddressDto)
-  readonly address: ReadAddressDto;
+  @Type(() => WriteAddressDto)
+  readonly address: WriteAddressDto;
 
   @Expose()
   @IsString()

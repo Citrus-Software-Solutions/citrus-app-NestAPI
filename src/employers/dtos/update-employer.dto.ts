@@ -1,13 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import {
-  IsDefined,
-  IsNotEmptyObject,
-  IsObject,
-  IsOptional,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
-import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import { IsOptional, IsString, ValidateNested } from 'class-validator';
+import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 
 @Exclude()
 export class UpdateEmployerDto {
@@ -19,8 +12,8 @@ export class UpdateEmployerDto {
   @Expose()
   @IsOptional()
   @ValidateNested()
-  @Type(() => ReadAddressDto)
-  readonly address: ReadAddressDto;
+  @Type(() => WriteAddressDto)
+  readonly address: WriteAddressDto;
 
   @Expose()
   @IsOptional()
