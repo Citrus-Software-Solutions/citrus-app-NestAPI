@@ -73,6 +73,7 @@ export class EmployeePersistenceAdapter
       references: null,
       rating: 0,
       status: 0,
+      user: userEntity,
     });
 
     if (!savedEmployee) {

@@ -13,6 +13,7 @@ import { WorkExperience } from '../../../work-experience/domain/work-experience.
 import { ReferenceEntity } from '../../../reference/entities/reference.entity';
 import { ReferenceDataMapper } from '../references/reference.mapper';
 import { Reference } from '../../../reference/domain/reference.model';
+import { UserDataMapper } from '../user/user.mapper';
 
 export class EmployeeDataMapper
   implements DataMapper<Employee, EmployeeEntity>
@@ -21,6 +22,7 @@ export class EmployeeDataMapper
   _mapperSkill = new SkillDataMapper();
   _mapperWorkExperience = new WorkExperienceDataMapper();
   _mapperReference = new ReferenceDataMapper();
+  _mapperUser = new UserDataMapper();
   public toDomain(entity: EmployeeEntity): Employee {
     const employee = new Employee();
 
@@ -56,6 +58,7 @@ export class EmployeeDataMapper
 
     employee.rating = entity.rating;
     employee.status = entity.status;
+    employee.user = this._mapperUser.toDomain(entity.user);
 
     return employee;
   }

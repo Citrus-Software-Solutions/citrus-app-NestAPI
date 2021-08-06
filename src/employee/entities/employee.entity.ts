@@ -7,11 +7,13 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SkillEntity } from '../../shared/skill/entities/skill.entity';
 import { WorkExperienceEntity } from '../../work-experience/entities/work-experience.entity';
 import { ReferenceEntity } from '../../reference/entities/reference.entity';
+import { UserEntity } from '../../user/entities/user.entity';
 
 @Entity('employee')
 export class EmployeeEntity extends BaseEntity {
@@ -69,6 +71,13 @@ export class EmployeeEntity extends BaseEntity {
 
   @Column({ type: 'integer', default: 0, nullable: false })
   status: number;
+
+  @OneToOne(() => UserEntity, (user) => user.employee, {
+    nullable: true,
+    eager: true,
+  })
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 
   // @OneToMany(() => ApplicationEntity, (application) => application.employee)
   // applications: ApplicationEntity[];

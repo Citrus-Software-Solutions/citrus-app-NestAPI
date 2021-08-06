@@ -11,6 +11,7 @@ import {
 import { ID } from '../../shared/domain/id.vo';
 import { Name } from '../../shared/domain/name.vo';
 import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import { CreatedUserDto } from '../../user/dtos/created-user.dto';
 
 @Exclude()
 export class CreatedEmployeeDto {
@@ -65,4 +66,12 @@ export class CreatedEmployeeDto {
   @Expose()
   @IsNumber()
   readonly status: number;
+
+  @Expose()
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreatedUserDto)
+  readonly user: CreatedUserDto;
 }
