@@ -10,6 +10,7 @@ import { SpecialRequirement } from '../../job-offers/domain/value-objects/specia
 import { Name } from '../../shared/domain/name.vo';
 import { CreatedEmployerDto } from '../dtos/created-employer.dto';
 import { AddressDataMapper } from '../../shared/mappers/address/address.data-mapper';
+import { UpdateEmployerDto } from '../dtos/update-employer.dto';
 @Injectable()
 export class EmployersService implements IEmployersService {
   constructor(
@@ -45,6 +46,26 @@ export class EmployersService implements IEmployersService {
     return plainToClass(
       ReadEmployerDto,
       this._employerRepository.getEmployerByUserId(userId),
+    );
+  }
+
+  async updateEmployer(
+    employerId: number,
+    employerDto: UpdateEmployerDto,
+  ): Promise<ReadEmployerDto> {
+    if (!employerId) {
+      throw new BadRequestException('id must be sent');
+    }
+
+    if (!employerDto) {
+      throw new BadRequestException('Data to update must be sent');
+    }
+
+    console.log(employerDto);
+
+    return plainToClass(
+      ReadEmployerDto,
+      this._employerRepository.updateEmployer(employerId, employerDto),
     );
   }
 

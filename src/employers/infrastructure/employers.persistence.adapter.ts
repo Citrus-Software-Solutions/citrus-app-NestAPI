@@ -52,6 +52,34 @@ export class EmployersPersisteceAdapter
     return employer;
   }
 
+  async updateEmployer(
+    employerId: number,
+    employer: EmployerEntity,
+  ): Promise<EmployerEntity> {
+    const employerRepository = getRepository(EmployerEntity);
+    const foundUser = await employerRepository.findOne(employerId, {
+      where: { status: 0 },
+    });
+
+    console.log(foundUser);
+
+    if (!foundUser) {
+      throw new NotFoundException('Employer does not exists');
+    }
+
+    foundUser.company_name = employer.company_name;
+    foundUser.address = employer.address;
+    foundUser.special_requirements = employer.special_requirements;
+
+    console.log(foundUser);
+
+    const updateUser = await employerRepository.save(foundUser);
+
+    console.log(updateUser);
+
+    return updateUser;
+  }
+
   async createEmployer(
     employer: EmployerEntity,
     userId: number,

@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
 import { EmployerDataMapper } from '../../shared/mappers/employer/employer.mapper';
 import { Employer } from '../domain/employer.model';
+import { UpdateEmployerDto } from '../dtos/update-employer.dto';
 import { EmployerEntity } from '../entities/employers.entity';
 import { IEmployersPersistence } from './employers.persistence.interface';
 import { IEmployerRepository } from './employers.repository.interface';
@@ -34,6 +36,24 @@ export class EmployersRepository implements IEmployerRepository {
     );
 
     return this._mapper.toDomain(employerEntity);
+  }
+
+  async updateEmployer(
+    employerId: number,
+    employerDto: UpdateEmployerDto,
+  ): Promise<Employer> {
+    const employer: Employer = this._mapper.toDomainFromUpdate(employerDto);
+
+    console.log(employer);
+
+    const employerUpdated: EmployerEntity =
+      await this._employersPersistence.updateEmployer(
+        employerId,
+        this._mapper.toDalEntity(employer),
+      );
+    console.log(employerUpdated);
+
+    return this._mapper.toDomain(employerUpdated);
   }
 
   async createEmployer(employer: Employer, userId: number): Promise<Employer> {

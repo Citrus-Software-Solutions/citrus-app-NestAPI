@@ -5,6 +5,7 @@ import {
   Inject,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -13,6 +14,7 @@ import { IEmployersService } from '../application/employers.service.interface';
 import { CreatedEmployerDto } from '../dtos/created-employer.dto';
 import { DataEmployerDto } from '../dtos/data-employer.dto';
 import { ReadEmployerDto } from '../dtos/read-employer.dto';
+import { UpdateEmployerDto } from '../dtos/update-employer.dto';
 
 @ApiTags('employers')
 @Controller('employers')
@@ -42,6 +44,16 @@ export class EmployersController {
     @Param('userId', ParseIntPipe) userId: number,
   ): Promise<ReadEmployerDto> {
     return this._employersService.getEmployerByUserId(userId);
+  }
+
+  @Patch(':employerId')
+  @ApiOperation({ summary: 'Update an employer' })
+  updateUser(
+    @Param('employerId', ParseIntPipe) employerId: number,
+    @Body() employer: UpdateEmployerDto,
+  ) {
+    console.log(employer);
+    return this._employersService.updateEmployer(employerId, employer);
   }
 
   // @Post('/:userId')

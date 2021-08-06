@@ -12,6 +12,9 @@ import { Skill } from '../../../shared/skill/domain/skill.model';
 import { SkillDataMapper } from '../skill/skill.data-mapper';
 import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
 import { UserDataMapper } from '../user/user.mapper';
+import { UpdateEmployerDto } from '../../../employers/dtos/update-employer.dto';
+import { plainToClass } from 'class-transformer';
+import { Address } from '../../../shared/address/domain/address.model';
 
 export class EmployerDataMapper
   implements DataMapper<Employer, EmployerEntity>
@@ -76,5 +79,25 @@ export class EmployerDataMapper
     employerEntity.status = employer.status;
 
     return employerEntity;
+  }
+
+  toDomainFromUpdate(dto: UpdateEmployerDto): Employer {
+    const employer = new Employer();
+
+    if (dto.company_name && dto.company_name != ' ') {
+      employer.company_name = Name.create(dto.company_name);
+    }
+
+    if (dto.address) {
+      employer.address = plainToClass(Address, dto.address);
+    }
+
+    if (dto.special_requirements && dto.special_requirements != ' ') {
+      employer.special_requirements = SpecialRequirement.create(
+        dto.special_requirements,
+      );
+    }
+
+    return employer;
   }
 }
