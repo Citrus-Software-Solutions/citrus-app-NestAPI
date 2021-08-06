@@ -1,10 +1,10 @@
-import * as request from 'supertest';
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { JobOffersModule } from '../src/job-offers/job-offers.module';
+import { Test, TestingModule } from '@nestjs/testing';
+import * as request from 'supertest';
+import { EmployersPersisteceAdapter } from '../src/employers/infrastructure/employers.persistence.adapter';
 import { JobOfferService } from '../src/job-offers/application/job-offers.service';
 import { JobOfferPersistenceAdapter } from '../src/job-offers/infrastructure/job-offers.persistence.adapter';
-import { EmployersPersisteceAdapter } from '../src/employers/infrastructure/employers.persistence.adapter';
+import { AddressPersistenceAdapter } from '../src/shared/address/infraestructure/address.persistence.adapter';
 
 describe('JobOfferController (e2e) ', () => {
   let app: INestApplication;
@@ -61,7 +61,7 @@ describe('JobOfferController (e2e) ', () => {
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [JobOffersModule],
+      imports: [AddressPersistenceAdapter],
     })
       .overrideProvider(JobOfferService)
       .useValue(jobOfferService)

@@ -2,6 +2,7 @@ import { Test } from '@nestjs/testing';
 import { JobOffersController } from './job-offers.controller';
 import { JobOfferService } from '../application/job-offers.service';
 import { DataJobOfferDto } from '../dtos/data-joboffer.dto';
+import { AddressPersistenceAdapter } from 'src/shared/address/infraestructure/address.persistence.adapter';
 
 describe('JobOffersController', () => {
   let jobOffersController: JobOffersController;
@@ -9,7 +10,7 @@ describe('JobOffersController', () => {
     updateJobOfferStatus: jest.fn(() => {
       'Status changed successfully';
     }),
-    createOffer: jest
+    createJobOffer: jest
       .fn()
       .mockImplementation((dto: DataJobOfferDto, id: number) => ({
         ...dto,
@@ -72,17 +73,23 @@ describe('JobOffersController', () => {
   describe('Create a Job Offer', () => {
     it('should return a JobOffer', async () => {
       const dto: DataJobOfferDto = {
-        name: 'Development',
-        description: 'Job Offer 1 ',
-        availableVacans: 5,
-        dateBegin: '05/08/2021',
-        dateEnd: '07/08/2021',
-        gender: 'string',
-        salary: 1234,
+        title: 'Clean restaurant after a party',
+        location: {
+          street1: 'Calle Real',
+          city: 'Caracas',
+          state: 'Dtto Capital',
+          zip: '1010',
+        },
+        dead_line: '2021-08-20',
+        schedules: null,
+        skills: null,
+        special_requirements: 'Close the restaurant after you clean',
+        duration: 10000,
+        hourly_rate: 7,
       };
 
-      expect(await jobOffersController.createJobOffer(dto, 1)).toEqual(dto);
-      expect(jobOfferService.createOffer).toHaveBeenCalled();
+      expect(await jobOffersController.createJobOffer(1, dto)).toEqual(dto);
+      expect(jobOfferService.createJobOffer).toHaveBeenCalled();
     });
   });
   describe('Update Job Offer Status (unit)', () => {
@@ -93,7 +100,9 @@ describe('JobOffersController', () => {
         .spyOn(jobOfferService, 'updateJobOfferStatus')
         .mockImplementation(() => result);
 
-      expect(await jobOffersController.updateJobOfferStatus(1)).toBe(result);
+      expect(
+        await jobOffersController.updateJobOfferStatus({ status: 2 }, 1),
+      ).toBe(result);
     });
   });
   describe('Get one Job Offer (unit)', () => {

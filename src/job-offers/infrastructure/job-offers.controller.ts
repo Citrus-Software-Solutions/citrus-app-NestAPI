@@ -73,7 +73,7 @@ export class JobOffersController {
 
   @Post('/:employerId')
   @ApiOperation({ summary: 'Create a job offer' })
-  createEmployer(
+  createJobOffer(
     @Param('employerId', ParseIntPipe) employerId: number,
     @Body() jobOffer: DataJobOfferDto,
   ): Promise<CreatedJobOfferDto> {
