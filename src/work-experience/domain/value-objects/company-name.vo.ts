@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from '../../../shared/domain/value-object.abstract';
 
 interface CompanyNameProps {
@@ -18,7 +19,7 @@ export class CompanyName extends ValueObject<CompanyNameProps> {
       return new CompanyName({ value: '' });
     }
     if (name.length <= 2 || name.length > 100) {
-      throw new Error(
+      throw new InternalServerErrorException(
         'Company name must be greater than 2 chars and less than 100.',
       );
     } else {

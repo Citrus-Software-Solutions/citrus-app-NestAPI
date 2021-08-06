@@ -3,18 +3,20 @@ import { IsOptional, IsString, ValidateNested } from 'class-validator';
 import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 
 @Exclude()
-export class DataEmployerDto {
+export class UpdateEmployerDto {
   @Expose()
+  @IsOptional()
   @IsString()
   readonly company_name: string;
 
   @Expose()
-  @ValidateNested({ each: true })
+  @IsOptional()
+  @ValidateNested()
   @Type(() => WriteAddressDto)
   readonly address: WriteAddressDto;
 
   @Expose()
-  @IsString()
   @IsOptional()
+  @IsString()
   readonly special_requirements: string;
 }

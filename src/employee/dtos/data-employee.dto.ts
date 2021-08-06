@@ -9,7 +9,6 @@ import {
 } from 'class-validator';
 import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
 import { EducationLevel } from '../domain/education-level.enum';
-import { EducationLevelDTO } from './education-level.dto';
 
 @Exclude()
 export class DataEmployeeDto {

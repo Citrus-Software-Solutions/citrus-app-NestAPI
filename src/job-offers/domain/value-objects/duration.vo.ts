@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from '../../../shared/domain/value-object.abstract';
 
 interface DurationProps {
@@ -15,10 +16,14 @@ export class Duration extends ValueObject<DurationProps> {
 
   public static create(hours: number): Duration {
     if (hours === undefined || hours === null) {
-      throw new Error('Total of hours can not be empty.');
+      throw new InternalServerErrorException(
+        'Total of hours can not be empty.',
+      );
     }
     if (hours <= 0) {
-      throw new Error('Total of hours can not be zero or negative.');
+      throw new InternalServerErrorException(
+        'Total of hours can not be zero or negative.',
+      );
     } else {
       return new Duration({ value: hours });
     }

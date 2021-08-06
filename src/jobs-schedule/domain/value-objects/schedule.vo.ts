@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from '../../../shared/domain/value-object.abstract';
 
 interface ScheduleProps {
@@ -15,7 +16,7 @@ export class Schedule extends ValueObject<ScheduleProps> {
 
   public static create(date: Date): Schedule {
     if (!date) {
-      throw new Error('Dates can not be empty');
+      throw new InternalServerErrorException('Dates can not be empty');
     } else {
       return new Schedule({ value: date });
     }

@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from '../../../shared/domain/value-object.abstract';
 
 interface SpecialRequirementProps {
@@ -18,7 +19,9 @@ export class SpecialRequirement extends ValueObject<SpecialRequirementProps> {
       return new SpecialRequirement({ value: '' });
     }
     if (name.length <= 2 || name.length > 700) {
-      throw new Error('Name must be greater than 2 chars and less than 100.');
+      throw new InternalServerErrorException(
+        'Name must be greater than 2 chars and less than 100.',
+      );
     } else {
       return new SpecialRequirement({ value: name });
     }

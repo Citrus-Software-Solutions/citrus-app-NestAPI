@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from '../../../shared/domain/value-object.abstract';
 
 interface MoneyProps {
@@ -15,10 +16,12 @@ export class Money extends ValueObject<MoneyProps> {
 
   public static create(amount: number): Money {
     if (amount === undefined || amount === null) {
-      throw new Error('Payment for every hour of work can not be empty.');
+      throw new InternalServerErrorException(
+        'Payment for every hour of work can not be empty.',
+      );
     }
     if (amount <= 0) {
-      throw new Error(
+      throw new InternalServerErrorException(
         'Payment for every hour of work can not be zero or negative.',
       );
     } else {
