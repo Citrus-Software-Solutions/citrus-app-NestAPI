@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from './value-object.abstract';
 
 interface JobTitleProps {
@@ -18,7 +19,9 @@ export class JobTitle extends ValueObject<JobTitleProps> {
       return new JobTitle({ value: '' });
     }
     if (name.length <= 2 || name.length > 100) {
-      throw new Error('Name must be greater than 2 chars and less than 100.');
+      throw new InternalServerErrorException(
+        'Name must be greater than 2 chars and less than 100.',
+      );
     } else {
       return new JobTitle({ value: name });
     }

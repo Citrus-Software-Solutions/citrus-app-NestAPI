@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { ValueObject } from '../../../shared/domain/value-object.abstract';
 
 interface DeadLineProps {
@@ -15,7 +16,7 @@ export class DeadLine extends ValueObject<DeadLineProps> {
 
   public static create(date: Date): DeadLine {
     if (!date) {
-      throw new Error('Dead Line can not be empty');
+      throw new InternalServerErrorException('Dead Line can not be empty');
       // Validar que la fecha sea mayor a la actual
     } else {
       return new DeadLine({ value: date });
