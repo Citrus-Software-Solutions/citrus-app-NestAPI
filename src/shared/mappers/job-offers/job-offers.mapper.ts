@@ -1,20 +1,20 @@
+import { JobOffer } from '../../../job-offers/domain/job-offer.model';
 import { DeadLine } from '../../../job-offers/domain/value-objects/dead-line.vo';
 import { Duration } from '../../../job-offers/domain/value-objects/duration.vo';
 import { Money } from '../../../job-offers/domain/value-objects/money.vo';
 import { SpecialRequirement } from '../../../job-offers/domain/value-objects/special-requirement.vo';
 import { Title } from '../../../job-offers/domain/value-objects/title.vo';
-import { JobOffer } from '../../../job-offers/domain/job-offer.model';
 import { JobOfferEntity } from '../../../job-offers/entities/job-offers.entity';
+import { JobSchedule } from '../../../jobs-schedule/domain/jobs-schedule.model';
+import { JobScheduleEntity } from '../../../jobs-schedule/entities/jobs-schedule.entity';
+import { Skill } from '../../../shared/skill/domain/skill.model';
+import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
+import { AddressDataMapper } from '../address/address.data-mapper';
 import { DataMapper } from '../data-mapper.interface';
 import { EmployeeDataMapper } from '../employee/employee.data-mapper';
 import { EmployerDataMapper } from '../employer/employer.mapper';
 import { JobScheduleDataMapper } from '../jobs-schedule/jobs-schedule.mapper';
-import { JobSchedule } from '../../../jobs-schedule/domain/jobs-schedule.model';
-import { JobScheduleEntity } from '../../../jobs-schedule/entities/jobs-schedule.entity';
-import { AddressDataMapper } from '../address/address.data-mapper';
 import { SkillDataMapper } from '../skill/skill.data-mapper';
-import { SkillEntity } from '../../../shared/skill/entities/skill.entity';
-import { Skill } from '../../../shared/skill/domain/skill.model';
 
 export class JobOfferDataMapper
   implements DataMapper<JobOffer, JobOfferEntity>
@@ -31,13 +31,18 @@ export class JobOfferDataMapper
     jobOffer.employer = this._mapperEmployer.toDomain(entity.employer);
     jobOffer.location = this._mapperAddress.toDomain(entity.location);
     jobOffer.dead_line = DeadLine.create(entity.dead_line);
-    jobOffer.schedules = entity.schedule.map((schedule: JobScheduleEntity) =>
-      this._mapperJobSchedule.toDomain(schedule),
-    );
 
-    jobOffer.skills = entity.skills.map((skill: SkillEntity) =>
-      this._mapperSkill.toDomain(skill),
-    );
+    if (entity.schedule) {
+      jobOffer.schedules = entity.schedule.map((schedule: JobScheduleEntity) =>
+        this._mapperJobSchedule.toDomain(schedule),
+      );
+    }
+
+    if (entity.skills) {
+      jobOffer.skills = entity.skills.map((skill: SkillEntity) =>
+        this._mapperSkill.toDomain(skill),
+      );
+    }
 
     jobOffer.special_requirements = SpecialRequirement.create(
       entity.special_requirements,
@@ -67,26 +72,32 @@ export class JobOfferDataMapper
         jobOffer.employer,
       );
     }
-
     jobOfferEntity.location = this._mapperAddress.toDalEntity(
       jobOffer.location,
     );
-
     jobOfferEntity.dead_line = jobOffer.dead_line.value;
-    jobOfferEntity.schedule = jobOffer.schedules.map((schedule: JobSchedule) =>
-      this._mapperJobSchedule.toDalEntity(schedule),
-    );
+    if (jobOffer.schedules) {
+      jobOfferEntity.schedule = jobOffer.schedules.map(
+        (schedule: JobSchedule) =>
+          this._mapperJobSchedule.toDalEntity(schedule),
+      );
+    }
 
-    jobOfferEntity.skills = jobOffer.skills.map((skill: Skill) =>
-      this._mapperSkill.toDalEntity(skill),
-    );
+    if (jobOffer.skills) {
+      jobOfferEntity.skills = jobOffer.skills.map((skill: Skill) =>
+        this._mapperSkill.toDalEntity(skill),
+      );
+    }
 
     jobOfferEntity.special_requirements = jobOffer.special_requirements.value;
     jobOfferEntity.duration = jobOffer.duration.value;
     jobOfferEntity.hourly_rate = jobOffer.hourly_rate.value;
-    jobOfferEntity.employee = this._mapperEmployee.toDalEntity(
-      jobOffer.employee,
-    );
+    if (jobOfferEntity.employee) {
+      jobOfferEntity.employee = this._mapperEmployee.toDalEntity(
+        jobOffer.employee,
+      );
+    }
+
     jobOfferEntity.status = jobOffer.status;
 
     return jobOfferEntity;

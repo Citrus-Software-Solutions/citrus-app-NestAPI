@@ -17,7 +17,7 @@ export class JobOffer {
   public location: Address;
   public dead_line: DeadLine;
   public schedules: JobSchedule[];
-  public skills: Skill[];
+  public skills?: Skill[];
   public special_requirements?: SpecialRequirement;
   //public certifications: Certification[]; -- requiere de los cursos
   public duration: Duration;

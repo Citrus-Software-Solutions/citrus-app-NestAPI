@@ -1,23 +1,20 @@
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
-import { IsString, ValidateNested } from 'class-validator';
-import { SpecialRequirement } from '../../job-offers/domain/value-objects/special-requirement.vo';
-import { Name } from '../../shared/domain/name.vo';
-import { ReadAddressDto } from '../../shared/address/dtos/read-address.dto';
+import { Exclude, Expose, Type } from 'class-transformer';
+import { IsOptional, IsString, ValidateNested } from 'class-validator';
+import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
 
 @Exclude()
 export class DataEmployerDto {
   @Expose()
   @IsString()
-  @Transform(({ value }) => value.props.value)
-  readonly company_name: Name;
+  readonly company_name: string;
 
   @Expose()
   @ValidateNested({ each: true })
-  @Type(() => ReadAddressDto)
-  readonly address: ReadAddressDto;
+  @Type(() => WriteAddressDto)
+  readonly address: WriteAddressDto;
 
   @Expose()
   @IsString()
-  @Transform(({ value }) => value.props.value)
-  readonly special_requirements: SpecialRequirement;
+  @IsOptional()
+  readonly special_requirements: string;
 }

@@ -7,7 +7,7 @@ export interface IEmployersService {
   getEmployerById(employerId: number): Promise<ReadEmployerDto>;
   getEmployerByUserId(userId: number): Promise<ReadEmployerDto>;
   createEmployer(
-    employer: Partial<DataEmployerDto>,
+    employer: DataEmployerDto,
     userId: number,
   ): Promise<CreatedEmployerDto>;
 }

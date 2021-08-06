@@ -41,9 +41,7 @@ export class AuthService implements IAuthService {
     return plainToClass(LoggedInDto, token);
   }
 
-  async signUpEmployer(
-    signupDto: Partial<SignupDto>,
-  ): Promise<CreatedEmployerDto> {
+  async signUpEmployer(signupDto: SignupDto): Promise<CreatedEmployerDto> {
     const user: CreatedUserDto = await this._userService.createUser(
       signupDto.data_user,
       'EMPLOYER',
