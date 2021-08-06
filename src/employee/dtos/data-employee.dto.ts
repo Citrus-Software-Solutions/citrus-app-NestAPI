@@ -1,13 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import {
   IsDateString,
   IsEnum,
-  IsNumber,
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { WriteAddressDto } from 'src/shared/address/dtos/write-address.dto';
+import { WriteAddressDto } from '../../shared/address/dtos/write-address.dto';
 import { EducationLevel } from '../domain/education-level.enum';
 
 @Exclude()
