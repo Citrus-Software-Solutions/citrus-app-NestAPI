@@ -35,7 +35,7 @@ export class EmployeeService implements IEmployeeService {
   }
 
   async createEmployee(
-    employeeDto: Partial<DataEmployeeDto>,
+    employeeDto: DataEmployeeDto,
     userId: number,
   ): Promise<CreatedEmployeeDto> {
     if (!employeeDto) {
@@ -56,7 +56,7 @@ export class EmployeeService implements IEmployeeService {
     employee.middle_name = Name.create(employeeDto.middle_name.toString());
     employee.last_name = Name.create(employeeDto.last_name.toString());
     employee.phone_number = employeeDto.phone_number;
-    employee.birth_date = employeeDto.birth_date;
+    employee.birth_date = new Date(employeeDto.birth_date);
     employee.address = address;
     employee.ssn = employeeDto.ssn;
     employee.education_level = employeeDto.education_level;

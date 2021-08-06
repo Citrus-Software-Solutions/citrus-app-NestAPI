@@ -74,3 +74,389 @@
     "email": "team@quikfoods.com"
   }
 }
+
+// REGISTER EMPLOYEES
+{
+  "data_employee": {
+    "education_level": 0,
+    "first_name": "Alba",
+    "middle_name": "Lucia",
+    "last_name": "Arias",
+    "phone_number": "04166609508",
+    "birth_date": "1984-01-12",
+    "address": {
+      "street1": "Calle 97",
+      "street2": "No. 5-68",
+      "city": "Maracaibo",
+      "state": "Zulia",
+      "zip": "4001"
+    },
+    "ssn": "33909141"
+  },
+  "data_user": {
+    "username": "alarias",
+    "password": "employee123",
+    "email": "alarias@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 0,
+    "first_name": "Luis",
+    "middle_name": "Alfonso",
+    "last_name": "Suarez",
+    "phone_number": "04124631165",
+    "birth_date": "1958-04-13",
+    "address": {
+      "street1": "Av. Principal de la Urbina",
+      "street2": "Edificio Antiguo fortín",
+      "city": "Caracas",
+      "state": "Dtto. Capital",
+      "zip": "1073"
+    },
+    "ssn": "79134337"
+  },
+  "data_user": {
+    "username": "lasuarez",
+    "password": "employee123",
+    "email": "lasuarez@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 2,
+    "first_name": "Maria",
+    "middle_name": "Lumena",
+    "last_name": "Molina",
+    "phone_number": "04146883317",
+    "birth_date": "1983-09-27",
+    "address": {
+      "street1": "Plaza Francia",
+      "street2": "Hotel Caracas Palace",
+      "city": "Caracas",
+      "state": "Dtto. Capital",
+      "zip": "1060"
+    },,
+    "ssn": "52005992"
+  },
+  "data_user": {
+    "username": "mlumena",
+    "password": "employee123",
+    "email": "mlumena@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 3,
+    "first_name": "Emilia",
+    "middle_name": "Mariana",
+    "last_name": "Hidalgo",
+    "phone_number": "04245230541",
+    "birth_date": "1962-12-28",
+    "address": {
+      "street1": "Urb. La Providencia",
+      "street2": null,
+      "city": "Turmero",
+      "state": "Aragua",
+      "zip": "2115"
+    },
+    "ssn": "86240821"
+  },
+  "data_user": {
+    "username": "emhidalgo",
+    "password": "employee123",
+    "email": "emhidalgo@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 4,
+    "first_name": "Iker",
+    "middle_name": "Esteban",
+    "last_name": "Mendez",
+    "phone_number": "04168945844",
+    "birth_date": "1978-05-10",
+    "address": {
+      "street1": "Av B, Quinta Monteria",
+      "street2": "Urbanizacion El Pinar",
+      "city": "Caracas",
+      "state": "Dtto. Capital",
+      "zip": "1020"
+    },
+    "ssn": "69592196"
+  },
+  "data_user": {
+    "username": "iemendez",
+    "password": "employee123",
+    "email": "iemendez@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 5,
+    "first_name": "Alfonso",
+    "middle_name": "Ignacio",
+    "last_name": "Rojas",
+    "phone_number": "04129485631",
+    "birth_date": "1991-07-31",
+    "address": {
+      "street1": "Calle 78",
+      "street2": "Dr Portillo",
+      "city": "Maracaibo",
+      "state": "Zulia",
+      "zip": "4001"
+    },
+    "ssn": "33878838"
+  },
+  "data_user": {
+    "username": "airojas",
+    "password": "employee123",
+    "email": "airojas@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 6,
+    "first_name": "Mar",
+    "middle_name": "Andrea",
+    "last_name": "Ortiz",
+    "phone_number": "04141884875",
+    "birth_date": "1987-08-25",
+    "address": {
+      "street1": "Urbanizacion La Granja",
+      "street2": null,
+      "city": "San Juan de los Morros",
+      "state": "Guárico",
+      "zip": "2301"
+    },
+    "ssn": "73221412"
+  },
+  "data_user": {
+    "username": "maortiz",
+    "password": "employee123",
+    "email": "maortiz@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 7,
+    "first_name": "Raquel",
+    "middle_name": "Milena",
+    "last_name": "Cabrera",
+    "phone_number": "04242437715",
+    "birth_date": "1969-02-28",
+    "address": {
+      "street1": "Calle Toledo",
+      "street2": "Casa Miguel",
+      "city": "Caracas",
+      "state": "Dtto. Capital",
+      "zip": "1061"
+    },
+    "ssn": "52785879"
+  },
+  "data_user": {
+    "username": "rmcabrera",
+    "password": "employee123",
+    "email": "rmcabrera@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 8,
+    "first_name": "Jordi",
+    "middle_name": "Roberto",
+    "last_name": "Nuñez",
+    "phone_number": "04166455894",
+    "birth_date": "1985-02-14",
+    "address": {
+      "street1": "Av. Libertador",
+      "street2": "Edif. FERTEC",
+      "city": "Caracas",
+      "state": "Dtto. Capital",
+      "zip": "1060"
+    },
+    "ssn": "96065271"
+  },
+  "data_user": {
+    "username": "jrnunez",
+    "password": "employee123",
+    "email": "jrnunez@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 9,
+    "first_name": "Maria",
+    "middle_name": "Julia",
+    "last_name": "Herrero",
+    "phone_number": "04121678572",
+    "birth_date": "1997-10-02",
+    "address": {
+      "street1": "Calle Real Simón Rodríguez",
+      "street2": "Maripérez",
+      "city": "Caracas",
+      "state": "Dtto. Capital",
+      "zip": "1050"
+    },
+    "ssn": "4171623"
+  },
+  "data_user": {
+    "username": "mjherrero",
+    "password": "employee123",
+    "email": "mjherrero@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 10,
+    "first_name": "Adriana",
+    "middle_name": "Mercedes",
+    "last_name": "Cano",
+    "phone_number": "04145104595",
+    "birth_date": "1999-08-14",
+    "address": {
+      "street1": "Avenida Jóvito",
+      "street2": "Villalba Edificio Lidotel Margarita",
+      "city": "Pampatar",
+      "state": "Nueva Esparta",
+      "zip": "6316"
+    },
+    "ssn": "33860836"
+  },
+  "data_user": {
+    "username": "amcano",
+    "password": "employee123",
+    "email": "amcano@example.com"
+  }
+}
+
+{
+  "data_employee": {
+    "education_level": 3,
+    "first_name": "Fernando",
+    "middle_name": "Adrian",
+    "last_name": "Gonzalez",
+    "phone_number": "04242869455",
+    "birth_date": "1989-05-27",
+    "address": {
+      "street1": "Calle la Manguera",
+      "street2": "Callejón Blanco",
+      "city": "Caracas",
+      "state": "Dtto Capital",
+      "zip": "1060"
+    },
+    "ssn": "26211654"
+  },
+  "data_user": {
+    "username": "fagonzalez",
+    "password": "employee123",
+    "email": "fagonzalez@example.com"
+  }
+}
+
+// CREATE JOB OFFER
+{
+  "title": "Clean PC labs",
+  "location": {
+    "street1": "Calle 28",
+    "city": "Barquisimeto",
+    "state": "Lara",
+    "zip": "3001"
+  },
+  "dead_line": "2021-08-15",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": "You need to be good at cleaning",
+  "duration": 3600,
+  "hourly_rate": 9.5
+}
+
+{
+  "title": "Repair lounge computers",
+  "location": {
+    "street1": "Calle Cedeño",
+    "city": "Barinas",
+    "state": "Barinas",
+    "zip": "5201"
+  },
+  "dead_line": "2021-09-15",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": "Have prior experience fixing electronic equipment",
+  "duration": 7200,
+  "hourly_rate": 10
+}
+
+{
+  "title": "Serve plates for an anniversary dinner",
+  "location": {
+    "street1": "Calle Real",
+    "city": "Caracas",
+    "state": "Dtto Capital",
+    "zip": "1010"
+  },
+  "dead_line": "2021-08-09",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": null,
+  "duration": 10800,
+  "hourly_rate": 5
+}
+
+{
+  "title": "Repair broken water pipes",
+  "location": {
+    "street1": "Los Mangos",
+    "city": "Caracas",
+    "state": "Dtto Capital",
+    "zip": "1050"
+  },
+  "dead_line": "2021-08-28",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": null,
+  "duration": 14400,
+  "hourly_rate": 7
+}
+
+{
+  "title": "Make a cake for a meeting",
+  "location": {
+    "street1": "Calle Cedeño",
+    "city": "Barinas",
+    "state": "Barinas",
+    "zip": "5201"
+  },
+  "dead_line": "2021-09-15",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": "Use only vegan ingredients and gluten free",
+  "duration": 5000,
+  "hourly_rate": 8
+}
+
+{
+  "title": "Clean restaurant after a party",
+  "location": {
+    "street1": "Calle Real",
+    "city": "Caracas",
+    "state": "Dtto Capital",
+    "zip": "1010"
+  },
+  "dead_line": "2021-08-20",
+  "schedules": null,
+  "skills": null,
+  "special_requirements": "Close the restaurant after you clean",
+  "duration": 10000,
+  "hourly_rate": 7
+}
