@@ -13,7 +13,7 @@ export class AuthRepository implements IAuthRepository {
     private readonly _mapper: UserDataMapper,
   ) {}
 
-  async signin(user: User): Promise<{ token: string }> {
+  async signin(user: User): Promise<{ token: string; id: number }> {
     const userEntity: UserEntity = this._mapper.toDalEntity(user);
 
     return await this._authPersistence.signin(userEntity);

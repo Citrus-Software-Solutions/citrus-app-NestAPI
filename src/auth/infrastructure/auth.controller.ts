@@ -3,6 +3,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreatedEmployeeDto } from '../../employee/dtos/created-employee.dto';
 import { CreatedEmployerDto } from '../../employers/dtos/created-employer.dto';
 import { IAuthService } from '../application/auth.service.interface';
+import { LoggedInDto } from '../dtos/loggedin.dto';
 import { SigninDto } from '../dtos/signin.dto';
 import { SignupEmployeeDto } from '../dtos/signup-employee.dto';
 import { SignupDto } from '../dtos/signup.dto';
@@ -17,7 +18,7 @@ export class AuthController {
 
   @Post('/signin')
   @ApiOperation({ summary: 'Iniciar sesión' })
-  login(@Body() signinDto: SigninDto) {
+  login(@Body() signinDto: SigninDto): Promise<LoggedInDto> {
     return this._authService.signin(signinDto);
   }
 

@@ -1,4 +1,5 @@
 import {
+  Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -19,9 +20,8 @@ export class AuthPersistenceAdapter
   constructor(private readonly _jwtService: JwtService) {
     super();
   }
-  async signin(userEntity: UserEntity): Promise<{ token: string }> {
+  async signin(userEntity: UserEntity): Promise<{ token: string; id: number }> {
     const userRepository = getRepository(UserEntity);
-
     const user: UserEntity = await userRepository.findOne({
       where: { username: userEntity.username },
     });
@@ -41,7 +41,8 @@ export class AuthPersistenceAdapter
       role: user.role,
     };
     const token = this._jwtService.sign(payload);
+    const id: number = user.id;
 
-    return { token };
+    return { token, id };
   }
 }
