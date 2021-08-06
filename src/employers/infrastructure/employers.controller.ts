@@ -52,7 +52,6 @@ export class EmployersController {
     @Param('employerId', ParseIntPipe) employerId: number,
     @Body() employer: UpdateEmployerDto,
   ) {
-    console.log(employer);
     return this._employersService.updateEmployer(employerId, employer);
   }
 

@@ -56,13 +56,10 @@ export class EmployersPersisteceAdapter
     employerId: number,
     employer: EmployerEntity,
   ): Promise<EmployerEntity> {
-    console.log(employer);
     const employerRepository = getRepository(EmployerEntity);
     const foundUser = await employerRepository.findOne(employerId, {
       where: { status: 0 },
     });
-
-    console.log(foundUser);
 
     if (!foundUser) {
       throw new NotFoundException('Employer does not exists');
@@ -76,11 +73,7 @@ export class EmployersPersisteceAdapter
     foundUser.address.zip = employer.address.zip;
     foundUser.special_requirements = employer.special_requirements;
 
-    console.log(foundUser);
-
     const updateUser = await employerRepository.save(foundUser);
-
-    console.log(updateUser);
 
     return updateUser;
   }
